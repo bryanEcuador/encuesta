@@ -24,21 +24,49 @@
                     {{ csrf_field() }}
                                 <label class="label-text"> Nombre:</label>
                                 <div class="form-group">
-                                    <input type="text" v-model="rol"  class="form-control" name="name" v-model="v_nombre" id="v_nombre"  placeholder="Nombre del rol" autocomplete="off">
+                                    <input type="text" v-model="rol"  class="form-control @if($errors->has('name')) is-invalid @endif"  name="name" v-model="v_nombre" id="v_nombre"  placeholder="Nombre del rol" autocomplete="off">
+                                     @if($errors->has('name'))
+                                        @foreach($errors->get('name') as $error)
+                                            <div class="invalid-feedback">
+                                                {{ $error }}
+                                            </div>   
+                                        @endforeach
+                                     @endif
                                 </div>
                                 <label class="label-text"> Slug:</label>
                                 <div class="form-group">
-                                    <input type="text" v-model="slug" required class="form-control" name="slug" v-model="v_slug" id="v_slug" placeholder="Nombre del rol" autocomplete="off">
+                                    <input type="text" v-model="slug" required class="form-control @if($errors->has('slug')) is-invalid @endif" name="slug" v-model="v_slug" id="v_slug" placeholder="Nombre del rol" autocomplete="off">
+                                    @if($errors->has('slug'))
+                                        @foreach($errors->get('slug') as $error)
+                                            <div class="invalid-feedback">
+                                                {{ $error }}
+                                            </div>   
+                                        @endforeach
+                                     @endif
                                 </div>
                                 <label class="label-text"> Description:</label>
                                 <div class="form-group">
-                                    <input type="text" required v-model="descripcion" class="form-control" name="description" v-model="v_descripcion" id="v_descripcion" placeholder="Descripción del rol" autocomplete="off">
+                                    <input type="text" required v-model="descripcion" class="form-control @if($errors->has('slug')) is-invalid @endif" name="description" v-model="v_descripcion" id="v_descripcion" placeholder="Descripción del rol" autocomplete="off">
+                                    @if($errors->has('description'))
+                                        @foreach($errors->get('description') as $error)
+                                            <div class="invalid-feedback">
+                                                {{ $error }}
+                                            </div>   
+                                        @endforeach
+                                     @endif
                                 </div>
 
                                 <h4>Permisos especiales</h4>
                                 <label><input type="radio" required name="special" value="all-access"> Acceso total</label>
                                 <label><input type="radio" name="special" value="no-access"> Sin acceso</label>
                                 <label><input type="radio" name="special" value="neutro">Acceso restringido</label>
+                                 @if($errors->has('special'))
+                                        @foreach($errors->get('special') as $error)
+                                            <div class="invalid-feedback">
+                                                {{ $error }}
+                                            </div>   
+                                        @endforeach
+                                     @endif
                                 <h4>permisos individuales</h4>
                                 <ul>
                                     <li id="lista_permisos" class="list-unstyled">
@@ -111,7 +139,8 @@
 
 
                     if( this.errores.length === 0) {
-                        document.getElementById('frmGuardar').submit();
+                        this.guardar()
+                        
                     } else {
                         var num = this.errores.length;
                         for(i=0; i<num;i++) {
@@ -122,6 +151,10 @@
 
 
                 },
+
+                guardar : function() {
+                    document.getElementById('frmGuardar').submit();
+                }
 
                 }
 

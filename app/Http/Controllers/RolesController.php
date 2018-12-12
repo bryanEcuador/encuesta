@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Database\QueryException;
+use App\Http\Requests\StoreRolesRequest;
 
 class RolesController extends Controller
 {
@@ -37,20 +38,9 @@ class RolesController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreRolesRequest $request)
     {
-        //dd($request->input());
-        $request->validate([
-            'slug' => 'required|max:30|unique:roles|string',
-            'name' => 'required|max:30|unique:roles|string',
-            'description'=> 'required|max:100|string',
-
-        ],['slug.required' => 'El slug es requerido','slug.max' => 'El slug solo puede tener un maximo de 30 caracteres','slug.unique' => "El nombre del slug debe ser unico",
-            'name.required' => 'El nommbre es requerido','name.max' => 'El nombre solo puede tener un maximo de 30 caracteres','name.unique' => "El nombre  debe ser unico",
-            'descripcion.required' => 'La descripción es requerida','slug.max' => 'La descripción solo puede tener un maximo de 100 caracteres',
-        ]);
-
-
+        
                 $name = $request->input('name');
                 $slug = $request->input('slug');
                 $description = $request->input('description');
@@ -59,7 +49,9 @@ class RolesController extends Controller
                 if($request->input('special') == 'neutro' )
                 {
                     $special = null;
-                } else {
+                }else if( !isset($special)){
+                    $special = null;
+                }else {
                     $special = $request->input('special');
                 }
 
@@ -85,7 +77,7 @@ class RolesController extends Controller
                                 'updated_at' => $fecha
                             ]);
                         }
-                    }
+                    } 
                     flash()->success('se ha registrado el rol con exito');
                     return redirect()->route('seguridad.roles.create');
                 }catch (QueryException $e){

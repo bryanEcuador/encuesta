@@ -1,7 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.administracion')
 @section('nombre_pagina','Permisos')
 @section('css')
-<link rel="stylesheet" href="{{asset('css/toastr.css')}}">
+
 @endsection
 @section('titulo de la pagina','Permisos')
 {{-- @section('breadcrumbs')
@@ -104,15 +104,6 @@
         </div>
         <!-- modales -->
         <div id="crearPermiso" class="modal fade" role="dialog" >
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="modal-dialog modal-lg">
                 <div class="col-lg-12">
                     <div class="bs-component">
@@ -506,7 +497,7 @@
                                             toastr.error("Error al guardar el permiso");
                                         }
                                     }else {
-                                        $("#editarPermisos").modal('hide');
+                                       
                                         toastr.success(this.mensaje2+" actualizado con exito");
                                         this.limpiar();
                                         this.loadPermisos();

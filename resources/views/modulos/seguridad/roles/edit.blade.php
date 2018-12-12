@@ -1,6 +1,9 @@
 @extends('layouts.administracion')
 @section('nombre_pagina','Edicion de roles')
 @section('css')
+    <style>
+      
+    </style>
 @endsection
 @section('titulo de la pagina')
     <p><a href="{{route('seguridad.roles.index')}}">Roles</a>/Edición</p>
@@ -29,7 +32,7 @@
                     <input type="hidden" value="{{$datos->id}}" id="id">
                     <label class="label-text"> Nombre:</label>
                     <div class="form-group">
-                        <input type="text"  value="{{$datos->name}}" class="form-control" name="name" id="v_nombre"  placeholder="Nombre del rol" autocomplete="off" v-on:keyup="validarNombreRol">
+                        <input type="text"  value="{{$datos->name}}" class="form-control " name="name" id="v_nombre"  placeholder="Nombre del rol" autocomplete="off" v-on:keyup="validarNombreRol">
                     </div>
                     <label class="label-text"> Slug:</label>
                     <div class="form-group">
@@ -47,14 +50,14 @@
                         <option value="null" @if($datos->special ==  null) selected   @endif> Acceso restringido</option>
                     </select>
                 @endforeach
-                <p>permisos actuales</p>
+                <h3>permisos actuales</h3>
 
                 <ul>
                     @foreach($permisos as $datos)
                         <label><input type='checkbox' name='actuales[]' checked value= {{$datos->id}}> {{$datos->name}} </label><br>
                     @endforeach
                 </ul>
-                <p>permisos faltantes</p>
+                <h3>permisos faltantes</h3>
                 <ul>
                     @foreach($permisosF as $datos)
                         <label><input type='checkbox' name='nuevos[]' value= {{$datos->id}}> {{$datos->name}} </label><br>
