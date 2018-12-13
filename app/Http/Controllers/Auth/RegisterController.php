@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+
+use Caffeinated\Shinobi\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -72,6 +75,8 @@ class RegisterController extends Controller
             ]);
             $id = $usuario->id;
             $rol = $data['rol'];
+
+
 
             DB::table('role_user')->insert([
                 'role_id' => $rol, 'user_id' => $id

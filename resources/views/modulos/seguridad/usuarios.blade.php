@@ -452,6 +452,7 @@
                                 name : this.usuario.toLowerCase(),
                                 email : this.email.toLowerCase(),
                                 password : this.pass,
+                                password_confirmation : this.pass2,
                                 rol : this.rol
                         
                             }).then(response => {
