@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Main CSS-->
 
-    <link rel="stylesheet" type="text/css" href="/css/main-proveedor.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/toastr.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -132,9 +132,11 @@
 {{-- <script src="{{asset('js/tooltip.js')}}"></script>
  --}}
 <!-- The javascript plugin to display page loading on top-->
-<script src="{{asset('js/main-proveedor.js')}}"></script>
+<script src="{{asset('js/main.js')}}"></script>
 <script src="/js/plugins/pace.min.js"></script>
-<script src="/js/plugins/toastr.js"></script>
+
+
+<script src="{{asset('js/toastr.js')}}"></script>
 <script src="{{asset('js/axios.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 <script>

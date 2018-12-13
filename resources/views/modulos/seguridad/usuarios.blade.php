@@ -1,15 +1,20 @@
-@extends('layouts.admin')
+@extends('layouts.administracion')
 @section('nombre_pagina','usuarios')
 @section('css')
 <link rel="stylesheet" href="{{asset('css/toastr.css')}}">
+<style>
+[v-cloak] {
+  display: none;
+}
+</style>
 @endsection
 @section('titulo de la pagina','usuarios')
 {{-- @section('breadcrumbs')
     {{ Breadcrumbs::render('usuarios') }}
 @endsection --}}
 @section('contenido')
- <div class="col-md-12" id="usuarios" v-cloak >
-        <div class="tile">
+ <div class="col-md-12" id="usuarios"  >
+        <div class="tile" v-cloak>
             <div class="col-md-12">
                 <button class="btn btn-primary btn-lg pull-right col-md-2" data-toggle="modal" data-target="#crearUsuario"> Crear </button>
             </div>
@@ -311,11 +316,11 @@
                     'to': 0,
                 },
                 offset: 3,
-                vistaBusqueda : true,
-                vistaOpcionesTabla : true,
-                vistaTabla : true,
-                vistaPaginacion : true,
-                cantidadDatos : true,
+                vistaBusqueda : false,
+                vistaOpcionesTabla : false,
+                vistaTabla : false,
+                vistaPaginacion : false,
+                cantidadDatos : false,
                 datos : [],
                 valor : '',
                 tipo : '',

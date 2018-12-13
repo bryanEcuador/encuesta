@@ -9,8 +9,8 @@
 @endsection --}}
 @section('contenido')
 
-<div class="col-md-12" id="permisos" v-cloak>
-        <div class="tile">
+<div class="col-md-12" id="permisos" >
+        <div class="tile" v-cloak>
             
             <div class="col-md-12">
                 <button class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#crearPermiso"> Crear </button>
