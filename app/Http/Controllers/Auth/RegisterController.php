@@ -74,7 +74,14 @@ class RegisterController extends Controller
                 'state' => 1,
             ]);
             $id = $usuario->id;
-            $rol = $data['rol'];
+
+            /* Modificar esta parte */
+            if(!isset($data['rol'])){
+                $rol = 1;
+            } else {
+                $rol = $data['rol'];
+            }
+            
 
 
 
