@@ -46,9 +46,11 @@ class SeguridadProcedure extends Model
 
      public function consultarUsuariosTodos() {
        return  DB::table('users')
-            ->join('role_user','users.id','=','role_user.user_id')
-            ->join('roles','role_user.role_id','=','roles.id')
-            ->select('users.id','users.name','roles.name as rol')
+            /* ->join('role_user','users.id','=','role_user.user_id')
+            ->join('roles','role_user.role_id','=','roles.id')  */
+            /* ->select('users.id','users.name','roles.name as rol') */
+            ->select('users.id','users.name')
+            
             ->where('users.state',1)
             ->get()->toArray();
     }

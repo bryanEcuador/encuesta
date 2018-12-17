@@ -6,6 +6,14 @@
 [v-cloak] {
   display: none;
 }
+
+
+@media screen and (max-width:768px){
+    .nombre {
+        margin-top : 5px;
+
+    }
+}
 </style>
 @endsection
 @section('titulo de la pagina','usuarios')
@@ -16,33 +24,30 @@
  <div class="col-md-12" id="usuarios"  >
         <div class="tile" v-cloak>
             <div class="col-md-12">
-                <button class="btn btn-primary btn-lg pull-right col-md-2" data-toggle="modal" data-target="#crearUsuario"> Crear </button>
-            </div>
-            <div class="form-group-row colmd-8">
-
+                <button class="btn btn-primary btn-lg-3 col-lg-3 col-md-12 mb-2" data-toggle="modal" data-target="#crearUsuario"> Crear </button>
             </div>
             
             <div v-if="vistaBusqueda == true" class="form-group row">
-                <label class="form-control-label col-md-1" for="name">Buscar:</label>
-                <select class="col-md-4 form-control" v-model="rol_consulta" id="b_roles" v-on:change = "consultarNombreUsuario(undefined)">
+                <label class="form-control-label col-md-1 col-12 my-2" for="name">Buscar:</label>
+                <select class="col-lg-4 col-lg-4 form-control mx-1 " v-model="rol_consulta" id="b_roles" v-on:change = "consultarNombreUsuario(undefined)">
                     <option value="0"></option>
                     <option v-for="item in cmbRoles" :value="item.id"> @{{item.name}}</option>
                 </select>
 
-                <input  type="text"   class="col-md-3 form-control" placeholder="nombre" v-model="usuario_consulta" v-on:keyup.13="consultarNombreUsuario(undefined)">
+                <input  type="text"   class="form-control nombre col-lg-4 " placeholder="nombre" v-model="usuario_consulta" v-on:keyup.13="consultarNombreUsuario(undefined)">
             </div>
             <br>
             <div>
                 <div  v-if="vistaOpcionesTabla == true" class="form-inline ">
-                     <div class="form-group col-md-3 mb-2"  style="margin-left:60px">
+                     <div class="form-group col-md-5 col-12 mb-2 ">
                         <label>Mostrar:</label>
-                        <select v-on:change="changeNumberPage" v-model="datosPorPagina" class="form-control">
+                        <select v-on:change="changeNumberPage" v-model="datosPorPagina" class="form-control mx-1">
                            <option  v-for="cantidad in cantidadPorPagina"> @{{cantidad}} </option>
                         </select>
                     </div>
-                    <div  class="form-group col-md-3 mb-2"  style="margin-left:410px">
+                    <div  class="form-group col-md-5 col-12 mb-2 ">
                         <label>Ordenar:</label>
-                        <select v-on:change="ordenar" v-model="orden" class="form-control">
+                        <select v-on:change="ordenar" v-model="orden" class="form-control mx-1">
                             <option value="asc">Ascendente</option>
                             <option value="desc">Descendente</option>
                         </select>
@@ -405,7 +410,6 @@
                         axios.get(url).then(response => {
                             
                                         this.datos = response.data;
-
                                         if(this.datos.length <= 5 || this.datos == 0) {
                                             this.vistaBusqueda = false;
                                             this.vistaOpcionesTabla = false;
@@ -419,6 +423,12 @@
                                             }
 
                                         } else {
+                                            this.vistaTabla = true;
+                                            this.vistaBusqueda = true;
+                                            this.vistaOpcionesTabla = true;
+                                            this.vistaPaginacion = true;
+                                            this.cantidadDatos = true;
+
                                             this.usuariosTable = this.datos.data;
                                             this.paginacion.total = this.datos.total;
                                             if (page == undefined) {
