@@ -7,9 +7,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Core\Procedimientos\SeguridadProcedure;
+/* use Illuminate\Support\Facades\Auth; */
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Auth\Authenticatable;
+/* use perm */
 
 class UserController extends Controller
 {
+    use Authenticatable;
     //parte de la logica esta en Auth/RegisterController
 
         /**
@@ -194,5 +199,12 @@ class UserController extends Controller
     public function consularUsuarioName($rol=0,$usuario='')
     {
         return \DB::select('call spconsultarUsuariosName(?,?)',array($usuario,$rol));
+    }
+
+    public function prueba(){
+        if (!$this->auth) {
+            
+        }
+        echo "else";
     }
 }

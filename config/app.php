@@ -162,6 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        /* paquetes descargados */
+
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
 
         /*
@@ -225,6 +227,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
 
     ],
 

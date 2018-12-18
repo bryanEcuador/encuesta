@@ -12,11 +12,12 @@ class rolesSeed extends Seeder
      */
     public function run()
     {
-        Role::created([
+
+        DB::table('roles')->insert([
            ['name'=> 'administrador','slug'=>'administrador','descripction'=>'Puede ver toda la información del sitio','speciall' =>'all-acces'],
-           ['name'=> 'seguridad','slug'=>'seguridad','descripction'=>'Puede gestionar la seguridad del sitio', 'speciall' => null],
-           ['name'=> 'visualizador','slug'=>'visualizador','descripction'=>'Puede ver los graficos estadistincos', 'speciall' => null],
-           ['name' => 'edicion','slug'=>'editor','description'=>'Puede modificar datos de la encuesta', 'speciall' => null]
+           ['name'=> 'seguridad','slug'=>'seguridad','description'=>'Puede gestionar la seguridad del sitio', 'special' => null],
+           ['name'=> 'visualizador','slug'=>'visualizador','description'=>'Puede ver los graficos estadistincos', 'special' => null],
+           ['name' => 'edicion','slug'=>'editor','description'=>'Puede modificar datos de la encuesta', 'special' => null]
         ]);
     }
 }
