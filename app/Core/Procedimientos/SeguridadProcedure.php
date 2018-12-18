@@ -48,8 +48,7 @@ class SeguridadProcedure extends Model
        return  DB::table('users')
              ->join('role_user','users.id','=','role_user.user_id')
             ->join('roles','role_user.role_id','=','roles.id')  
-             ->select('users.id','users.name','roles.name as rol') 
-            ->select('users.id','users.name')
+             ->select('users.id','users.name','roles.name as rol')
             ->where('users.state',1)
             ->get()->toArray();
     }
