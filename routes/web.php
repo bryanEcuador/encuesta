@@ -12,6 +12,7 @@
 */
 
 require_once __DIR__. '/modulos/seguridad.php';
+require_once __DIR__. '/modulos/graficos.php';
 /* require __DIR__ . '/modulos/proveedores.php';
  */
 Route::get('/', function () {
