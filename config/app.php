@@ -165,7 +165,7 @@ return [
         /* paquetes descargados */
 
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
-
+        Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -229,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
+        'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
 
     ],
 

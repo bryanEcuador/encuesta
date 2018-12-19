@@ -13,7 +13,9 @@
         "fideloper/proxy": "^4.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "maatwebsite/excel": "^3.1",
+        "khill/lavacharts": "3.0.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
