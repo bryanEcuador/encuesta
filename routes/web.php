@@ -22,3 +22,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/notificaciones','EncuestaController@notifify');
+Route::get('/leer-notificaciones', 'EncuestaController@read');

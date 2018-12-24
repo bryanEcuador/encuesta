@@ -104,12 +104,11 @@
             <ul class="treeview-menu">
                {{--  <li><a class="app-menu__item" href="{{route('administrador.marca.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Marcas</span></a></li>
                 <li><a class="app-menu__item" href="{{route('administrador.categorias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Categorias</span></a></li>
-                <li><a class="app-menu__item" href="{{route('administrador.subCategorias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Subcategorias</span></a></li>
                 <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Colores</span></a></li>
                 <li><a class="app-menu__item" href="{{route('administrador.Sugerencias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Sugerencias</span></a></li> --}}
             </ul>
         </li>
-        <li><a class="app-menu__item"  href="{{route('graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i> Gráficos</a></li>
+        <li><a class="app-menu__item"  href="{{route('graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
     </ul>
 </aside>
 <main class="app-content">
