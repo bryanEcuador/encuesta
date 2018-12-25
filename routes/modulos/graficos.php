@@ -1,7 +1,7 @@
 <?php
 
 route::middleware(['auth'])->group(function () {
-
-    route::get('graficos-encuesta', 'EncuestaController@index')->name('graficos-encuesta');
-
+    Route::group(['prefix' => 'administracion', 'as' => 'administracion.'], function () {
+        route::get('graficos-encuesta', 'EncuestaController@index')->name('graficos-encuesta');
+     });
 });

@@ -108,7 +108,7 @@
                 <li><a class="app-menu__item" href="{{route('administrador.Sugerencias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Sugerencias</span></a></li> --}}
             </ul>
         </li>
-        <li><a class="app-menu__item"  href="{{route('graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
+        <li><a class="app-menu__item"  href="{{route('administracion.graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
     </ul>
 </aside>
 <main class="app-content">
