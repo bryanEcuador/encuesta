@@ -28,4 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function logUser(){
+        return $this->hasMany('App\Core\Modelos\UserLogs');
+    }
 }

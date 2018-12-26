@@ -7,11 +7,13 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Core\Procedimientos\SeguridadProcedure;
+use App\Http\Traits\logTrait;
  
 
 class PermisosController extends Controller
 {
     protected $SeguridadProcedure;
+    use logTrait;
 
     public function __construct(SeguridadProcedure $seguridadProcedure){
         $this->SeguridadProcedure = $seguridadProcedure;
@@ -48,6 +50,8 @@ class PermisosController extends Controller
     
         try{
             $this->SeguridadProcedure->storePermisos($request->input('name'),$request->input('slug'),$request->input('description'),$this->fecha());
+            $logTrait = new logTrait;
+            $logTrait->llamada();    
             return response()->json(['success'=>'Informacion guardada con exito']);
         }catch (QueryException $e){
             $array = array("Error" , $e);
