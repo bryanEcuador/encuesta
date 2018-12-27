@@ -109,6 +109,7 @@
             </ul>
         </li>
         <li><a class="app-menu__item"  href="{{route('administracion.graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
+        <li><a class="app-menu__item"  href="{{route('administracion.log')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Logs</span> </a></li>
     </ul>
 </aside>
 <main class="app-content">
