@@ -75,6 +75,6 @@ class LogController extends Controller
     public function getLogAllTable()
     {
         // obtener todos los logs del sistema
-
+        return $this->LogProcedure->getLogAllTable();
     }
 }

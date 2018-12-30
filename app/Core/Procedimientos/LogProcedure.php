@@ -56,7 +56,7 @@ class LogProcedure extends Model
 
     public function getLogAllTable()
     {
-        // obtener todos los logs del sistema
+        return TableLogs::all();
 
     }
 }

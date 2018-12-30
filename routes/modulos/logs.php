@@ -8,6 +8,7 @@ Route::group(['prefix' => 'administracion', 'as' => 'administracion.'], function
         route::get('logs/usuarios/{user}/{desde?}/{hasta?}', 'LogController@userLogs')->name('logs.user');
         route::get('logs/tablas/{user}/{tabla?}/{desde?}/{hasta?}', 'LogController@tableLogs')->name('logs.table');
         route::get('user/logs/all/{id}', 'LogController@getLogAllUser')->name('logs.all');
+        route::get('logs/all','LogController@getLogAllTable');
         route::get('prueba', 'LogController@storeLogUser');
     });
 });
