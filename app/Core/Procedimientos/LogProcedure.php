@@ -15,22 +15,28 @@ class LogProcedure extends Model
     }
 
     public function userLogs($user,$desde=null,$hasta=null) {
-        if($desde != null){
-            return 0;
+        if($desde){
+            return UserLogs::where([
+                ['user_id',$user],
+                ['created_at' >= $desde],
+                ['created_at' <= $hasta]
+            ])->get();
         }
 
-        return UserLogs::where('user_id',1)->get();
+        return UserLogs::where('user_id',$user)->get();
     }
 
     public function tableLogs($user,$table = null, $desde = null, $hasta = null)
     {
-       if($desde == null and $table !==null){
-        
-       }else if($desde != null and $table == null){
 
+       if($desde){
+           return TableLogs::where([
+                [ 'user_id', $user],
+               ['created_at' >= $desde],
+               ['created_at' <= $hasta]
+           ])->get();
        }
-
-        return TableLogs::where('user_id', 1)->get();
+        return TableLogs::where('user_id', $user)->get();
 
     }
 
@@ -49,9 +55,41 @@ class LogProcedure extends Model
         ])->get();
     }
 
-    public function getLogAllUser($user_id)
+    public function addHoursToDate($fecha){
+        $desde = $fecha.' 00:00:00' ;
+        $hasta = $fecha.' 23:59:59';
+
+        $fechas = array($desde,$hasta);
+        return $fechas;
+    }
+
+    public function getLogAllUser($user_id,$fecha)
     {
-       return User::find(1)->logUser;
+        $fechas = $this->addHoursToDate($fecha);
+
+       return TableLogs::where([
+           ['user_id',$user_id],
+           ['created_at', '>=' , $fechas[0] ],
+          ['created_at' ,'<=', $fechas[1]],
+       ])->get();
+    }
+
+    public function getLogTable($tabla,$user,$desde = null,$hasta = null) {
+
+        if($desde != null){
+
+            return TableLogs::where([
+                ['tabla',$tabla],
+                ['user_id',$user],
+                ['created_at', '>=' , $desde ],
+                ['created_at' ,'<=', $hasta],
+            ])->get();
+        }
+
+        return TableLogs::where([
+            ['tabla',$tabla],
+            ['user_id',$user]
+        ])->get();
     }
 
     public function getLogAllTable()

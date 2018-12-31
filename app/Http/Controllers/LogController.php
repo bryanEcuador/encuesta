@@ -17,16 +17,16 @@ class LogController extends Controller
     }
 
     public function index(){
-        return view('modulos.logs.index');
+        $datos = $this->getLogAllTable();
+        return view('modulos.logs.index',compact('datos'));
     }
 
     public function storeLogUser(){
-        $this->llamada();
+
     }
 
     public function storeLogTable() {
-        $logTrait = new logTrait;
-        $logTrait->llamada();
+
     }
 
 
@@ -65,16 +65,27 @@ class LogController extends Controller
         return $this->LogProcedure->getUserLogByTable($tabla, $fecha);
     }
 
-    public function getLogAllUser($user_id){
-        // obtener todos los logs del sistema
-        /* return $this->LogProcedure->getLogAllUser($user_id); */
-        dd($this->LogProcedure->getLogAllUser($user_id));
+    // nos lleva a la vista de logs de usuario
+    public function userLog($user_id,$fecha)
+    {
+        $datos = $this->getLogAllUser($user_id,$fecha);
+        return view('modulos.logs.userlogs',compact('datos'));
+    }
+
+    public function getLogAllUser($user_id,$fecha){
+        // obtener todos los logs de las tablas por usuario y fecha
+        return $this->LogProcedure->getLogAllUser($user_id,$fecha);
 
     }
 
-    public function getLogAllTable()
+    public function showTableLogs($tabla,$user,$desde = null,$hasta = null) {
+        $datos = $this->getLogTable($tabla,$user,$desde,$hasta);
+        return view('modulos.logs.tablelogs',compact('datos'));
+    }
+
+    public function getLogTable($tabla,$user,$desde,$hasta)
     {
         // obtener todos los logs del sistema
-        return $this->LogProcedure->getLogAllTable();
+        return $this->LogProcedure->getLogTable($tabla,$user,$desde,$hasta);
     }
 }

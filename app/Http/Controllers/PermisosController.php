@@ -49,9 +49,9 @@ class PermisosController extends Controller
         ]);
     
         try{
-            $this->SeguridadProcedure->storePermisos($request->input('name'),$request->input('slug'),$request->input('description'),$this->fecha());
-            $logTrait = new logTrait;
-            $logTrait->llamada();    
+           //$registro_id = $this->SeguridadProcedure->storePermisos($request->input('name'),$request->input('slug'),$request->input('description'),$this->fecha());
+            $registro_id = 1;
+            $this->tableLog('permissions','creación',$registro_id);
             return response()->json(['success'=>'Informacion guardada con exito']);
         }catch (QueryException $e){
             $array = array("Error" , $e);

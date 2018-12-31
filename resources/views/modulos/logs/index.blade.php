@@ -18,9 +18,9 @@
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#usuario">Por usuario</a></li>                
               </ul>
               <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade active show" id="generales">                
-                        <div class="table-responsive">
-                            <table class="table">
+                <div class="tab-pane fade active show" id="generales">
+                    <div class="col-md-8 offset-2 my-4" >
+                            <table class="table table-responsive" id="Table">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -32,14 +32,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr v-for="logs in AllLogs">
-                                    <td>@{{logs.id}}</td>
-                                    <td>@{{logs.user_id}}</td>
-                                    <td>@{{logs.registro}}</td>
-                                    <td>@{{logs.tabla}}</td>
-                                    <td>@{{logs.accion}}</td>
-                                    <td>@{{logs.created_at}}</td>
-                                </tr>
+                                @forelse($datos as $logs )
+                                    <tr>
+                                        <td>{{$logs->id}}</td>
+                                        <td>{{$logs->user_id}}</td>
+                                        <td>{{$logs->registro}}</td>
+                                        <td>{{$logs->tabla}}</td>
+                                        <td>{{$logs->accion}}</td>
+                                        <td>{{$logs->created_at}}</td>
+                                    </tr>
+                                @empty
+                                    <p> No existen datos </p>
+                                @endforelse
 
                                 </tbody>
                             </table>
@@ -47,11 +51,21 @@
                 </div>
 
                 <div class="tab-pane fade" id="usuario">
-                     <div class="form-group">
+                     <div class="form-group my-4">
                             <label>Usuario</label>
                             <select class="form-control"  v-model="user"  v-on:change="checkLogs">
                                 <option v-for="user in users" :value="user.id"> @{{user.name}} </option>
                             </select>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label>Desde:</label>
+                            <input class="form-control" type="date" v-model="desde">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Hasta:</label>
+                            <input class="form-control" type="date" v-model="hasta">
+                        </div>
                     </div>
                     <div class="row">
                             <div class="col-md-6">
@@ -60,7 +74,7 @@
                                 <div>
                                     <ul>
                                         {{-- <li v-for = "sesion in inicioSesion"><a :href="urlLogDate sesion.id"> @{{sesion.created_at | formatDate}} </a> <span class="badge badge-secondary">2</span> </li> --}}
-                                        <li v-for = "sesion in inicioSesion"><button @click="openLinkSesion('sesion.id')" class="btn btn-link">@{{sesion.created_at | formatDate}}</button> <span class="badge badge-secondary">2</span> </li>
+                                        <li v-for = "sesion in inicioSesion"><button @click="openLinkSesion(sesion.id,sesion.created_at)" class="btn btn-link">@{{sesion.created_at | formatDate}}</button> <span class="badge badge-secondary">2</span> </li>
                                     </ul>
                                 </div>
                             </div>  
@@ -70,7 +84,7 @@
                             </h2>
                             <div>
                                 <ul>
-                                        <li v-for="tables in modificacionesTablas"><a> @{{tables.tabla}} <span class="badge badge-secondary">2</span></a></li>
+                                    <li v-for = "tables in modificacionesTablas"><button @click="openLinkTable(tables.tabla)" class="btn btn-link"> @{{tables.tabla}}</button> <span class="badge badge-secondary">2</span> </li>
                                 </ul>
                             </div>
                             </div>
@@ -83,7 +97,32 @@
         
 </div>
 @endsection
-@section('js')  
+@section('js')
+    <script type="text/javascript" src="/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        $('#Table').DataTable(
+            {
+                "scrollX": true,
+                "language": {
+
+                    "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                    "zeroRecords": "Ningun registro encontrado ",
+                    "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin registros disponibles",
+                    "infoFiltered": "(filtrando de un total de  _MAX_ registros)",
+                    "search": "Buscar:",
+                    paginate: {
+                        first:      "Primero",
+                        previous:   "Anterior",
+                        next:       "Siguiente",
+                        last:       "Ultimo"
+                    },
+                }
+            }
+        );
+    </script>
     <script src="{{asset('js/toastr.js')}}"></script>
     <script>
         var app = new Vue ({
@@ -91,6 +130,8 @@
             data : {
                 urlLogDate : 'urlLogDate/',
                 user : '',
+                desde: '',
+                hasta : '',
                 inicioSesion : [],
                 users :[],
                 modificacionesTablas : [],
@@ -123,9 +164,17 @@
 
                     })
                 },
-                logsUser : function (user) {
-                    /* var urlLogsUsuario = 'logs/usuarios/'+usuario+'/{desde?}/{hasta?}' */
-                    var urlLogsUsuario = 'logs/usuarios/'+usuario;
+                logsUser : function () {
+                    if(this.desde === '' && this.hasta == '' ){
+                        var urlLogsUsuario = 'logs/usuarios/'+this.user;
+                    } else {
+                        if(this.desde === '' && this.hasta !== ''){
+                            this.desde = this.hasta
+                        } else {
+                            this.hasta = this.desde
+                        }
+                        var urlLogsUsuario = 'logs/usuarios/'+this.user+'/'+this.desde+'/'+this.hasta;
+                    }
                     axios.get(urlLogsUsuario).then(response => {
                         this.inicioSesion = response.data
                     }).catch(error => {
@@ -134,8 +183,18 @@
                 },
 
                 logsTable : function () {
+                    if(this.desde === '' && this.hasta == '' ){
+                        var urlLogTable = 'logs/tablas/'+this.user;
+                    } else {
+                        if(this.desde === '' && this.hasta !== ''){
+                            this.desde = this.hasta
+                        } else {
+                            this.hasta = this.desde
+                        }
+                        var urlLogTable  = 'logs/usuarios/'+this.user+'/'+this.desde+'/'+this.hasta;
+                    }
                     /* var urlLogTable = 'logs/tablas/{user}/{tabla?}/{desde?}/{hasta?}'*/
-                    var urlLogTable = 'logs/tablas/'+this.user;
+
                     axios.get(urlLogTable).then(response => {
                         this.modificacionesTablas = response.data
                     }).catch(error => {
@@ -157,14 +216,34 @@
                 this.logsTable();
                 },
 
-                openLinkSesion : function(link) {
-                    var newLink = 'dir'
+                openLinkSesion : function(id,fecha) {
+                    var newFecha =  fecha.substring(0,10)
+                    var newLink = 'user/logs/all/'+id+'/'+newFecha;
                    var etiqueta = document.createElement("a")
-                   etiqueta.setAttribute("href","/www.google.com")
+                   etiqueta.setAttribute("href",newLink)
                    etiqueta.setAttribute("target","_black")
                    etiqueta.click()
                    console.log("click")
                    /*  document.createElement("button", {id: "mi-boton"}) */
+                },
+
+                openLinkTable : function(table) {
+                    if(this.desde === '' && this.hasta == '' ){
+                        var newLink = 'table/log/'+table+'/'+this.user;
+                    } else {
+                        if(this.desde === '' && this.hasta !== ''){
+                            this.desde = this.hasta
+                        } else {
+                            this.hasta = this.desde
+                        }
+                        var newLink = 'table/log/'+table+'/'+this.user+'/'+this.desde+'/'+this.hasta;
+                    }
+                    var etiqueta = document.createElement("a")
+                    etiqueta.setAttribute("href",newLink)
+                    etiqueta.setAttribute("target","_black")
+                    etiqueta.click()
+                    console.log("click")
+                    /*  document.createElement("button", {id: "mi-boton"}) */
                 }
             },
 

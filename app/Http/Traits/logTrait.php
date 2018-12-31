@@ -16,11 +16,13 @@ trait logTrait
         $userLogs->save();
     }
 
-    public function tableLog($table,$action,$user){
-
+    public function tableLog($table,$action,$registro){
+        $userTable = new TableLogs();
+        $userTable->tabla = $table;
+        $userTable->accion =$action;
+        $userTable->registro = $registro;
+        $userTable->user_id = auth()->id();
+        $userTable->save();
     }
 
-    public function llamada(){
-        
-    }
 }
