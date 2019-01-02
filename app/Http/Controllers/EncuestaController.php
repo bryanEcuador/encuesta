@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\graficosExport;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\EncuestaNotification;
 use App\User;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EncuestaController extends Controller
 {
@@ -20,6 +23,13 @@ class EncuestaController extends Controller
     public function index() {
 
         return view('modulos.graficos.graficos');
+    }
+
+    public function excel($tipo = null){
+        return Excel::download(new graficosExport(), 'users.xlsx');
+    }
+    public function pdf($tipo = null){
+        //return Excel::download(new graficosExport(), 'users.xlsx');
     }
 
     public function notifify(){
