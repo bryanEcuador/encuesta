@@ -17,7 +17,7 @@ class LogController extends Controller
     }
 
     public function index(){
-        $datos = $this->getLogAllTable();
+         $datos = $this->getLogAllTable();
         return view('modulos.logs.index',compact('datos'));
     }
 
@@ -42,7 +42,7 @@ class LogController extends Controller
 
     public function userLogs($user,$desde=null ,$hasta=null){
         //obtener los logs de las fechas de ingresos de los usuarios
-       return $this->LogProcedure->userLogs($user,$desde,$hasta);
+        return $this->LogProcedure->userLogs($user,$desde,$hasta);
     }
 
     public function getUser(){
@@ -87,5 +87,9 @@ class LogController extends Controller
     {
         // obtener todos los logs del sistema
         return $this->LogProcedure->getLogTable($tabla,$user,$desde,$hasta);
+    }
+
+    public function getLogAllTable() {
+        return $this->LogProcedure->getLogAllTable();
     }
 }

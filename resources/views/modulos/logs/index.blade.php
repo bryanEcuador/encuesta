@@ -20,7 +20,7 @@
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade active show" id="generales">
                     <div class="col-md-8 offset-2 my-4" >
-                            <table class="table table-responsive" id="Table">
+                             <table class="table table-responsive" id="Table">
                                 <thead>
                                 <tr>
                                     <th>#</th>
@@ -53,7 +53,7 @@
                 <div class="tab-pane fade" id="usuario">
                      <div class="form-group my-4">
                             <label>Usuario</label>
-                            <select class="form-control"  v-model="user"  v-on:change="checkLogs">
+                            <select class="form-control"  v-model="user">
                                 <option v-for="user in users" :value="user.id"> @{{user.name}} </option>
                             </select>
                     </div>
@@ -67,6 +67,9 @@
                             <input class="form-control" type="date" v-model="hasta">
                         </div>
                     </div>
+                    <button v-if="user === ''" class="btn btn-secundary" disabled>Consultar</button>
+                    <button v-else class="btn btn-primary" @click="checkLogs">Consultar</button>
+                    <hr>
                     <div class="row">
                             <div class="col-md-6">
                                 <h2>Inicios de sesión</h2>
@@ -191,7 +194,7 @@
                         } else {
                             this.hasta = this.desde
                         }
-                        var urlLogTable  = 'logs/usuarios/'+this.user+'/'+this.desde+'/'+this.hasta;
+                        var urlLogTable  = 'logs/tablas/'+this.user+'/'+this.desde+'/'+this.hasta;
                     }
                     /* var urlLogTable = 'logs/tablas/{user}/{tabla?}/{desde?}/{hasta?}'*/
 

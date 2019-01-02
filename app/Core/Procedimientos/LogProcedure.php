@@ -15,29 +15,33 @@ class LogProcedure extends Model
     }
 
     public function userLogs($user,$desde=null,$hasta=null) {
+        $desde = $this->setDesde($desde);
+        $hasta = $this->setHasta($hasta);
+
         if($desde){
-            return UserLogs::where([
+            return
+                UserLogs::where([
                 ['user_id',$user],
-                ['created_at' >= $desde],
-                ['created_at' <= $hasta]
+                ['created_at', '>=' ,$desde],
+                ['created_at', '<=' ,$hasta]
             ])->get();
         }
 
-        return UserLogs::where('user_id',$user)->get();
+        //return UserLogs::where('user_id',$user)->get();
     }
 
     public function tableLogs($user,$table = null, $desde = null, $hasta = null)
     {
-
+        $desde = $this->setDesde($desde);
+        $hasta = $this->setHasta($hasta);
        if($desde){
            return TableLogs::where([
                 [ 'user_id', $user],
-               ['created_at' >= $desde],
-               ['created_at' <= $hasta]
+               ['created_at', '>=' ,$desde],
+               ['created_at', '<=' ,$hasta]
            ])->get();
        }
         return TableLogs::where('user_id', $user)->get();
-
     }
 
     public function getUserLogByDate($fecha, $user)
@@ -55,14 +59,6 @@ class LogProcedure extends Model
         ])->get();
     }
 
-    public function addHoursToDate($fecha){
-        $desde = $fecha.' 00:00:00' ;
-        $hasta = $fecha.' 23:59:59';
-
-        $fechas = array($desde,$hasta);
-        return $fechas;
-    }
-
     public function getLogAllUser($user_id,$fecha)
     {
         $fechas = $this->addHoursToDate($fecha);
@@ -73,6 +69,7 @@ class LogProcedure extends Model
           ['created_at' ,'<=', $fechas[1]],
        ])->get();
     }
+
 
     public function getLogTable($tabla,$user,$desde = null,$hasta = null) {
 
@@ -95,6 +92,22 @@ class LogProcedure extends Model
     public function getLogAllTable()
     {
         return TableLogs::all();
-
     }
+
+    public function addHoursToDate($fecha){
+        $desde = $fecha.' 00:00:00' ;
+        $hasta = $fecha.' 23:59:59';
+
+        $fechas = array($desde,$hasta);
+        return $fechas;
+    }
+
+    public function setDesde($desde){
+        return $desde.' 00:00:00' ;
+    }
+    public function setHasta($hasta){
+       return $hasta. '23:59:59';
+    }
+
+
 }
