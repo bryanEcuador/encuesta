@@ -9,6 +9,8 @@ use App\Notifications\EncuestaNotification;
 use App\User;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
+use  Dompdf\Dompdf;
+
 
 class EncuestaController extends Controller
 {
@@ -30,6 +32,20 @@ class EncuestaController extends Controller
     }
     public function pdf($tipo = null){
         //return Excel::download(new graficosExport(), 'users.xlsx');
+       /* $pdf = \PDF::loadView('pdf.prueba');
+        return $pdf->download('invoice.pdf');*/
+        // instantiate and use the dompdf class
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml('hello world');
+
+// (Optional) Setup the paper size and orientation
+        $dompdf->setPaper('A4', 'landscape');
+
+// Render the HTML as PDF
+        $dompdf->render();
+
+// Output the generated PDF to Browser
+        $dompdf->stream();
     }
 
     public function notifify(){

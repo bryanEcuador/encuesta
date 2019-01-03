@@ -166,6 +166,7 @@ return [
 
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -230,6 +231,7 @@ return [
 
         'Shinobi' => Caffeinated\Shinobi\Facades\Shinobi::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
