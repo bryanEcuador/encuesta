@@ -25,14 +25,17 @@
         </div>
         </div>
         {{-- Grafico de tipo_institucion --}}
-    <div class=" col-lg-6">
+    <div class=" col-lg-6" id="content">
         <div class="tile">
-            <canvas id="myChart" class="embed-responsive-item" width="40vw" height="30vh"></canvas>
+            <div id="grafico1">
+                <canvas id="myChart" class="embed-responsive-item" width="40vw" height="30vh"></canvas>
+            </div>
+            <div id="render"></div>
             <hr>
             <div class="container">
                 <div class="row justify-content-center">
                     <button class="btn btn-success mx-2" onclick="excel()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-                    <button class="btn btn-danger mx-2" onclick="pdf()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar</button>
+                    <button class="btn btn-danger mx-2" id="download" {{--onclick="descargarPdf('myChart')"--}} ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar</button>
                     <button class="btn btn-secondary mx-2" onclick="imprimir()"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
                 </div>
             </div>
@@ -49,7 +52,41 @@
 @endsection
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>--}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
 <script>
+
+
+
+
+  download.addEventListener("click", function() {
+
+         html2canvas(document.getElementById("myChart")).then(canvas => {
+
+             var doc = new jsPDF();
+              doc.setFontSize(20);
+              doc.text(20, 25, 'Informe de .....');
+             doc.addImage(canvas,'JPEG',20,40); // x y
+             doc.setFontSize(12);
+             doc.text(20,135,'Aqui va el texto del informe final');
+             doc.save();
+         });
+
+      // You'll need to make your image into a Data URL
+// Use http://dataurl.net/#dataurlmaker
+
+      /*html2canvas(document.querySelector("#myDiv")).then(canvas => {
+          document.body.appendChild(canvas);
+      saveImage();     //or whatever you want to execute
+        });*/
+  });
+
+
+
+
 
 
 
@@ -63,7 +100,7 @@
         }
         // llamamos a las funciones para dibujar los graficos
         this.graficoA(yearValue);
-        this.esMayorDeEdad3();
+
     }
 
 
@@ -120,9 +157,37 @@
     function descargarExcel(grafico) {
 
     }
+
+/*    function descargarPdf(id){
+        var doc = new jsPDF();
+        var grafico = document.getElementById(id);
+        var specialElementHandlers = {
+            grafico: function (element, renderer) {
+                return true;
+            }
+        };
+
+            doc.fromHTML($('#content').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('sample-file.pdf');
+
+
+        $('#cmd').click(function () {
+            doc.fromHTML($('#content').html(), 15, 15, {
+                'width': 170,
+                'elementHandlers': specialElementHandlers
+            });
+            doc.save('sample-file.pdf');
+        });
+
+// This code is collected but useful, click below to jsfiddle link.
+
+    }*/
 </script>
 
-      
+
 
 
 

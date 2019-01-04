@@ -36,8 +36,7 @@ class EncuestaController extends Controller
         return $pdf->download('invoice.pdf');*/
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
-        $dompdf->loadHtml('hello world');
-
+        $dompdf->loadHtml('');
 // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', 'landscape');
 
@@ -58,5 +57,10 @@ class EncuestaController extends Controller
 
     public function read() {
         
+    }
+
+    public function graficoA() {
+        $datos = array(10,20,30);
+        return $datos;
     }
 }
