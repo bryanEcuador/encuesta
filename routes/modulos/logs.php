@@ -13,6 +13,6 @@ Route::group(['prefix' => 'administracion', 'as' => 'administracion.'], function
         route::get('table/log/{tabla}/{user}/{desde?}/{hasta?}','LogController@showTableLogs');
 
         route::get('logs/all','LogController@getLogAllTable');
-        route::get('prueba', 'LogController@storeLogUser');
+       
     });
 });
