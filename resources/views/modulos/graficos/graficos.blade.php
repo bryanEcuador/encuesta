@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <input type="number" id="year" class="form-control" min="2018" max="2038">
-                <button type="button" class="btn btn-warning mt-1">Consultar</button>
+                <button type="button" id="consultar" class="btn btn-warning mt-1">Consultar</button>
             </div>
         </div>
         </div>
@@ -35,9 +35,9 @@
             <hr>
             <div class="container">
                 <div class="row justify-content-center">
-                    <button class="btn btn-success mx-2" onclick="excel()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
-                    <button class="btn btn-danger mx-2" id="download" onclick="pdf('tipoInstitucion')" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar</button>
-                    <button class="btn btn-secondary mx-2" onclick="imprimir()"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+                    <button class="btn btn-success mx-2" onclick="descargarExcel('tipoInstitucion')"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
+                    <button class="btn btn-danger mx-2"  onclick="descargarPdf('tipoInstitucion')" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar</button>
+                    <button class="btn btn-secondary mx-2" onclick="imprimirPagina('tipoInstitucion')"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
                 </div>
             </div>
 
@@ -54,7 +54,6 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>--}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 
@@ -67,17 +66,21 @@ this.cargarGraficos();
 
 // funciones para porcesamiento
 
-     function cargarGraficos(){
-        // obtenemos el año actual
+    function obtenerYear() {
         var yearValue = document.getElementById("year").value;
         if (yearValue === ''){
             var fecha = new Date();
             yearValue = fecha.getFullYear();
-
+            return   yearValue;   
         }
+        return   yearValue;
+    }
+
+     function cargarGraficos(){
+        // obtenemos el año actual
+        var yearValue = this.obtenerYear();
         // llamamos a las funciones para dibujar los graficos
         this.consultarGraficoA(yearValue);
-
     }
 
 // funciones para cargar información
@@ -103,9 +106,9 @@ this.cargarGraficos();
         //armamos el grafico
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'pie',
             data: {
-                labels: ["1","2","3"],
+                labels: ["publica 20%","privada 75%","negocio propio 5%"],
                 datasets: [{
                     label: '# of Votes',
                     data: [datos[0], datos[1], datos[2]],
@@ -129,13 +132,7 @@ this.cargarGraficos();
                 }]
             },
             options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
+                
             }
         });
     }
@@ -166,11 +163,19 @@ this.cargarGraficos();
 
 
 // funciones para excel
+     function descargarExcel(grafico) {
+        
+        var link = document.createElement("a");
+        var year = this.obtenerYear();
+        var dir = "excel/"+grafico+"/"+year;   
+        link.setAttribute("href",dir);
+        link.click();
 
+    }
 
 // funciones para PDF
 
-    function pdf(id) {
+    function descargarPdf(id) {
         var grafico ;
         if(id == "tipoInstitucion"){
            grafico = document.getElementById("myChart");
@@ -196,43 +201,23 @@ this.cargarGraficos();
     }
 
 
-
 //funciones para imprimir
-
-
-
-
-  ownload.addEventListener("click", function() {
-
-         html2canvas(document.getElementById("myChart")).then(canvas => {
-
-             var doc = new jsPDF();
-              doc.setFontSize(20);
-              doc.text(20, 25, 'Informe de .....');
-             doc.addImage(canvas,'JPEG',20,40); // x y
-             doc.setFontSize(12);
-             doc.text(20,135,'Aqui va el texto del informe final');
-             doc.save();
-         });
-  });
-
-
-
-
-
-
-
-   
-
-
-
-
-   
-
-
-    function descargarExcel(grafico) {
-
+    function imprimirPagina(grafico) {        
+        var link = document.createElement("a");
+        var year = this.obtenerYear();
+        var dir = "imprimir/"+grafico+"/"+year;  
+        link.setAttribute("href",dir);
+        link.setAttribute("target","_black");
+        link.click();
+        
     }
+
+// consultar por año
+
+    consultar.addEventListener("click", () => {
+        this.cargarGraficos();
+    });
+   
 
 
 </script>

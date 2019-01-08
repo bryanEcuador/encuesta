@@ -9,44 +9,48 @@ use App\Notifications\EncuestaNotification;
 use App\User;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
-use  Dompdf\Dompdf;
+use App\Core\procedimientos\EncuestaProcedure;
 
 
 class EncuestaController extends Controller
 {
     use Notifiable;
     protected $EncuestaNotification;
+    protected $EncuestaProcedure;
 
-    public function __construct(EncuestaNotification $encuestaNotification)
+    public function __construct(EncuestaNotification $encuestaNotification, EncuestaProcedure $encuestaProcedure)
     {
         $this->EncuestaNotification = $encuestaNotification;
+        $this->EncuestaProcedure = $encuestaProcedure;
     }
 
+    // vista de los graficos todo
     public function index() {
 
         return view('modulos.graficos.graficos');
     }
 
-    public function excel($tipo = null){
+    // descarga el excel de los graficos
+    public function excel($tipo = null,$year = null){
         return Excel::download(new graficosExport(), 'users.xlsx');
     }
-    public function pdf($tipo = null){
-        //return Excel::download(new graficosExport(), 'users.xlsx');
-       /* $pdf = \PDF::loadView('pdf.prueba');
-        return $pdf->download('invoice.pdf');*/
-        // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml('');
-// (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('A4', 'landscape');
 
-// Render the HTML as PDF
-        $dompdf->render();
+    // imprimir los graficos
+    public function imprimir($tipo = null, $year = null)
+    {
+        if($tipo == "tipoInstitucion"){
+            // voy a pedir datos por medio de un sp
 
-// Output the generated PDF to Browser
-        $dompdf->stream();
+            return view('imprimir.prueba');
+        }
     }
 
+    // consulta de graficos
+    public function pdf($tipo = null){
+       
+    }
+
+    // envia una notificación con el porcentaje de resultados
     public function notifify(){
         $encuestados = "200";
         $porcentaje = "75%";
@@ -59,8 +63,68 @@ class EncuestaController extends Controller
         
     }
 
+    // funciones para cargar con info los graficos
     public function graficoA() {
         $datos = array(10,20,30);
         return $datos;
     }
+
+    // consultas de la encuesta
+
+     //Consultar nacionalidad
+    public function getNacionalidadAll()
+    {
+        
+        return $this->EncuestaProcedure->getNacionalidadAll();
+    }
+    //consultar genero
+    public function getGeneroAll()
+    {
+        return $this->EncuestaProcedure->getGeneroAll();
+    }
+
+    // consultar carrera
+    public function getCarreraAll()
+    {
+        return $this->EncuestaProcedure->getCarreraAll();
+    }
+
+    // estado civil
+    public function getEstadoCivilAll()
+    {
+        return $this->EncuestaProcedure->getEstadoCivilAll();
+    }
+
+    // pais de residencia
+    public function getPaisAll()
+    {
+        return $this->EncuestaProcedure->getPaisAll();
+    }
+
+    // etnia
+    public function getEtniaAll()
+    {
+        return $this->EncuestaProcedure->getEtniaAll();
+    }
+
+    // tipo de institucion
+    public function getInstitucionAll()
+    {
+        return $this->EncuestaProcedure->getInstitucionAll();
+    }
+
+    //cargo que ocupa
+    public function getCargoAll()
+    {
+        return  $this->EncuestaProcedure->getCargoAll();
+    }
+
+    // rango de sueldo
+    public function getRangoSueldoAll()
+    {
+       return  $this->EncuestaProcedure->getRangoSueldoAll();
+    }
+
+    //funcion para enviar correos para realizar la encuesta 
+    
 }
