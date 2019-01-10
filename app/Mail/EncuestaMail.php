@@ -7,9 +7,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class EncuestaMail extends Mailable
+class EncuestaMail extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels ;
 
     /**
      * Create a new message instance.
@@ -28,6 +28,6 @@ class EncuestaMail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('Seguimiento a graduados')->markdown('emails.encuesta');
     }
 }

@@ -10,18 +10,22 @@ use App\User;
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Core\procedimientos\EncuestaProcedure;
-
+use App\Mail\EncuestaMail;
+use Illuminate\Support\Facades\Mail;
 
 class EncuestaController extends Controller
 {
     use Notifiable;
     protected $EncuestaNotification;
     protected $EncuestaProcedure;
+    protected $EncuestaMail;
 
-    public function __construct(EncuestaNotification $encuestaNotification, EncuestaProcedure $encuestaProcedure)
+
+    public function __construct(EncuestaNotification $encuestaNotification, EncuestaProcedure $encuestaProcedure ,EncuestaMail $encuestaMail)
     {
         $this->EncuestaNotification = $encuestaNotification;
         $this->EncuestaProcedure = $encuestaProcedure;
+        $this->EncuestaMail = $encuestaMail;
     }
 
     // vista de los graficos todo
@@ -126,5 +130,16 @@ class EncuestaController extends Controller
     }
 
     //funcion para enviar correos para realizar la encuesta 
+
+    public function emailSend() {
+
+        //obtener los usuarios
+       $user = user::find(4);
+        Mail::to($user)->send( new EncuestaMail($user));
+        
+            // for con todos los usuarios
+                //la clase para enviar los correos
+
+    }
     
 }

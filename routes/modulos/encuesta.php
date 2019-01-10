@@ -12,4 +12,5 @@ route::get('get-etnia', 'EncuestaController@getEtniaAll');
 route::get('get-institucion', 'EncuestaController@getInstitucionAll');
 route::get('get-cargo', 'EncuestaController@getCargoAll');
 route::get('get-rango', 'EncuestaController@getRangoSueldoAll');
+route::get('enviar-encuesta', 'EncuestaController@emailSend');
 // TODO: 
