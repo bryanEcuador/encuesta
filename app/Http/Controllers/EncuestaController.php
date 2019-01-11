@@ -31,27 +31,7 @@ class EncuestaController extends Controller
     // vista de los graficos todo
     public function index() {
 
-        return view('modulos.graficos.graficos');
-    }
-
-    // descarga el excel de los graficos
-    public function excel($tipo = null,$year = null){
-        return Excel::download(new graficosExport(), 'users.xlsx');
-    }
-
-    // imprimir los graficos
-    public function imprimir($tipo = null, $year = null)
-    {
-        if($tipo == "tipoInstitucion"){
-            // voy a pedir datos por medio de un sp
-
-            return view('imprimir.prueba');
-        }
-    }
-
-    // consulta de graficos
-    public function pdf($tipo = null){
-       
+       // return view('modulos.graficos.graficos');
     }
 
     // envia una notificación con el porcentaje de resultados
@@ -63,16 +43,8 @@ class EncuestaController extends Controller
 
     }
 
-    public function read() {
-        
-    }
-
-    // funciones para cargar con info los graficos
-    public function graficoA() {
-        $datos = array(10,20,30);
-        return $datos;
-    }
-
+   
+   
     // consultas de la encuesta
 
      //Consultar nacionalidad

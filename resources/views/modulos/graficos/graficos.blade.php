@@ -86,12 +86,10 @@ this.cargarGraficos();
 // funciones para cargar información
      
     function consultarGraficoA(year){
-        console.log(year)
-
-        var url = 'prueba/'+year;
+        var url = 'grafico/tipo_institucion/'+year;
          $.get(url, { crossDomain : true} , (data) =>  {
                 console.log(data);
-                this.graficoA(data)
+                //this.graficoA(data)
             }).fail( function() {
                 console.log("fallo la peticion");
         });
@@ -101,14 +99,18 @@ this.cargarGraficos();
 
 // funciones para cargar graficos    
         function graficoA(datos) {
-        // hacemos una petición a la url con la información
-
         //armamos el grafico
+        var privada = datos[0].total ;
+        var publica = datos[1].total;
+        var familiar = datos[2].total;
+        var propio = datos[3].total;
+        var independiente = datos[4].total;
+
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ["publica 20%","privada 75%","negocio propio 5%"],
+                labels: ["publica","privada","negocio propio","familiar","independiente"],
                 datasets: [{
                     label: '# of Votes',
                     data: [datos[0], datos[1], datos[2]],
@@ -118,7 +120,6 @@ this.cargarGraficos();
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
                     ],
                     borderColor: [
                         'rgba(255,99,132,1)',
@@ -126,7 +127,6 @@ this.cargarGraficos();
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)',
                         'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
                     ],
                     borderWidth: 1
                 }]

@@ -1,0 +1,73 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Core\Procedimientos\GraficosProcedure;
+//use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\graficosExport;
+
+
+class GraficosController extends Controller
+{
+    protected $GraficosProcedure;
+    // función inicial donde vamos a llamar a la clase que contiene
+    // los metodos para llamar a los procedimientos almacenados
+    public function __construct(GraficosProcedure $graficosProcedure)
+    {
+        $this->GraficosProcedure = $graficosProcedure; // inicialisamos las clase ahora ya podemos usar sus metodos
+    }
+
+
+    // vista principal de los graficos
+    public function index(){
+        return view('modulos.graficos.graficos');
+    }
+
+    // descargas de excel
+    public function excel($tipo = null, $year = null)
+    {
+        return Excel::download(new graficosExport(), 'users.xlsx');
+    }
+
+
+    // pdf ?
+
+
+    // imprimir los graficos
+    public function imprimir($tipo = null, $year = null)
+    {
+        if ($tipo == "tipoInstitucion") {
+            // voy a pedir datos por medio de un sp
+
+            return view('imprimir.prueba');
+        }
+    }
+
+     // funciones para cargar con info los graficos
+    public function dibujarGrafico($tipo,$year)
+    {
+        // preguntamos que grafico necesitamos 
+        // trae los datos y llama a una función para que los regrese en porcentaje
+        if($tipo == "tipo_institucion" ){
+             $datos = $this->GraficosProcedure->tipoInstitucion($year);
+             $total = $this->GraficosProcedure->totalTipoInstitucion($year);
+            $porcentaje = $this->porcentajeTipoInstitucion($datos,$total);
+           return $porcentaje;
+        }
+        
+    }
+
+
+    // metodos para procesar información de los graficos
+
+    public function porcentajeTipoInstitucion($datos , $total) {
+        foreach ($datos as $value) {
+            $value->total = ($value->total * 100) / $total[0]->cantidad;
+        }
+
+        return $datos;
+    }
+
+}
