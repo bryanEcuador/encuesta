@@ -10,6 +10,8 @@ use App\Core\Procedimientos\SeguridadProcedure;
 /* use Illuminate\Support\Facades\Auth; */
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Auth\Authenticatable;
+use App\Http\Controllers\Auth\RegisterController;
+
 /* use perm */
 
 class UserController extends Controller
@@ -25,8 +27,10 @@ class UserController extends Controller
 
     protected $SeguridadProcedure;
 
-    public function __construct(SeguridadProcedure $seguridadProcedure){
+    public function __construct(SeguridadProcedure $seguridadProcedure , RegisterController $registerController){
         $this->SeguridadProcedure = $seguridadProcedure;
+        $this->RegisterController = $registerController;
+
     }
 
     public function index()
@@ -85,10 +89,11 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        
+        $this->RegisterController->create($request->input());
 
-         $request->validate([
+        /*  $request->validate([
             'nombres' => 'required|max:30',
-            'apellidos' => 'required',
             'name'=> 'required|unique:users|max:10',
             'password' => 'required|min:8|max:16',
             'rol' => 'required'
@@ -102,8 +107,7 @@ class UserController extends Controller
         $password = bcrypt($request->input('pass')) ;
 
         $id =DB::table('users')->insertGetId(
-            ['nombres' => $nombres,
-                'apellidos' => $apellidos,
+            [
                 'name' => $name,
                 'state' => $estado,
                 'password' => $password,
@@ -117,7 +121,7 @@ class UserController extends Controller
             ]);
          
             User::create($request->input());
-        return response()->json(['success'=>'Informacion guardada con exito']);
+        return response()->json(['success'=>'Informacion guardada con exito']); */
 
     }
 

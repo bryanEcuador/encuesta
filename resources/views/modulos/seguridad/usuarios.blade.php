@@ -457,7 +457,7 @@
                 //------------------------------------ CRUD -----------------------------------//
                     
                 crear : function() {
-                    $url = '/register';
+                    $url = '/seguridad/usuarios/store';
                         axios.post($url, {
                                 name : this.usuario.toLowerCase(),
                                 email : this.email.toLowerCase(),

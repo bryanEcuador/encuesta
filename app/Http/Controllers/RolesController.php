@@ -7,9 +7,18 @@ use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Database\QueryException;
 use App\Http\Requests\StoreRolesRequest;
+use App\Http\Controllers\Auth\RegisterController;
 
 class RolesController extends Controller
 {
+    protected $RegisterController;
+
+    public function __construct(RegisterController $registerController)
+    {
+        $this->RegisterController = $registerController;
+    }
+
+
      public function index()
     {
         //
