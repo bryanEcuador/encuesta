@@ -44,6 +44,26 @@
 
         </div>
     </div>
+        {{--  --}}
+        <div class=" col-lg-6" id="content">
+        <div class="tile">
+            <h3>Tipo de institución que labora</h3>
+            <div id="grafico1">
+                <canvas id="myChart2" class="embed-responsive-item" width="40vw" height="30vh"></canvas>
+            </div>
+            <div id="render"></div>
+            <hr>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <button class="btn btn-success mx-2" onclick="descargarExcel('tipoInstitucion')"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Descargar</button>
+                    <button class="btn btn-danger mx-2"  onclick="descargarPdf('tipoInstitucion')" ><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar</button>
+                    <button class="btn btn-secondary mx-2" onclick="imprimirPagina('tipoInstitucion')"><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
 
     </div>
 </div>
@@ -81,6 +101,7 @@ this.cargarGraficos();
         var yearValue = this.obtenerYear();
         // llamamos a las funciones para dibujar los graficos
         this.consultarGraficoA(yearValue);
+        this.consultarGraficoB(yearValue);
     }
 
 // funciones para cargar información
@@ -88,23 +109,34 @@ this.cargarGraficos();
     function consultarGraficoA(year){
         var url = 'grafico/tipo_institucion/'+year;
          $.get(url, { crossDomain : true} , (data) =>  {
-                console.log(data);
-                //this.graficoA(data)
+               this.graficoA(data)
             }).fail( function() {
                 console.log("fallo la peticion");
         });
 
     }
 
+    function consultarGraficoB(year) {
+         var url = 'grafico/recursos_carrera/'+year;
+         $.get(url, { crossDomain : true} , (data) =>  {
+                console.log(data);
+               this.graficoB(data)
+            }).fail( function() {
+                console.log("fallo la peticion");
+        });
+    }
+
 
 // funciones para cargar graficos    
         function graficoA(datos) {
         //armamos el grafico
-        var privada = datos[0].total ;
-        var publica = datos[1].total;
-        var familiar = datos[2].total;
-        var propio = datos[3].total;
-        var independiente = datos[4].total;
+        var privada =  (datos.length >= 1)  ? datos[0].total : 0;
+        var publica = (datos.length >= 2)  ? datos[1].total : 0;
+        var familiar = (datos.length >= 3)  ? datos[2].total : 0;
+        var propio = (datos.length >= 4)  ? datos[3].total : 0;
+        var independiente = (datos.length >= 5)  ? datos[4].total : 0;
+
+       
 
         var ctx = document.getElementById("myChart").getContext('2d');
         var myChart = new Chart(ctx, {
@@ -113,7 +145,7 @@ this.cargarGraficos();
                 labels: ["publica","privada","negocio propio","familiar","independiente"],
                 datasets: [{
                     label: '# of Votes',
-                    data: [datos[0], datos[1], datos[2]],
+                    data: [privada,publica,familiar,propio,independiente],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -134,11 +166,188 @@ this.cargarGraficos();
             options: {
                 
             }
-        });
+        }); 
     }
 
-    function graficoB(){
+    function graficoB(datos){
+        
+        // talento 
+        if(typeof(datos.talento[0].cantidad !== undefined)){
+            console.log("talento");
+            for(var i in datos.talento){
+                if(datos.talento[i].talento == "excelente" ){
+                var talentoExcelente = datos.talento[i].cantidad;
 
+                } else if(datos.talento[i].talento == "muy buena"){
+                    var talentoMuyBuena = datos.talento[i].cantidad;
+
+                }else if(datos.talento[i].talento == "buena"){
+                    var talentoBuena = datos.talento[i].cantidad;
+
+                }else if(datos.talento[i].talento == "regular"){
+                    var talentoRegular = datos.talento[i].cantidad;
+
+                }else if(datos.talento[i].talento == "insuficiente"){
+                    var talentoInsufuciente = datos.talento[i].cantidad;
+                }
+            }  
+        }
+        // servicios
+       
+         if(typeof(datos.servicios[0].cantidad !== undefined)){
+        
+            for(var i in datos.servicios){
+                if(datos.servicios[i].servicio == "excelente" ){
+                var serviciosExcelente = datos.servicios[i].cantidad;
+
+                } else if(datos.servicios[i].servicio == "muy buena"){
+                    var serviciosMuyBuena = datos.servicios[i].cantidad;
+
+                }else if(datos.servicios[i].servicio == "buena"){
+                    var serviciosBuena = datos.servicios[i].cantidad;
+                    console.log(serviciosBuena+" servicios");
+
+                }else if(datos.servicios[i].servicio == "regular"){
+                    var serviciosRegular = datos.servicios[i].cantidad;
+
+                }else if(datos.servicios[i].servicio == "insuficiente"){
+                    var serviciosInsufuciente = datos.servicios[i].cantidad;
+                }
+            }  
+        }
+        //ambientes
+        if(typeof(datos.ambiente[0].cantidad !== undefined)){
+        
+            for(var i in datos.ambiente){
+                if(datos.ambiente[i].ambiente == "excelente" ){
+                var ambienteExcelente = datos.ambiente[i].cantidad;
+
+                } else if(datos.ambiente[i].ambiente == "muy buena"){
+                    var ambienteMuyBuena = datos.ambiente[i].cantidad;
+
+                }else if(datos.ambiente[i].ambiente == "buena"){
+                    var ambienteBuena = datos.ambiente[i].cantidad;
+
+                }else if(datos.ambiente[i].ambiente == "regular"){
+                    var ambienteRegular = datos.ambiente[i].cantidad;
+
+                }else if(datos.ambiente[i].ambiente == "insuficiente"){
+                    var ambienteInsufuciente = datos.ambiente[i].cantidad;
+                }
+            }  
+        }
+        //infraestructura
+        if(typeof(datos.infraestructura[0].cantidad !== undefined)){
+        
+            for(var i in datos.infraestructura){
+                if(datos.infraestructura[i].infraestructura == "excelente" ){
+                var infraestructuraExcelente = datos.infraestructura[i].cantidad;
+
+                } else if(datos.infraestructura[i].infraestructura == "muy buena"){
+                    var infraestructuraMuyBuena = datos.infraestructura[i].cantidad;
+
+                }else if(datos.infraestructura[i].infraestructura == "buena"){
+                    var infraestructuraBuena = datos.infraestructura[i].cantidad;
+
+                }else if(datos.infraestructura[i].infraestructura == "regular"){
+                    var infraestructuraRegular = datos.infraestructura[i].cantidad;
+
+                }else if(datos.infraestructura[i].infraestructura == "insuficiente"){
+                    var infraestructuraInsufuciente = datos.infraestructura[i].cantidad;
+                }
+            }  
+        }
+
+
+        (typeof(infraestructuraInsufuciente) == "number") ? infraestructuraInsufuciente = infraestructuraInsufuciente : infraestructuraInsufuciente = 0 ;
+        (typeof(infraestructuraRegular) == "number") ?  infraestructuraRegular = infraestructuraRegular: infraestructuraRegular = 0;
+        (typeof(infraestructuraBuena) == "number") ? infraestructuraBuena = infraestructuraBuena : infraestructuraBuena = 0;
+        (typeof(infraestructuraMuyBuena) == "number") ? infraestructuraMuyBuena = infraestructuraMuyBuena  : infraestructuraMuyBuena = 0 ;
+        (typeof(infraestructuraExcelente) == "number") ? infraestructuraExcelente = infraestructuraExcelente  : infraestructuraExcelente = 0; 
+
+         (typeof(ambienteInsufuciente) == "number") ? ambienteInsufuciente = ambienteInsufuciente : ambienteInsufuciente = 0 ;
+        (typeof(ambienteRegular) == "number") ?  ambienteRegular = ambienteRegular: ambienteRegular = 0;
+        (typeof(ambienteBuena) == "number") ? ambienteBuena = ambienteBuena : ambienteBuena = 0;
+        (typeof(ambienteMuyBuena) == "number") ? ambienteMuyBuena = ambienteMuyBuena  : ambienteMuyBuena = 0 ;
+        (typeof(ambienteExcelente) == "number") ? ambienteExcelente = ambienteExcelente  : ambienteExcelente = 0; 
+
+         (typeof(serviciosInsufuciente) == "number") ? serviciosInsufuciente = serviciosInsufuciente : serviciosInsufuciente = 0 ;
+        (typeof(serviciosRegular) == "number") ?  serviciosRegular = serviciosRegular: serviciosRegular = 0;
+        (typeof(serviciosBuena) == "number") ? serviciosBuena = serviciosBuena : serviciosBuena = 0;
+        (typeof(serviciosMuyBuena) == "number") ? serviciosMuyBuena = serviciosMuyBuena  : serviciosMuyBuena = 0 ;
+        (typeof(serviciosExcelente) == "number") ? serviciosExcelente = serviciosExcelente  : serviciosExcelente = 0; 
+
+        (typeof(talentoInsufuciente) == "number") ? talentoInsufuciente = talentoInsufuciente : talentoInsufuciente = 0 ;
+        (typeof(talentoRegular) == "number") ?  talentoRegular = talentoRegular: talentoRegular = 0;
+        (typeof(talentoBuena) == "number") ? talentoBuena = talentoBuena : talentoBuena = 0;
+        (typeof(talentoMuyBuena) == "number") ? talentoMuyBuena = talentoMuyBuena  : talentoMuyBuena = 0 ;
+        (typeof(talentoExcelente) == "number") ? talentoExcelente = talentoExcelente  : talentoExcelente = 0; 
+        
+           
+
+         var ctx = document.getElementById("myChart2").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ["insuficiente","regular","buena","muy buena","excelente"],
+                datasets: [{
+
+                    label: 'Talento humano',
+                    data: [talentoInsufuciente,talentoRegular,talentoBuena,talentoMuyBuena,talentoExcelente],
+                    backgroundColor: [
+                        'rgba(186, 231, 34  , 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(186, 231, 34  ,1)',
+                    ],
+                    borderWidth: 1
+                } ,
+                {
+                    label: 'servicios',
+                       
+                    data: [ 
+                            0,0,0,0,0
+                        ],
+                    backgroundColor: [
+                        'rgba(255, 99, 172, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255,99,172,1)',
+                    ],
+                    borderWidth: 1 
+                },
+                 {
+                    label: 'infraestructura',
+                    data: [ infraestructuraInsufuciente , infraestructuraRegular , infraestructuraBuena ,infraestructuraMuyBuena ,infraestructuraExcelente],
+                    backgroundColor: [
+                        'rgba(8, 240, 191  , 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(8, 240, 191  ,1)',
+                    ],
+                    borderWidth: 1 
+                },
+                 {
+                    label: 'ambiente',
+                     data: [ambienteInsufuciente,ambienteRegular,ambienteBuena,ambienteMuyBuena,ambienteExcelente],
+                    backgroundColor: [
+                        'rgba(29, 51, 192, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(87, 107, 236  ,1)',
+                    ],
+                    borderWidth: 1 
+                }
+
+                ]
+            },
+            options: {
+                
+            }
+        });
+        
+          
+    
     }
     function graficoC(){
 
