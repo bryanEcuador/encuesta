@@ -28,10 +28,10 @@ class EncuestaController extends Controller
         $this->EncuestaMail = $encuestaMail;
     }
 
-    // vista de los graficos todo
+   
     public function index() {
 
-       // return view('modulos.graficos.graficos');
+       
     }
 
     // envia una notificación con el porcentaje de resultados
@@ -111,6 +111,10 @@ class EncuestaController extends Controller
         
             // for con todos los usuarios
                 //la clase para enviar los correos
+
+    }
+
+    public function store(EncuestaRequest $request){
 
     }
     
