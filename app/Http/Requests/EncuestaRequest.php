@@ -26,7 +26,9 @@ class EncuestaRequest extends FormRequest
         return [
             /* Datos personales */
            'identificacion' => 'required |String',
+           'tipo_identificacion' => 'required |Numeric',
            'nombres' => 'required |String',
+           'apeliidos' => 'required |String',
            'fecha_nacimiento' => 'required | date',
            'nacionalidad' => 'required |Numeric',
            'genero' => 'required |Numeric',
@@ -45,10 +47,14 @@ class EncuestaRequest extends FormRequest
            'correo' => 'required | email',
            'etnia' => 'required |Numeric',
            /* informacion profesional */
+           'trabajo_actual' => 'required | String',
+           'tipo_institucion' => 'required | Numeric',
            'empresa' => 'required |String',
+           'actividad_empresa' => 'required |Numeric',
            'cargo' => 'required |Numeric',
            'tiempo_laborando' => 'required |Numeric',
-           'tipo_contraro' => 'required |Numeric',
+           'tipo_contrato' => 'required |Numeric',
+           'rango_sueldo' => 'required |Numeric',
            'trabajo_exterior' => 'required |string',
            'relacion_carrera_profesional' => 'required |Numeric',
            'nivel_estudio_acorde' => 'required |Numeric',
