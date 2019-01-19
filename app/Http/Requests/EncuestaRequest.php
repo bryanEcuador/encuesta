@@ -62,7 +62,7 @@ class EncuestaRequest extends FormRequest
             /* instituto Carrera recurso */
            'formacion_profesional' => 'required | Numeric',
            'formación_profesional_porque' => 'required | String',
-           'calificacion_docente' => 'required | array' ,
+           'calificacion_docente' => 'required | String' ,
            'conocimientos_menos_utiles' => 'required | Numeric',
            'conocimientos_menos_utiles_explique' => 'required_if : conocimientos_menos_utiles, 4 | String',
            'recursos_de_la_carrera' => 'required | array',
