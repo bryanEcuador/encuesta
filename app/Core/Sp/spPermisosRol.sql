@@ -1,3 +1,4 @@
+delimiter //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spPermisosRol`(in _rol_id int)
 begin 
 	select pr.id, p.name from permission_role pr
@@ -5,3 +6,4 @@ begin
 				pr.permission_id = p.id
 	where role_id = _rol_id;
 end
+// delimiter //
