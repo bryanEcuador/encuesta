@@ -7,6 +7,9 @@ use App\Core\Procedimientos\GraficosProcedure;
 //use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\graficosExport;
+use App\Exports\recursosCarreraExport;
+use App\Exports\tipoInstitucionExport;
+
 
 
 class GraficosController extends Controller
@@ -28,7 +31,12 @@ class GraficosController extends Controller
     // descargas de excel
     public function excel($tipo = null, $year = null)
     {
-        return Excel::download(new graficosExport(), 'users.xlsx');
+        if($tipo== "tipoInstitucion") {
+            return Excel::download(new tipoInstitucionExport($year), 'tipoInstitucion.xlsx');
+        }else if($tipo == "recursos_carrera"){
+            return Excel::download(new recursosCarreraExport($year), 'recursosCarrera.xlsx');
+        }
+        
     }
 
 
@@ -41,7 +49,9 @@ class GraficosController extends Controller
         if ($tipo == "tipoInstitucion") {
             // voy a pedir datos por medio de un sp
 
-            return view('imprimir.prueba');
+            return view('imprimir.tipoinstitucion',compact('year'));
+        }else if($tipo == "recursos_carrera" ){
+            return view('imprimir.recursoscarrera', compact('year'));
         }
     }
 
@@ -55,7 +65,7 @@ class GraficosController extends Controller
              $total = $this->GraficosProcedure->totalTipoInstitucion($year);
             $porcentaje = $this->porcentajeTipoInstitucion($datos,$total);
            return $porcentaje;
-        }if($tipo == "recursos_carrera"){
+        }else if($tipo == "recursos_carrera"){
 
             $servicios = $this->GraficosProcedure->recursosCarreraServicios($year);
             $infraestructura = $this->GraficosProcedure->recursosCarreraInfraestructura($year);
