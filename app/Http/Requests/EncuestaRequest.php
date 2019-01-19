@@ -48,7 +48,7 @@ class EncuestaRequest extends FormRequest
            'empresa' => 'required |String',
            'cargo' => 'required |String',
            'tiempo_laborando' => 'required |String',
-           'tipo_contraro' => 'required |string',
+           'tipo_contrato' => 'required |string',
            'trabajo_exterior' => 'required |string',
            'relacion_carrera_profesional' => 'required |String',
            'nivel_estudio_acorde' => 'required |String',

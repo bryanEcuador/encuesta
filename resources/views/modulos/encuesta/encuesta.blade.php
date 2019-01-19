@@ -96,7 +96,7 @@
             border-bottom-color: #2C554E;
             position: absolute; 
              right: 0;
-            bottom: 0;
+            bottom: 0;          
              
         }
 
@@ -122,25 +122,150 @@
         </div>
         
         <div>
-            <label class="titulo"> Generico</label>
+            <label class="titulo"> Datos Personales</label>
         </div>
         <hr>
         <div id="cuerpoForm">
             <form>
-                <section v-if="personal" id="informacion personales">
-                    <input type="text" v-model="campo1">
+                <section v-if="personal" id="datos personales">
+                    <div class="form-group col-md-3" > 
+                    <label class="control-label" for="">Identificacion</label>
+                    <input class="form-control"type="text" v-model="identificacion" name="Identificacion">
+                    </div>
+
+                    <div class="form-group col-md-8" > 
+                    <label class="control-label" for="">Nombres y Apellidos</label>
+                    <input class="form-control"type="text" v-model="nombres" name="Nombres">
+                    </div>
+
+                    <div class="form-group col-md-8" > 
+                    <label class="control-label" for="">Fecha Nacimiento</label>
+                    <input type="date" v-model="fecha_nacimiento" name="Fecha Nacimiento">
+                    </div>
+
+                    <div class="form-group row col-md-10" > 
+                    <label class="control-label col-md-3" >Nacionalidad</label >
+                    <input class="form-control mx-1 col-md-4"type="text" v-model="nacionalidad" name=" Nacionalidad ">
+                    <label class="control-label col-md-2">Genero</label>
+                    <select class="form-control col-md-2" v-model="genero">
+                    <option value="FEMENINO">FEMENINO</option>
+                    <option value="MASCULINO">MASCULINO</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-10" > 
+                    <label class="control-label col-md-3" >Carrera</label >
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="carrera" name=" Carrera ">
+                    </div>
+
+                    <div class="form-group row col-md-10" > 
+                    <label class="control-label col-md-3">Discapacidad</label>
+                    <select class="form-control col-md-2" v-model="discapacidad">
+                    <option value="SI">Si</option>
+                    <option value="NO">No</option>
+                    </select>
+                    <label class="control-label col-md-3" >Carnet Conadis</label >
+                    <input class="form-control mx-1 col-md-3"type="text" v-model="carnet_conadis" name="Carnet Conadis ">
+                    </div>
+
+                    </form>
+
                 </section>
-                <section id="información profesional" v-if="profesional">
-                    <input type="text" v-model="campo2">
+                <section id="informacion personales" v-if="profesional">
+                <div>
+                    <label class="titulo"> INFORMACIÓN PERSONAL</label>
+                </div>
+                    <div class="form-group row col-md-10" > 
+                    <label class="control-label col-md-2">Estado Civil</label>
+                    <select class="form-control col-md-2" v-model="estado_civil">
+                    <option value="CASADO">CASADO</option>
+                    <option value="SOLTERO">SOLTERO</option>
+                    <option value="DIVORCIADO">DIVORCIADO</option>
+                    <option value="VIUDO">VIUDO</option>
+                    <option value="UNION LIBRE">UNION LIBRE</option>
+                    </select>
+                    </div>     
+
+                    <div class="form-group row col-md-10" > 
+                    <label class="control-label col-md-3" >Número de Hijos</label >
+                    <input class="form-control mx-1 col-md-4"type="text" v-model="numero_hijos" name=" numero_hijos ">
+                    <label class="control-label col-md-2">País</label>
+                    <select class="form-control col-md-2" v-model="pais">
+                              
+                    </select>
+                    </div>       
+                
+                
+                
+                
+              
+                <input type="text" v-model="ciudad" name="Ciudad">
+                <input type="number" v-model="celular" name="Celular">
+                <input type="text" v-model="direccion" name="Direccion">
+                <input type="text" v-model="correo" name="Correo">
+                <select v-model="etnia">
+                    <option>INDIGENA</option>
+                    <option>AFROAMERICANO</option>
+                    <option>NEGRO</option>
+                    <option>MULATO</option>
+                    <option>MONTUBIO</option>
+                    <option>MESTIZO</option>
+                    <option>BLANCO</option>
+                    </select>
+                    <span>Etnia: @{{ etnia }}</span>
+                    
                 </section>
                 <section id="institucion" v-if="institucion">
-                    <input type="text" v-model="campo3">
+                <input type="text" v-model="empresa" name="Empresa">
+                <select v-model="cargo">
+                    <option>DIRECTOR EJECUTIVO</option>
+                    <option>GERENTE GENERAL</option>
+                    <option>SUPERVISOR</option>
+                    <option>VENDEDOR</option>
+                    <option>PROMOTOR</option>
+                    <option>ANALISTA</option>
+                    <option>DESARROLLADOR</option>
+                    <option>ADMINISTRATIVO</option>
+                    <option>AUDITOR</option>
+                    <option>SALUD</option>
+                    <option>TECNICO</option>
+                    <option>JEFE</option>
+                    </select>
+                    <span>Cargo:@{{ cargo }}</span>
+                    <input type="number" v-model="tiempo_laborando" name="Tiempo Laborando">
+                    <select v-model="tipo_contrato">
+                    <option>CONTRATO INDEFINIDO</option>
+                    <option>CONTRATO EVENTUAL</option>
+                    <option>CONTRATO POR OBRA</option>
+                    <option>CONTRATO DE PRUEBA</option>
+                    <option>CONTRATO POR TAREA</option>
+                    <option>CONTRATO TACITO</option>
+                    </select>
+                    <span>Tipo Contrato: @{{ tipo_contrato }}</span>
+                    <input type="text" v-model="trabajo_exterior" name="Trabajo en el Exterior">
+                    <input type="text" v-model="relacion_carrera_profesional" name="Su Trabajo es acorde a su profesion">
+                    <input type="text" v-model="nivel_estudio_acorde" name="Su nivel se Estudio es acorde al Cargo que desempeña">
+                    <select v-model="dificultad_para_trabajar">
+                    <option>SI</option>
+                    <option>NO</option>
+                    </select>
+                    <span>Dificultad: @{{ dificultad_para_trabajar }}</span>
                 </section>
                 <section id="preferencias" v-if="preferencias">
-                    <input type="text" v-model="campo4">
+                <input type="text" v-model="formacion_profesional" name="Trabajo en el Exterior">
+                <input type="text" v-model="calificacion_docente" name="Trabajo en el Exterior">
+                <input type="text" v-model="conocimientos_menos_utiles" name="Trabajo en el Exterior">
+                <input type="text" v-model="recursos_de_la_carrera" name="Trabajo en el Exterior">
+                <input type="text" v-model="dificultad_general" name="Trabajo en el Exterior">
+                <input type="text" v-model="relacion_desempeño" name="Trabajo en el Exterior">
+                <input type="text" v-model="estudios_pregrado" name="Trabajo en el Exterior">
+                <input type="text" v-model="otra_carrera" name="Trabajo en el Exterior">
+                <input type="text" v-model="recomendar_institucion" name="Trabajo en el Exterior">
                 </section>
                 <section id="Recomendaciones" v-if="recomendaciones">
-                    <input type="text" v-model="campo5">    
+                <input type="text" v-model="temas" name="Trabajo en el Exterior">
+                <input type="text" v-model="asignatura" name="Trabajo en el Exterior">
+
                 </section>          
         </form> 
         </div>
@@ -206,29 +331,29 @@
              validarPersonal : function (boton) {
                  // comienzo validacion
 
-                 if(boton == "next"){
-                      if(this.campo1 == ''){
-                        console.log("error1")
-                    }else {
+                // if(boton == "next"){
+                     // if(this.campo1 == ''){
+                      //  console.log("error1")
+                   // }else {
                         this.personal = false;
                         this.profesional = true;
                         this.seccionActual = 2;
                         this.btnAnterior = true;
-                    }
-                 }               
+                   // }
+                 //}               
              },
 
              validarProfesional : function (boton) {
 
                  if(boton == "next"){
-                      if(this.campo2 == ''){
-                        console.log("error2")
-                    }else {
+                  //    if(this.campo2 == ''){
+                    //    console.log("error2")
+                   // }else {
                         this.profesional = false;
                         this.institucion = true;
                         this.seccionActual = 3;
-                    }
-                 }else if(boton == "previous"){
+                    //}
+                }else if(boton == "previous"){
                         this.personal = true;
                         this.profesional = false;
                         this.btnAnterior = false;
