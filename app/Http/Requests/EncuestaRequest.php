@@ -50,17 +50,11 @@ class EncuestaRequest extends FormRequest
            'trabajo_actual' => 'required | String',
            'tipo_institucion' => 'required | Numeric',
            'empresa' => 'required |String',
-<<<<<<< HEAD
-           'cargo' => 'required |String',
-           'tiempo_laborando' => 'required |String',
-           'tipo_contrato' => 'required |string',
-=======
            'actividad_empresa' => 'required |Numeric',
            'cargo' => 'required |Numeric',
            'tiempo_laborando' => 'required |Numeric',
            'tipo_contrato' => 'required |Numeric',
            'rango_sueldo' => 'required |Numeric',
->>>>>>> 8170ce1a72ff6194f202e6debbe181b999ea1394
            'trabajo_exterior' => 'required |string',
            'relacion_carrera_profesional' => 'required |Numeric',
            'nivel_estudio_acorde' => 'required |Numeric',
