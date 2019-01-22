@@ -1,5 +1,5 @@
 <?php
-
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,12 +17,23 @@ require_once __DIR__. '/modulos/logs.php';
 require_once __DIR__. '/modulos/encuesta.php';
 /* require __DIR__ . '/modulos/proveedores.php';
  */
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
+
+Route::redirect('/register', '/home', 301);
+Route::redirect('/', '/login', 301);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/notificaciones','EncuestaController@notifify');
 Route::get('/leer-notificaciones', 'EncuestaController@read');
+Route::get('/prueba', function () {
+     
+      $users = User::all();
+
+      foreach ($users as  $user) {
+        
+         DB::table('tb_correos')->insert([
+            'user_id' => $user->id  , 'estado' => 0 , 'fecha_id' => 1 , 'token' =>  str_random(16),
+         ]);
+      }
+  
+});

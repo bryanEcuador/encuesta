@@ -1,4 +1,5 @@
 <?php
+
 route::get('encuesta', function(){
     return view('modulos.encuesta.encuesta');
 });
@@ -14,4 +15,5 @@ route::get('get-cargo', 'EncuestaController@getCargoAll');
 route::get('get-rango', 'EncuestaController@getRangoSueldoAll');
 //
 route::get('enviar-encuesta', 'EncuestaController@emailSend');
+route::get('encuesta-prueba/{token}', 'EncuestaController@ValidarEncuesta');
 // TODO: 

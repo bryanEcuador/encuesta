@@ -18,7 +18,7 @@
 </head>
 <body class="app sidebar-mini rtl">
 <!-- Navbar-->
-<header class="app-header" ><a id="header" v-cloak class="app-header__logo" href="{{ url('/') }}"> nombre pagina </a>
+<header class="app-header" ><a id="header" v-cloak class="app-header__logo" href="{{ url('/home') }}"> itsvr encuesta </a>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
     <ul class="app-nav">
