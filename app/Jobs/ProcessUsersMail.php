@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class ProcessUsersMail implements ShouldQueue
 {
@@ -21,7 +22,7 @@ class ProcessUsersMail implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $users,$fecha_id)
+    public function __construct($users,$fecha_id)
     {
         $this->users = $users;
         $this->fecha = $fecha_id;
@@ -34,8 +35,8 @@ class ProcessUsersMail implements ShouldQueue
      */
     public function handle()
     {
+        $this->users = $this->users->whereIn('id', 4);
         foreach ($this->users as  $user) {
-        
          DB::table('tb_correos')->insert([
             'user_id' => $user->id  , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),
          ]);

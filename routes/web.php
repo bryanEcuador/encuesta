@@ -26,14 +26,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/notificaciones','EncuestaController@notifify');
 Route::get('/leer-notificaciones', 'EncuestaController@read');
 Route::get('/prueba', function () {
-     
-      $users = User::all();
 
+    $user = \DB::table('tb_correos')->whereYear('fecha_creacion',2019)->get();
+    dd($user);
+     
+/*        $users = User::all();
+      $users = $users->whereIn('id',4);
+      dd($users);
       foreach ($users as  $user) {
-        
-         DB::table('tb_correos')->insert([
+       echo $user->id;
+          DB::table('tb_correos')->insert([
             'user_id' => $user->id  , 'estado' => 0 , 'fecha_id' => 1 , 'token' =>  str_random(16),
-         ]);
+         ]); 
       }
+    Flight::where('foo', 'bar')->cursor()   */
   
 });
+
+

@@ -30,7 +30,9 @@ use App\Core\Modelos\RelacionDesempeño;
 use App\Core\Modelos\TemasInteres;
 use App\Core\Modelos\TipoInstitucion;
 use App\Core\Modelos\Asignatura;
+// jobs
 use App\Jobs\ProcessUsersMail;
+use App\Jobs\ProcessMailEncuesta;
 
 
 
@@ -335,33 +337,27 @@ class EncuestaController extends Controller
             $enviado =  false; //DB::table('tb_correos')->whereyear('fecha_creacion',$fecha)->first();
 
             if($enviado){
-                return view('home'); // hacer un reddirect 
+                return redirect()->route('home');
             }
         // dar la fecha inicio y fin para responder la encuesta
-          /*  $month = date('m');
-            $year = date('Y');
-            $day = date("d", mktime(0,0,0, $month+1, 0, $year));
- 
-            $fecha_fin = date('Y-m-d', mktime(0,0,0, 12, $day, $year));
-            $fecha_inicio = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
-
-            $id_fecha = DB::table('tb_fecha')->insertGetId([
-                'inicio' => $fecha_inicio , 'fin' => $fecha_fin 
-            ]); */
+           $fecha =  $this->setFecha();
 
         //obtener los usuarios
-            $user = user::find(4);
+            $user = $this->getUser();
                
        // guardar en la base los registros
-           // ProcessUsersMail::dispatch($user,$id_fecha);
+            ProcessUsersMail::dispatch($user,1);
+       // enviar los correos a los usuarios     
+            //ProcessMailEncuesta::dispatch();
+            Mail::to($user)->send(new EncuestaMail($user));
         
 
-       // enviar los correos 
-        Mail::to($user)->send( new EncuestaMail($user));
-        
+       // enviar los correos a cola
+/*             Mail::to($user)->send( new EncuestaMail($user));
+ */        
             // for con todos los usuarios
                 //la clase para enviar los correos
-
+     
     }
 
     public function validarEncuesta(){
@@ -374,6 +370,25 @@ class EncuestaController extends Controller
         $fecha = getdate();
 
         return $fecha['year'];
+    }
+
+    public function getUser(){
+        return  user::all();
+    }
+
+    public function setFecha($juan){
+        $month = date('m');
+        $year = date('Y');
+        $day = date("d", mktime(0, 0, 0, $month + 1, 0, $year));
+
+        $fecha_fin = date('Y-m-d', mktime(0, 0, 0, 12, $day, $year));
+        $fecha_inicio = date('Y-m-d', mktime(0, 0, 0, $month, 1, $year));
+
+        $id_fecha = DB::table('tb_fecha')->insertGetId([
+            'inicio' => $fecha_inicio, 'fin' => $fecha_fin
+        ]); 
+
+        return $id_fecha;
     }
     
 }

@@ -87,9 +87,10 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+    <div class="app-sidebar__user">
+        
         <div>
-            <p class="app-sidebar__user-name">Nombre del usuario</p>
+            <p style="color:red; padding:2px;" class="app-sidebar__user-name">{{ Auth::user()->name }}</p>
         </div>
     </div>
     <ul class="app-menu">
@@ -109,8 +110,13 @@
             </ul>
         </li>
         <li><a class="app-menu__item"  href="{{route('administracion.graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
-        <li><a class="app-menu__item"  href="{{route('administracion.log')}}"><i class="app-menu__icon fa fa-file-code-o" aria-hidden="true"></i><span class="app-menu__label">Logs</span> </a></li>
-
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-shield"></i><span class="app-menu__label">Logs</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="app-menu__item"  href="{{route('administracion.logs.usuarios')}}"><i class="app-menu__icon fa fa-file-code-o" aria-hidden="true"></i><span class="app-menu__label">Logs de usuario</span> </a></li>               
+                <li><a class="app-menu__item"  href="{{route('administracion.logs.sistema')}}"><i class="app-menu__icon fa fa-file-code-o" aria-hidden="true"></i><span class="app-menu__label">Logs de sistema</span> </a></li>               
+            </ul>
+        </li>
+        <a href="ejemplo"> ejemplo</a>
     </ul>
 </aside>
 <main class="app-content">

@@ -167,6 +167,7 @@ return [
         Caffeinated\Shinobi\ShinobiServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         /*
          * Package Service Providers...
          */
