@@ -1,8 +1,8 @@
 <?php
 
-route::get('encuesta', function(){
+/* route::get('encuesta', function(){
     return view('modulos.encuesta.encuesta');
-});
+}); */
 // selecet 
 route::get('get-nacionalidad', 'EncuestaController@getNacionalidadAll');
 route::get('get-genero', 'EncuestaController@getGeneroAll');
@@ -15,5 +15,6 @@ route::get('get-cargo', 'EncuestaController@getCargoAll');
 route::get('get-rango', 'EncuestaController@getRangoSueldoAll');
 //
 route::get('enviar-encuesta', 'EncuestaController@emailSend');
-route::get('encuesta-prueba/{token}', 'EncuestaController@ValidarEncuesta');
+route::get('encuesta', 'EncuestaController@ValidarEncuesta');
+/* route::get('encuesta-prueba/{token}', 'EncuestaController@ValidarEncuesta'); */
 // TODO: 

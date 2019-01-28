@@ -68,6 +68,7 @@
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
               <!--  <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Configuraciones</a></li> -->
                 <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Perfil</a></li>
+                
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();

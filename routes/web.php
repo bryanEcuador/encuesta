@@ -1,5 +1,6 @@
 <?php
 use App\User;
+use App\Core\Modelos\Correos;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,20 +28,16 @@ Route::get('/notificaciones','EncuestaController@notifify');
 Route::get('/leer-notificaciones', 'EncuestaController@read');
 Route::get('/prueba', function () {
 
-    $user = \DB::table('tb_correos')->whereYear('fecha_creacion',2019)->get();
+   $user = Correos::whereYear('fecha_creacion',2019)->get();
     dd($user);
+   
+         
      
-/*        $users = User::all();
-      $users = $users->whereIn('id',4);
-      dd($users);
-      foreach ($users as  $user) {
-       echo $user->id;
-          DB::table('tb_correos')->insert([
-            'user_id' => $user->id  , 'estado' => 0 , 'fecha_id' => 1 , 'token' =>  str_random(16),
-         ]); 
-      }
-    Flight::where('foo', 'bar')->cursor()   */
+/*  Flight::where('foo', 'bar')->cursor()   */
   
 });
+
+
+
 
 

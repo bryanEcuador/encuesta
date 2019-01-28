@@ -30,6 +30,7 @@ use App\Core\Modelos\RelacionDesempeño;
 use App\Core\Modelos\TemasInteres;
 use App\Core\Modelos\TipoInstitucion;
 use App\Core\Modelos\Asignatura;
+use App\Core\Modelos\Correos;
 // jobs
 use App\Jobs\ProcessUsersMail;
 use App\Jobs\ProcessMailEncuesta;
@@ -340,18 +341,16 @@ class EncuestaController extends Controller
                 return redirect()->route('home');
             }
         // dar la fecha inicio y fin para responder la encuesta
-           $fecha =  $this->setFecha();
+         //  $fecha =  $this->setFecha();
 
         //obtener los usuarios
-            $user = $this->getUser();
+          //  $user = $this->getUser(); //TODO
                
        // guardar en la base los registros
-            ProcessUsersMail::dispatch($user,1);
+           // ProcessUsersMail::dispatch($user,1);
        // enviar los correos a los usuarios     
-            //ProcessMailEncuesta::dispatch();
-            Mail::to($user)->send(new EncuestaMail($user));
-        
-
+            ProcessMailEncuesta::dispatch();
+            
        // enviar los correos a cola
 /*             Mail::to($user)->send( new EncuestaMail($user));
  */        
@@ -361,8 +360,25 @@ class EncuestaController extends Controller
     }
 
     public function validarEncuesta(){
-        // buscar si existe el token 
+        // buscar si existe el token  TODO
+
+        $user_id =  Auth()->user()->id;
+       
         //ver el estado de la encuesta
+         $estado = Correos::whereYear('fecha_creacion',$this->getFecha())
+                        ->where([
+                            ['estado',0],
+                            ['user_id',$user_id]
+                        ]);
+         if($estado){
+            echo "pasa a realizar la encuesta";
+            /* Retorna la vista de la encuesta */
+         }else {
+            echo "no puede realizar la encuesta. [Esta ya fue realizada o no se encuentra dentro del periodo de la misma] ";
+            /* Retorna a una pagina de error */
+         }               
+        
+
         // ver la fecha de la encuesta 
     } 
 

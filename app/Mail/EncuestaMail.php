@@ -6,8 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
 
-class EncuestaMail extends Mailable implements ShouldQueue
+class EncuestaMail extends Mailable 
 {
     use Queueable, SerializesModels ;
 
@@ -18,7 +19,7 @@ class EncuestaMail extends Mailable implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**
