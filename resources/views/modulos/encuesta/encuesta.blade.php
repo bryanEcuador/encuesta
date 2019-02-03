@@ -236,7 +236,7 @@
 
                     <div class="form-group row col-md-12" > 
                     <label class="control-label col-md-3">Nombre de la Empresa</label>
-                    <input class="form-control mx-1 col-md-5"type="text" v-model="celular" name=" celular ">
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="empresa" name=" celular ">
                     </div>
 
                     <div class="form-group row col-md-12" > 
@@ -244,13 +244,13 @@
                     <select class="form-control col-md-3" v-model="actividad_empresa">
                     </select>
                     <label class="control-label col-md-3">Cargo que Ocupa</label>
-                    <select class="form-control col-md-3" v-model="actividad_empresa">
+                    <select class="form-control col-md-3" v-model="cargo">
                     </select>
                     </div>
 
                     <div class="form-group row col-md-12" > 
                     <label class="control-label col-md-5">Tiempo que se encuentra laborando</label>
-                    <input class="form-control mx-1 col-md-2"type="number" v-model="celular" name=" celular ">
+                    <input class="form-control mx-1 col-md-2"type="number" v-model="tiempo_laborando" name=" celular ">
                     </div>
 
                     <div class="form-group row col-md-12" > 
@@ -317,43 +317,43 @@
                         <tbody>
                             <tr>
                             <td>Dominio de la asignatura</td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
                             </tr>
                             <tr>
                             <td>Actualización en los conocimientos </td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
                             </tr>
                             <tr>
                             <td>Metodologia de la enseñanza</td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
                             </tr>
                             <tr>
                             <td>Fomento de las habilidades de análisis e Investigación </td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
                             </tr>
                             <tr>
                             <td>Forma de evaluación </td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
-                            <td><input class="form-check-input" type="radio" name="gender"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" ></td>
                             </tr>
                         </tbody>
                         </table>
@@ -368,19 +368,19 @@
                             </div>
 
                             <br>                   
-                                <input class="form-check-input" type="checkbox" name="gender">Materias de profesionalización
+                                <input class="form-check-input" type="checkbox" name="conocimientos_materias_profesionales">Materias de profesionalización
                                 <br>
                                                 
-                                <input class="form-check-input" type="checkbox" name="gender">Comunicación y Lingüística 
+                                <input class="form-check-input" type="checkbox" name="conocimientos_comunicacion">Comunicación y Lingüística 
                                 <br>
 
-                                <input class="form-check-input" type="checkbox" name="gender">Materias básicas (Matemáticas, Computación, Sociales,etc)
+                                <input class="form-check-input" type="checkbox" name="conocimientos_materias_basicas">Materias básicas (Matemáticas, Computación, Sociales,etc)
                                 <br>
 
-                                <input class="form-check-input" type="checkbox" name="gender">Idiomas 
+                                <input class="form-check-input" type="checkbox" name="conocimientos_idiomas">Idiomas 
                                 <br>
 
-                                <input class="form-check-input" type="checkbox" name="gender">Otros 
+                                <input class="form-check-input" type="checkbox" name="conocimientos_otros">Otros 
                             <br>
                             <label class="control-label col-md-2">¿Por qué? </label>
                             <input class="form-control mx-1 col-md-5"type="text" v-model="conocimientos_menos_utiles_explique">
@@ -406,35 +406,35 @@
                             <tbody>
                                 <tr>
                                 <td>Talento humano</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
                                 </tr>
                                 <tr>
                                 <td>Infraestructura</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
                                 </tr>
                                 <tr>
                                 <td>Servicios</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
                                 </tr>
                                 <tr>
                                 <td>Ambiente Tecnológico</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
                                 </tr>
                             </tbody>
                             </table>
@@ -458,57 +458,57 @@
                             <tbody>
                                 <tr>
                                 <td>Trabajo en equipo</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
                                 </tr>
                                 <tr>
                                 <td>Comunicación escrita</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
                                 </tr>
                                 <tr>
                                 <td>Comunicación oral</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
                                 </tr>
                                 <tr>
                                 <td>Informática</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
                                 </tr>
                                 <tr>
                                 <td>Gestíon</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
                                 </tr>
                                 <tr>
                                 <td>Investigación</td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
-                                <td><input class="form-check-input" type="radio" name="gender"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
                                 </tr>
                             </tbody>
                             </table>
                             <div class="form-group col-md-12" > 
                             <label class="control-label col-md-12"> En relación con su desempeño como graduado del ITSVR usted se encuentra</label>
-                            <select class="form-control col-md-3" v-model="relacion_desempeño ">
+                            <select class="form-control col-md-3" v-model="relacion_desempeño_descripcion ">
                             </select>
                             </div>
 
@@ -535,7 +535,10 @@
 
                     <div class="form-group row col-md-12" > 
                     <label class="control-label col-md-9"> Temas de interés para cursos de  certificación de áreas</label>
-                    <input class="form-control mx-1 col-md-3"type="text" v-model="temas_interes">
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="temas_interes_r1">
+                    <td>
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="temas_interes_r2">
+                    </td>
                     </div>
 
 
@@ -545,9 +548,9 @@
                     <div class="form-group col-md-12" > 
                     <label class="control-label col-md-9"> ¿Qué contenidos cree usted que se deban incluir?</label>
                     <label class="control-label col-md-4"> Temas</label>
-                    <input class="form-control mx-1 col-md-8"type="text" v-model="temas">
+                    <input class="form-control mx-1 col-md-8"type="text" v-model="temas_incluir1">
                     <label class="control-label col-md-4"> Asignaturas</label>
-                    <input class="form-control mx-1 col-md-8"type="text" v-model="asignatura">
+                    <input class="form-control mx-1 col-md-8 "type="text" v-model="asignatura">
                     
                     </div>
 
