@@ -30,6 +30,7 @@ use App\Core\Modelos\RelacionDesempeño;
 use App\Core\Modelos\TemasInteres;
 use App\Core\Modelos\TipoInstitucion;
 use App\Core\Modelos\Asignatura;
+use App\Jobs\ProcessUsersMail;
 
 
 
@@ -139,16 +140,7 @@ class EncuestaController extends Controller
 
     //funcion para enviar correos para realizar la encuesta 
 
-    public function emailSend() {
 
-        //obtener los usuarios
-       $user = user::find(4);
-        Mail::to($user)->send( new EncuestaMail($user));
-        
-            // for con todos los usuarios
-                //la clase para enviar los correos
-
-    }
 
     public function store(EncuestaRequest $request){
 
@@ -335,6 +327,53 @@ class EncuestaController extends Controller
             DB::rollback();
         }
 
+    }
+
+        public function emailSend() {
+        // validar que no se hayan enviado ya los correos
+            $fecha = $this->getFecha();
+            $enviado =  false; //DB::table('tb_correos')->whereyear('fecha_creacion',$fecha)->first();
+
+            if($enviado){
+                return view('home'); // hacer un reddirect 
+            }
+        // dar la fecha inicio y fin para responder la encuesta
+          /*  $month = date('m');
+            $year = date('Y');
+            $day = date("d", mktime(0,0,0, $month+1, 0, $year));
+ 
+            $fecha_fin = date('Y-m-d', mktime(0,0,0, 12, $day, $year));
+            $fecha_inicio = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+
+            $id_fecha = DB::table('tb_fecha')->insertGetId([
+                'inicio' => $fecha_inicio , 'fin' => $fecha_fin 
+            ]); */
+
+        //obtener los usuarios
+            $user = user::find(4);
+               
+       // guardar en la base los registros
+           // ProcessUsersMail::dispatch($user,$id_fecha);
+        
+
+       // enviar los correos 
+        Mail::to($user)->send( new EncuestaMail($user));
+        
+            // for con todos los usuarios
+                //la clase para enviar los correos
+
+    }
+
+    public function validarEncuesta(){
+        // buscar si existe el token 
+        //ver el estado de la encuesta
+        // ver la fecha de la encuesta 
+    } 
+
+    public function getFecha(){
+        $fecha = getdate();
+
+        return $fecha['year'];
     }
     
 }
