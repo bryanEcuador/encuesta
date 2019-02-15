@@ -351,11 +351,7 @@ class EncuestaController extends Controller
        // enviar los correos a los usuarios     
             ProcessMailEncuesta::dispatch();
             
-       // enviar los correos a cola
-           //  Mail::to($user)->send( new EncuestaMail($user));
-         
-            // for con todos los usuarios
-                //la clase para enviar los correos
+      
      
     }
 
@@ -405,6 +401,11 @@ class EncuestaController extends Controller
         ]); 
 
         return $id_fecha;
+    }
+
+    public function porcentajeEncuestados($year)
+    {
+        return $this->EncuestaProcedure->porcentajeEncuestados($year);
     }
     
 }

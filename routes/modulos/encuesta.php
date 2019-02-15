@@ -16,5 +16,6 @@ route::get('get-rango', 'EncuestaController@getRangoSueldoAll');
 //
 route::get('enviar-encuesta', 'EncuestaController@emailSend');
 route::get('encuesta', 'EncuestaController@ValidarEncuesta');
+route::get('porcentaje/encuesta/{year}', 'EncuestaController@porcentajeEncuestados');
 /* route::get('encuesta-prueba/{token}', 'EncuestaController@ValidarEncuesta'); */
 // TODO: 
