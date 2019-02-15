@@ -111,13 +111,13 @@
             </ul>
         </li>
         <li><a class="app-menu__item"  href="{{route('administracion.graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
-        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-shield"></i><span class="app-menu__label">Logs</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-search-plus"></i><span class="app-menu__label">Auditoria</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="app-menu__item"  href="{{route('administracion.logs.usuarios')}}"><i class="app-menu__icon fa fa-file-code-o" aria-hidden="true"></i><span class="app-menu__label">Logs de usuario</span> </a></li>               
-                <li><a class="app-menu__item"  href="{{route('administracion.logs.sistema')}}"><i class="app-menu__icon fa fa-file-code-o" aria-hidden="true"></i><span class="app-menu__label">Logs de sistema</span> </a></li>               
+                <li><a class="app-menu__item"  href="{{route('administracion.logs.sistema')}}"><i class="app-menu__icon fa fa-code" aria-hidden="true"></i><span class="app-menu__label">Logs de sistema</span> </a></li>               
             </ul>
         </li>
-        <a href="ejemplo"> ejemplo</a>
+        
     </ul>
 </aside>
 <main class="app-content">

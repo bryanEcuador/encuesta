@@ -35,9 +35,12 @@ class ProcessMailEncuesta implements ShouldQueue
      */
     public function handle()
     {            
-        $user = Correos::whereYear('fecha_creacion',2019)->get();
+        $users = Correos::whereYear('fecha_creacion',2019)->get();
         # envia los correos a todos los usuarios que deben responder la encuesta
-        Mail::to($user)->send(new EncuestaMail($user));
+        foreach ( $users as $user) {
+            # code...
+            Mail::to($user)->send(new EncuestaMail($user));
+        }
                              
     }
 }

@@ -344,7 +344,7 @@ class EncuestaController extends Controller
          //  $fecha =  $this->setFecha();
 
         //obtener los usuarios
-          //  $user = $this->getUser(); //TODO
+            $user = $this->getUser(); //TODO usuarios con rol estudiante 
                
        // guardar en la base los registros
            // ProcessUsersMail::dispatch($user,1);
@@ -352,8 +352,8 @@ class EncuestaController extends Controller
             ProcessMailEncuesta::dispatch();
             
        // enviar los correos a cola
-/*             Mail::to($user)->send( new EncuestaMail($user));
- */        
+           //  Mail::to($user)->send( new EncuestaMail($user));
+         
             // for con todos los usuarios
                 //la clase para enviar los correos
      

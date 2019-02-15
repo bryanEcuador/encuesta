@@ -35,10 +35,10 @@ class ProcessUsersMail implements ShouldQueue
      */
     public function handle()
     {
-        $this->users = $this->users->whereIn('id', 4);
+        
         foreach ($this->users as  $user) {
          DB::table('tb_correos')->insert([
-            'user_id' => $user->id  , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),
+            'user_id' => $user->id  ,'email' => $user->email , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),
          ]);
       }
     }
