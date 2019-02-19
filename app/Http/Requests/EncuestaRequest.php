@@ -88,7 +88,7 @@ class EncuestaRequest extends FormRequest
             'dificultad_general_comunicacion_oral' => 'required | String ',
             'dificultad_general_informatica' => 'required | String ',
             'dificultad_general_gestion' => 'required | String ',
-            'dificultad_general_investigacion' => 'required | String ',
+            'edificultad_general_investigacion' => 'required | String ',
 
 
            'relacion_desempeño_descripcion' => 'required |Numeric',

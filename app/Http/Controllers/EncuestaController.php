@@ -367,8 +367,9 @@ class EncuestaController extends Controller
                             ['user_id',$user_id]
                         ]);
          if($estado){
-            echo "pasa a realizar la encuesta";
+            // echo "pasa a realizar la encuesta";
             /* Retorna la vista de la encuesta */
+            return view('modulos.encuesta.encuesta');
          }else {
             echo "no puede realizar la encuesta. [Esta ya fue realizada o no se encuentra dentro del periodo de la misma] ";
             /* Retorna a una pagina de error */
