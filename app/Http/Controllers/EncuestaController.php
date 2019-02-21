@@ -351,7 +351,8 @@ class EncuestaController extends Controller
        // enviar los correos a los usuarios     
             ProcessMailEncuesta::dispatch();
             
-      
+            $estado = "enviada";
+            return redirect()->route('home',compact('estado'));
      
     }
 

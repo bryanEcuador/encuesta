@@ -14,21 +14,31 @@
             <div class="tile">
               <h4>Estado de la encuesta </h4> 
               <hr>
-              <div id="enviarEncuesta" style="display:none">
-                    <div class="alert alert-warning">
-                        <p> La encuesta aun <strong>no</strong>  ha sido enviada</p>
-                    </div>
-                    <button class="btn btn-primary">
+|
+                <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
+                        document.getElementById('enviar-encuesta').submit();">
                         Enviar Encuesta 
-                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                    </button>
-              </div>
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </a>
+                <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="GET" style="display: none;">
+                            @csrf
+                    </form>
+                
+                <div id="enviarEncuesta" style="display:none">
+                        <div class="alert alert-warning">
+                            <p> La encuesta aun <strong>no</strong>  ha sido enviada</p>
+                        </div>
+                        <button class="btn btn-primary">
+                            Enviar Encuesta 
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        </button>
+                </div>
 
-              <div id="grafico" style="display:none">
-                <h5 class="text">Estado de correos enviados</h5>
-                <canvas id="estado" width="400" height="400"></canvas>
+                    <div id="grafico" style="display:none">
+                        <h5 class="text">Estado de correos enviados</h5>
+                        <canvas id="estado" width="400" height="400"></canvas>
+                    </div>  
             </div>
-              </div>
               
         </div>
     </div>
