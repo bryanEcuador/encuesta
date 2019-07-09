@@ -16,6 +16,20 @@ class GraficosProcedure extends Model
         return DB::select('call sp_total_institucion(?)', array($year));
    }
 
+   // cargo que ocupa
+   public function totalCargo($year){
+      return DB::select('call sp_total_cargos(?)', array($year));
+   }
+
+   public function tipoCargo($year){
+      return DB::select('call sp_cargos(?)', array($year));
+
+   }
+   // relacion carrera profesional 
+
+   public function relacion_carrera_profesional($year){
+      return DB::select('call sp_relacion_carrera_profesion(?)', array($year));
+   }
 
    // recursos carrera
    public function totalRecursosCarrera($year){

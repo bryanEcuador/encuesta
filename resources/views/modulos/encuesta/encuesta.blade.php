@@ -317,43 +317,43 @@
                         <tbody>
                             <tr>
                             <td>Dominio de la asignatura</td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="excelente" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="muy buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="insuficiente" ></td>
                             </tr>
                             <tr>
                             <td>Actualización en los conocimientos </td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion"></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="excelente"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="regular" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="insuficiente" ></td>
                             </tr>
                             <tr>
                             <td>Metodologia de la enseñanza</td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="excelente"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="insuficiente" ></td>
                             </tr>
                             <tr>
                             <td>Fomento de las habilidades de análisis e Investigación </td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="excelente"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="insuficiente" ></td>
                             </tr>
                             <tr>
                             <td>Forma de evaluación </td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion"></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" ></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion"></td>
-                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="excelente" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="insuficiente"></td>
                             </tr>
                         </tbody>
                         </table>
@@ -406,35 +406,35 @@
                             <tbody>
                                 <tr>
                                 <td>Talento humano</td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Infraestructura</td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Servicios</td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Ambiente Tecnológico</td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
-                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="insuficiente"></td>
                                 </tr>
                             </tbody>
                             </table>
@@ -458,51 +458,51 @@
                             <tbody>
                                 <tr>
                                 <td>Trabajo en equipo</td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Comunicación escrita</td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Comunicación oral</td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Informática</td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Gestíon</td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="insuficiente"></td>
                                 </tr>
                                 <tr>
                                 <td>Investigación</td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
-                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="insuficiente" ></td>
                                 </tr>
                             </tbody>
                             </table>
