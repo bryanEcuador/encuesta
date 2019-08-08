@@ -8,21 +8,52 @@
 @section('title','Principal')
 
 @section('contenido')
+
+    <!-- Modal para el envio de las encuestas -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4  class="modal-title" id="myModalLabel">Encuestas</h4>
+                </div>
+                <div class="modal-body">
+                    <label class="label-primary">Enviar encuesta:</label>
+                    <select class="form-control" id="promociones">
+                        <option value="todos" selected>Todas las promoiones</option>
+                        <option value="grupo">Grupo</option>
+                    </select>
+                    <hr>
+                    <div class="form-group" id="grupo_promociones" style="display:none;">
+                        <label class="label-primary"> promocion 2017 <input class="form-control-label" type="checkbox"> </label><br>
+                        <label class="label-primary"> promocion 2018 <input class="form-control-label" type="checkbox"> </label><br>
+                        <label class="label-primary"> promocion 2019 <input class="form-control-label" type="checkbox"> </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div id="graficos" class="col-md-12">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="tile">
               <h4>Estado de la encuesta </h4> 
               <hr>
-|
-                <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
+|               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Enviar encuesta
+                </button>
+               {{-- <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
                         document.getElementById('enviar-encuesta').submit();">
                         Enviar Encuesta 
                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                </a>
+                </a>--}}
                 <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="GET" style="display: none;">
                             @csrf
-                    </form>
+                </form>
                 
                 <div id="enviarEncuesta" style="display:none">
                         <div class="alert alert-warning">
@@ -53,10 +84,21 @@
 
 var grafico = document.getElementById("grafico");
 var enviarEncuesta = document.getElementById("enviarEncuesta");
+let promociones = document.querySelector('#promociones');
+let grupoPromociones = document.querySelector('#grupo_promociones');
+
+
+promociones.addEventListener('change',function() {
+   if( promociones.value == 'todos' ){
+       grupoPromociones.style.display = 'none'
+   } else if(promociones.value == 'grupo' ) {
+       grupoPromociones.style.display = 'block'
+   }
+});
 
 /* grafico.style.display = 'none'; */
 /* enviarEncuesta.style.display = 'none'; */
-console.log("hola");
+
 this.consultarEncuestados()
 
     function obtenerYear() { 

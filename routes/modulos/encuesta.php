@@ -20,5 +20,11 @@ route::get('porcentaje/encuesta/{year}', 'EncuestaController@porcentajeEncuestad
 /* route::get('encuesta-prueba/{token}', 'EncuestaController@ValidarEncuesta'); */
 // TODO: 
 route::post('encuesta/store','EncuestaController@store');
+route::get('error-encuesta', function(){
+   return view('modulos.encuesta.errorEncuesta');
+});
+route::get('admin-encuesta', function(){
+    return view('modulos.encuesta.administracion');
+});
 
 //enviar-encuesta
