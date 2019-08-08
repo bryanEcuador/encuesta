@@ -34,8 +34,7 @@ use App\Core\Modelos\Correos;
 // jobs
 use App\Jobs\ProcessUsersMail;
 use App\Jobs\ProcessMailEncuesta;
-
-
+use PhpParser\Node\Expr\Array_;
 
 
 class EncuestaController extends Controller
@@ -332,22 +331,41 @@ class EncuestaController extends Controller
 
     }
 
-        public function emailSend() {
-        // validar que no se hayan enviado ya los correos
-            $fecha = $this->getFecha();
-            $enviado =  false; //DB::table('tb_correos')->whereyear('fecha_creacion',$fecha)->first();
+        public function emailSend(Request $request) {
 
-            if($enviado){
-                return redirect()->route('home');
+        /*Validar a quienes se les va a enviar el correo electronico */
+
+            // se crea un array con los resultados pasados desde la vista
+            $array = array_map(null,$request->input());
+
+            //se valida a quien va dirigida la encuesta
+            if($request->input('promociones') == 'todos'){
+                //obtener los usuarios
+                $user = $this->getUser(1); //TODO usuarios con rol estudiante
+            }else {
+                // se obtiene las promociones
+                $promociones = array_filter($array, function($var){
+                    if(is_numeric($var)){
+                        return $var;
+                    }
+                });
+                $user = $this->getUser(2,$promociones); //TODO usuarios con rol estudiante
             }
-        // dar la fecha inicio y fin para responder la encuesta
-         //  $fecha =  $this->setFecha();
+            /* -------------------------------------------------------------------------- */
+            //$fecha = $this->getFecha();
+            //$enviado =  false; //DB::table('tb_correos')->whereyear('fecha_creacion',$fecha)->first();
 
-        //obtener los usuarios
-            $user = $this->getUser(); //TODO usuarios con rol estudiante 
-               
+            //if($enviado){
+              //  return redirect()->route('home');
+            //}
+
+        // dar la fecha inicio y fin para responder la encuesta
+           //$fecha =  $this->setFecha();
+
+
+     /* Envio de correos */
        // guardar en la base los registros
-           // ProcessUsersMail::dispatch($user,1);
+            ProcessUsersMail::dispatch($user,1);
        // enviar los correos a los usuarios     
             ProcessMailEncuesta::dispatch();
             
@@ -386,8 +404,15 @@ class EncuestaController extends Controller
         return $fecha['year'];
     }
 
-    public function getUser(){
-        return  user::all();
+    public function getUser($tipo,$elementos = null){
+        if($tipo == 1){
+            // retorna todos los usuarios con rol estudiante
+            $user = user::all();
+        }else if(tipo == 2){
+            // retorna los estudiantes de las promociones seleccionadas
+            $user = user::all();
+        }
+        return  $user;
     }
 
     public function setFecha($juan){

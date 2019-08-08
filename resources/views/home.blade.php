@@ -17,21 +17,31 @@
                     <h4  class="modal-title" id="myModalLabel">Encuestas</h4>
                 </div>
                 <div class="modal-body">
-                    <label class="label-primary">Enviar encuesta:</label>
-                    <select class="form-control" id="promociones">
-                        <option value="todos" selected>Todas las promoiones</option>
-                        <option value="grupo">Grupo</option>
-                    </select>
-                    <hr>
-                    <div class="form-group" id="grupo_promociones" style="display:none;">
-                        <label class="label-primary"> promocion 2017 <input class="form-control-label" type="checkbox"> </label><br>
-                        <label class="label-primary"> promocion 2018 <input class="form-control-label" type="checkbox"> </label><br>
-                        <label class="label-primary"> promocion 2019 <input class="form-control-label" type="checkbox"> </label>
-                    </div>
+                   <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="POST">
+                       {{ csrf_field() }}
+                        <label class="label-primary">Enviar encuesta:</label>
+                        <select name="promociones" class="form-control" id="promociones">
+                            <option  value="todos" selected>Todas las promociones</option>
+                            <option  value="grupo">Grupo</option>
+                        </select>
+                        <hr>
+                        <div class="form-group" id="grupo_promociones" style="display:none;">
+                            <label class="label-primary"> promocion 2017 <input class="form-control-label" type="checkbox" name="promocion1" value="2017"> </label><br>
+                            <label class="label-primary"> promocion 2018 <input class="form-control-label" type="checkbox" name="promocion2" value="2018"> </label><br>
+                            <label class="label-primary"> promocion 2019 <input class="form-control-label" type="checkbox" name="promocion3" value="2019"> </label>
+                        </div>
+                   </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+{{--
                     <button type="button" class="btn btn-primary">Enviar</button>
+--}}
+                    <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
+                        document.getElementById('enviar-encuesta').submit();">
+                        Enviar
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -51,9 +61,9 @@
                         Enviar Encuesta 
                             <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </a>--}}
-                <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="GET" style="display: none;">
-                            @csrf
-                </form>
+              {{--  <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="GET" style="display: none;">
+
+                </form>--}}
                 
                 <div id="enviarEncuesta" style="display:none">
                         <div class="alert alert-warning">
