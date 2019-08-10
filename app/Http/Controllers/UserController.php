@@ -92,37 +92,6 @@ class UserController extends Controller
         
         $this->RegisterController->create($request->input());
 
-        /*  $request->validate([
-            'nombres' => 'required|max:30',
-            'name'=> 'required|unique:users|max:10',
-            'password' => 'required|min:8|max:16',
-            'rol' => 'required'
-        ]);
-        //
-        $nombres = $request->input('nombres');
-        $apellidos = $request->input('apellidos');
-        $name = $request->input('name');
-        $estado = 1;
-        $rol = $request->input('rol');
-        $password = bcrypt($request->input('pass')) ;
-
-        $id =DB::table('users')->insertGetId(
-            [
-                'name' => $name,
-                'state' => $estado,
-                'password' => $password,
-                'remember_token' => str_random(60),
-                'created_at' => null,
-                'updated_at' => null]
-        );
-
-        DB::table('role_user')->insert([
-            'role_id' => $rol,'user_id' => $id
-            ]);
-         
-            User::create($request->input());
-        return response()->json(['success'=>'Informacion guardada con exito']); */
-
     }
 
     public function show($id)

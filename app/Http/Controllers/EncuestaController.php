@@ -31,10 +31,12 @@ use App\Core\Modelos\TemasInteres;
 use App\Core\Modelos\TipoInstitucion;
 use App\Core\Modelos\Asignatura;
 use App\Core\Modelos\Correos;
+use App\Core\Modelos\EncuestasEnviadas;
 // jobs
 use App\Jobs\ProcessUsersMail;
 use App\Jobs\ProcessMailEncuesta;
 use PhpParser\Node\Expr\Array_;
+use PhpParser\Node\Stmt\Foreach_;
 
 
 class EncuestaController extends Controller
@@ -82,14 +84,11 @@ class EncuestaController extends Controller
 
     }
 
-   
-   
     // consultas de la encuesta
 
      //Consultar nacionalidad
     public function getNacionalidadAll()
     {
-        
         return $this->EncuestaProcedure->getNacionalidadAll();
     }
     //consultar genero
@@ -331,7 +330,12 @@ class EncuestaController extends Controller
 
     }
 
-        public function emailSend(Request $request) {
+    /**
+     * Se encarga de enviar las notificaciones a todas las promociones de estudiantes
+     * para responder las encuestas del año
+     * @return void
+     */
+    public function emailSend(Request $request) {
 
         /*Validar a quienes se les va a enviar el correo electronico */
 
@@ -341,7 +345,7 @@ class EncuestaController extends Controller
             //se valida a quien va dirigida la encuesta
             if($request->input('promociones') == 'todos'){
                 //obtener los usuarios
-                $user = $this->getUser(1); //TODO usuarios con rol estudiante
+                $user = $this->getUser(1);
             }else {
                 // se obtiene las promociones
                 $promociones = array_filter($array, function($var){
@@ -349,73 +353,93 @@ class EncuestaController extends Controller
                         return $var;
                     }
                 });
-                $user = $this->getUser(2,$promociones); //TODO usuarios con rol estudiante
+                $user = $this->getUser(2,$promociones);
             }
             /* -------------------------------------------------------------------------- */
-            //$fecha = $this->getFecha();
-            //$enviado =  false; //DB::table('tb_correos')->whereyear('fecha_creacion',$fecha)->first();
-
-            //if($enviado){
-              //  return redirect()->route('home');
-            //}
-
-        // dar la fecha inicio y fin para responder la encuesta
-           //$fecha =  $this->setFecha();
-
 
      /* Envio de correos */
        // guardar en la base los registros
-            ProcessUsersMail::dispatch($user,1);
+            ProcessUsersMail::dispatch($user,$this->setFecha());
        // enviar los correos a los usuarios     
             ProcessMailEncuesta::dispatch();
             
             $estado = "enviada";
+            $this->promocionesEnviadas($promociones);
             return redirect()->route('home',compact('estado'));
      
     }
 
-    public function validarEncuesta(){
-        // buscar si existe el token  TODO
+    /**
+     * Se encarga de validar si el usuario puede realizar la encuesta
+     *
+     * @return void
+     */
+    public function validarEncuesta($token = null,$promocion = null){
 
-        $user_id =  Auth()->user()->id;
-       
-        //ver el estado de la encuesta
-         $estado = Correos::whereYear('fecha_creacion',$this->getFecha())
-                        ->where([
-                            ['estado',0],
-                            ['user_id',$user_id]
-                        ]);
-         if($estado){
-            // echo "pasa a realizar la encuesta";
-            /* Retorna la vista de la encuesta */
-            return view('modulos.encuesta.encuesta');
-         }else {
-            echo "no puede realizar la encuesta. [Esta ya fue realizada o no se encuentra dentro del periodo de la misma] ";
-            /* Retorna a una pagina de error */
-         }               
-        
+        $valido = Correos::whereYear('fecha_creacion',$this->getFecha())
+            ->where([
+                ['token',$token],
+                ['promocion',$promocion]
+            ])->get();
 
-        // ver la fecha de la encuesta 
-    } 
+        // validar si existe el token con la promoción determinada
+        if($valido->isEmpty() != 1){
+            $estado = Correos::whereIn('estado',[0,1,2])->where([
+                 ['token',$token],
+                 ['promocion',$promocion]
+             ])->get()->toArray();
 
+            // Validar la acción que se debe realizar según el estado de la encuesta
+            if($estado[0]['estado'] == '0'){
+                 return view('modulos.encuesta.encuesta');
+             }else if($estado[0]['estado'] == '1') {
+                 $titulo = 'Lo sentimos la encuesta no esta disponible';
+                 $mensaje = 'Usted ya ha respondido la encuesta del presente año.';
+                return view('modulos.encuesta.errorEncuesta',compact('titulo','mensaje'));
+             }else if($estado[0]['estado'] == '2'){
+                 $titulo = 'Lo sentimos la encuesta no esta disponible';
+                 $mensaje = 'Le enviaremos un correo electrónico cuando esta esté disponible.';
+                 return view('modulos.encuesta.errorEncuesta',compact('titulo','mensaje'));
+             }
+        }else {
+            $titulo = 'Error 404: Pagina no encontrada';
+            $mensaje = 'La página que ha solicitado no se encuentra disponible.';
+            return view('modulos.encuesta.errorEncuesta',compact('titulo','mensaje'));
+        }
+
+    }
+
+    /**
+     * Retorna el año actual
+     *
+     * @return date
+     */
     public function getFecha(){
         $fecha = getdate();
-
         return $fecha['year'];
     }
 
     public function getUser($tipo,$elementos = null){
-        if($tipo == 1){
-            // retorna todos los usuarios con rol estudiante
-            $user = user::all();
-        }else if(tipo == 2){
-            // retorna los estudiantes de las promociones seleccionadas
-            $user = user::all();
+
+        $estudiantes_id = array();
+        // retorna todos los usuarios con rol estudiante
+        $users = DB::table('role_user')->select('user_id')->where('role_id',5)->get();
+        foreach($users as $user){
+            array_push($estudiantes_id,$user->user_id) ;
         }
-        return  $user;
+
+        if($tipo == 1){
+            $estudiantes = User::whereIn('id',$estudiantes_id)->get();
+            return $estudiantes;
+        }else if($tipo == 2){
+            // retorna los estudiantes de las promociones seleccionadas
+            $estudiantes = User::whereIn('id',$estudiantes_id)->WhereIn('promocion',$elementos)->get();
+            return $estudiantes;
+        }
+
     }
 
-    public function setFecha($juan){
+    public function setFecha(){
         $month = date('m');
         $year = date('Y');
         $day = date("d", mktime(0, 0, 0, $month + 1, 0, $year));
@@ -424,7 +448,7 @@ class EncuestaController extends Controller
         $fecha_inicio = date('Y-m-d', mktime(0, 0, 0, $month, 1, $year));
 
         $id_fecha = DB::table('tb_fecha')->insertGetId([
-            'inicio' => $fecha_inicio, 'fin' => $fecha_fin
+            'inicio' => $fecha_inicio, 'fin' => $fecha_fin, 'año' => $year
         ]); 
 
         return $id_fecha;
@@ -434,5 +458,55 @@ class EncuestaController extends Controller
     {
         return $this->EncuestaProcedure->porcentajeEncuestados($year);
     }
-    
+
+    public function promociones(){
+        $array = array();
+        //consulto las promociones encuestas
+        $promocionesEncuestadas = $this->promocionesEncuestadas();
+
+        foreach ($promocionesEncuestadas as $promocion ){
+            array_push($array,$promocion->promocion);
+        }
+        // consulta todos los registros de este año hacia atras que no se hayan enviado
+        return DB::table('tb_promociones')->select('promocion')
+                   ->where('promocion','<=', $this->getFecha())
+                    ->whereNotIn('promocion',$array)->get();
+
+    }
+
+    public function promocionesEncuestadas(){
+        return DB::table('tb_correos')->join('tb_fecha','tb_correos.fecha_id','=','tb_fecha.id')
+                    ->select('tb_correos.promocion')->distinct()->where('tb_fecha.año','=',$this->getFecha())->get();
+    }
+
+    public function storePromocionesEnviadas($promociones) {
+        // registra las promociones a las cuales se les envio la encuesta
+        $promocion = new EncuestasEnviadas();
+        foreach ($promociones as $value){
+            $promocion->promocion = $value;
+            $promocion->create_user_id = auth()->id();;
+            $promocion->update_user_id = auth()->id();;
+            $promocion->estado = 'enviada';
+        }
+    }
+
+    public function cancelarEncuesta($id)
+    {
+        // cancelar encuesta en la tabla
+        EncuestasEnviadas::where('id',$id)->update(['estado' => 'cancelado']);
+
+        // desactivar registris de esta promocion
+
+
+    }
+
+    public function  promocionesEnviadas(){
+       $enviadas = EncuestasEnviadas::whereYear('created_at',$this->getFecha())->get();
+
+        return view('modulos.encuesta.administracion',compact('enviadas'));
+    }
+
+
+
+
 }

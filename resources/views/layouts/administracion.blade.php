@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     @yield('css')
 </head>
-<body class="app sidebar-mini rtl">
+<body class="app sidebar-mini rtl pace-done sidenav-toggled">
 <!-- Navbar-->
 <header class="app-header" ><a id="header" v-cloak class="app-header__logo" href="{{ url('/home') }}"> itsvr encuesta </a>
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
@@ -102,14 +102,14 @@
                 <li><a class="treeview-item" href="{{route('seguridad.permisos.index')}}"><i class="icon fa fa-unlock"></i> Permisos</a></li>
             </ul>
         </li>
-        <li class="treeview"> <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        {{--<li class="treeview"> <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
-               {{--  <li><a class="app-menu__item" href="{{route('administrador.marca.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Marcas</span></a></li>
+               --}}{{--  <li><a class="app-menu__item" href="{{route('administrador.marca.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Marcas</span></a></li>
                 <li><a class="app-menu__item" href="{{route('administrador.categorias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Categorias</span></a></li>
                 <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Colores</span></a></li>
-                <li><a class="app-menu__item" href="{{route('administrador.Sugerencias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Sugerencias</span></a></li> --}}
+                <li><a class="app-menu__item" href="{{route('administrador.Sugerencias.index')}}"><i class="app-menu__icon fa fa-tags"></i><span class="app-menu__label">Sugerencias</span></a></li> --}}{{--
             </ul>
-        </li>
+        </li>--}}
         <li><a class="app-menu__item"  href="{{route('administracion.graficos-encuesta')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Gráficos</span> </a></li>
         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-search-plus"></i><span class="app-menu__label">Auditoria</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
@@ -117,7 +117,8 @@
                 <li><a class="app-menu__item"  href="{{route('administracion.logs.sistema')}}"><i class="app-menu__icon fa fa-code" aria-hidden="true"></i><span class="app-menu__label">Logs de sistema</span> </a></li>               
             </ul>
         </li>
-        
+        <li><a class="app-menu__item"  href="{{route('encuesta.promocionesenviadas')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Envio de encuesta</span> </a></li>
+
     </ul>
 </aside>
 <main class="app-content">

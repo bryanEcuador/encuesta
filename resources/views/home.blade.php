@@ -20,15 +20,13 @@
                    <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="POST">
                        {{ csrf_field() }}
                         <label class="label-primary">Enviar encuesta:</label>
-                        <select name="promociones" class="form-control" id="promociones">
+                        <select name="promociones"  class="form-control" id="promociones">
                             <option  value="todos" selected>Todas las promociones</option>
                             <option  value="grupo">Grupo</option>
                         </select>
                         <hr>
                         <div class="form-group" id="grupo_promociones" style="display:none;">
-                            <label class="label-primary"> promocion 2017 <input class="form-control-label" type="checkbox" name="promocion1" value="2017"> </label><br>
-                            <label class="label-primary"> promocion 2018 <input class="form-control-label" type="checkbox" name="promocion2" value="2018"> </label><br>
-                            <label class="label-primary"> promocion 2019 <input class="form-control-label" type="checkbox" name="promocion3" value="2019"> </label>
+
                         </div>
                    </form>
                 </div>
@@ -103,13 +101,50 @@ promociones.addEventListener('change',function() {
        grupoPromociones.style.display = 'none'
    } else if(promociones.value == 'grupo' ) {
        grupoPromociones.style.display = 'block'
+       consultarPromociones();
    }
 });
+
 
 /* grafico.style.display = 'none'; */
 /* enviarEncuesta.style.display = 'none'; */
 
 this.consultarEncuestados()
+
+    function consultarPromociones(){
+        var url = 'promociones';
+            $.get(url, { crossDomain : true} , (data) =>  {
+                this.crear(data)
+                }).fail( function() {
+                console.log("fallo la peticion");
+            });
+    }
+
+    function crear(data){
+        //recorrer para crear los elementos
+        let etiqueta;
+        let opcion;
+        let contador = 0;
+        data.forEach(function(element){
+            contador +=1;
+          etiqueta = document.createElement('label');
+          etiqueta.classList = 'label-primary';
+          etiqueta.textContent = 'promocion'+' '+element.promocion+' '
+          opcion = document.createElement('input');
+          opcion.classList = 'form-control-label';
+          opcion.value = element.promocion;
+          opcion.setAttribute('name','promocion'+contador);
+          opcion.setAttribute('type','checkbox');
+          etiqueta.appendChild(opcion);
+
+          grupoPromociones.appendChild(etiqueta)
+            grupoPromociones.appendChild(document.createElement('br'));
+
+
+
+          console.log(element.promocion)
+        });
+    }
 
     function obtenerYear() { 
             var fecha = new Date();

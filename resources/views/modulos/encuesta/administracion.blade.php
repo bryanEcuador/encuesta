@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" onclick="enviar()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary">Cancelar encuesta</button>
                 </div>
             </div>
@@ -40,18 +40,44 @@
                </tr>
                </thead>
                <tbody>
+               @foreach($enviadas as $enviada)
                <tr>
-                   <td>2019</td>
-                   <td>19-03-2019</td>
-                   <td>administrador</td>
-                   {{--<td><button>Cancelar</button></td>--}}
-                   <td><button class="btn btn-danger" data-toggle="modal" data-target="#myModal">Cancelar</button></td>
+                   <td>{{$enviada->promocion}}</td>
+                   <td>{{$enviada->created_at}}</td>
+                   <td>{{$enviada->create_user_id}}</td>
+                   @if($enviada->estado == 'enviada')
+                   <td><button class="btn btn-danger" onclick="cancelar({{$enviada->id}})">Cancelar</button></td>
+                   @endif
+                   @if($enviada->estado == 'cancelada')
+                       <td>Cancelada</td>
+                   @endif
                </tr>
+               @endforeach
 
                </tbody>
            </table>
        </div>
    </div>
+
+    <script>
+        let enviadaId;
+        function cancelar(id){
+            enviadaId = id
+            $("#myModal").modal()
+        }
+
+        function enviar(){
+            var url = 'cancelar-encuesta/'+enviadaId;
+            $.get(url, { crossDomain : true} , (data) =>  {
+                $("#myModal").modal('hide')
+                location.reload();
+        }).fail( function() {
+                $("#myModal").modal('hide')
+                console.log("fallo la peticion");
+            });
+        }
+
+    </script>
 @endsection
 
 

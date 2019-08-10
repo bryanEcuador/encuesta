@@ -153,6 +153,10 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div>
+                                            <label class="control-label col-md-2">Promoción</label>
+                                            <input class="form-control" v-model="promocion" type="number" min="2010" max="{{date('Y') + 1}}">
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-primary" type="button" v-on:click="validar">Guardar</button>
@@ -276,6 +280,7 @@
                 usuario : '',
                 pass : '',
                 pass2 : '',
+                promocion : '',
                 
                 /* Carga de información */
                 usuarios_s : [],
@@ -463,7 +468,8 @@
                                 email : this.email.toLowerCase(),
                                 password : this.pass,
                                 password_confirmation : this.pass2,
-                                rol : this.rol
+                                rol : this.rol,
+                                promocion : this.promocion
                         
                             }).then(response => {
                                 if(response.data[0] == "Error") {

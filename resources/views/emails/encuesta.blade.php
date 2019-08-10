@@ -1,12 +1,12 @@
 @component('mail::message')
-# Saludos estudiante
+# Saludos estudiante de la promoción {{$promocion}}
 
-Este correo le llega con el fin de que realice la encuesta de seguimiento de graduados del presente año
+Este correo le llega con el fin de que realice la encuesta de seguimiento de graduados del presente año.
 
-@component('mail::button', ['url' => 'http://encuesta.test:8090/encuesta'])
+@component('mail::button', ['url' => $url])
 Realizar encuesta
 @endcomponent
-{{-- token / --}}
+
 Gracias,<br>
 {{ config('app.name') }}
 @endcomponent

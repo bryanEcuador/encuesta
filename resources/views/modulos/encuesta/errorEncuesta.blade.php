@@ -1,4 +1,4 @@
-@extends('layouts.administracion')
+@extends('layouts.encuestaEncuesta')
 @section('nombre_pagina','Encuesta')
 @section('Principal')
     <p>Encuesta</p>
@@ -7,8 +7,8 @@
 
 @section('contenido')
     <div class="page-error tile col-md-12">
-        <h1><i class="fa fa-exclamation-circle"></i>Lo sentimos la encuesta no esta disponible</h1>
-        <p>Le enviaremos un correo electrónico cuando esta esté disponible.</p>
+        <h1><i class="fa fa-exclamation-circle"></i>{{$titulo}}</h1>
+        <p>{{$mensaje}}</p>
     </div>
 @endsection
 

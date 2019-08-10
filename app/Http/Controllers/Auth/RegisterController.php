@@ -74,6 +74,7 @@ class RegisterController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password']),
                 'state' => 1,
+                'promocion' => $data['promocion']
             ]);
             $id = $usuario->id;
 
