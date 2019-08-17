@@ -19,10 +19,10 @@
                 <div class="modal-body">
                    <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="POST">
                        {{ csrf_field() }}
-                        <label class="label-primary">Enviar encuesta:</label>
+                        <label class="label-primary">Enviar encuesta a:</label>
                         <select name="promociones"  class="form-control" id="promociones">
-                            <option  value="todos" selected>Todas las promociones</option>
-                            <option  value="grupo">Grupo</option>
+                            <option  value="todos" selected>Todas las promóciones</option>
+                            <option  value="grupo">Grupo de prómociones</option>
                         </select>
                         <hr>
                         <div class="form-group" id="grupo_promociones" style="display:none;">
@@ -51,7 +51,7 @@
             <div class="tile">
               <h4>Estado de la encuesta </h4> 
               <hr>
-|               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                     Enviar encuesta
                 </button>
                {{-- <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
@@ -129,7 +129,7 @@ this.consultarEncuestados()
             contador +=1;
           etiqueta = document.createElement('label');
           etiqueta.classList = 'label-primary';
-          etiqueta.textContent = 'promocion'+' '+element.promocion+' '
+          etiqueta.textContent = 'Promoción'+' '+element.promocion+' '
           opcion = document.createElement('input');
           opcion.classList = 'form-control-label';
           opcion.value = element.promocion;
@@ -139,10 +139,6 @@ this.consultarEncuestados()
 
           grupoPromociones.appendChild(etiqueta)
             grupoPromociones.appendChild(document.createElement('br'));
-
-
-
-          console.log(element.promocion)
         });
     }
 

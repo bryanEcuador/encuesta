@@ -361,11 +361,11 @@ class EncuestaController extends Controller
        // guardar en la base los registros
             ProcessUsersMail::dispatch($user,$this->setFecha());
        // enviar los correos a los usuarios     
-            ProcessMailEncuesta::dispatch();
+            //ProcessMailEncuesta::dispatch();
             
-            $estado = "enviada";
-            $this->promocionesEnviadas($promociones);
-            return redirect()->route('home',compact('estado'));
+            //$estado = "enviada";
+            //$this->promocionesEnviadas($promociones);
+            //return redirect()->route('home',compact('estado'));
      
     }
 
@@ -407,6 +407,8 @@ class EncuestaController extends Controller
             return view('modulos.encuesta.errorEncuesta',compact('titulo','mensaje'));
         }
 
+
+
     }
 
     /**
@@ -419,6 +421,11 @@ class EncuestaController extends Controller
         return $fecha['year'];
     }
 
+    /**
+     * Retorna los los usuarios que tienen el rol de estudiante, puede retornar todos los estudiantes o solo los de determinada promoción
+     *
+     * @return collecion
+     */
     public function getUser($tipo,$elementos = null){
 
         $estudiantes_id = array();
@@ -429,11 +436,11 @@ class EncuestaController extends Controller
         }
 
         if($tipo == 1){
-            $estudiantes = User::whereIn('id',$estudiantes_id)->get();
+            $estudiantes = User::whereIn('id',$estudiantes_id)->get()->toArray();
             return $estudiantes;
         }else if($tipo == 2){
             // retorna los estudiantes de las promociones seleccionadas
-            $estudiantes = User::whereIn('id',$estudiantes_id)->WhereIn('promocion',$elementos)->get();
+            $estudiantes = User::whereIn('id',$estudiantes_id)->WhereIn('promocion',$elementos)->get()->toArray();
             return $estudiantes;
         }
 
