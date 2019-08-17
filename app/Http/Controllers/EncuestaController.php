@@ -330,6 +330,7 @@ class EncuestaController extends Controller
     }
 
         public function emailSend() {
+
         // validar que no se hayan enviado ya los correos
             $fecha = $this->getFecha();
             $enviado =  false; //DB::table('tb_correos')->whereyear('fecha_creacion',$fecha)->first();
