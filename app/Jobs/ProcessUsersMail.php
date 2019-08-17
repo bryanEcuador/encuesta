@@ -16,6 +16,11 @@ class ProcessUsersMail implements ShouldQueue
 
     protected $users;
     protected $fecha;
+    /**
+     * The number of times the job may be attempted.
+     * @var int
+     */
+    public $tries = 5;
 
     /**
      * Create a new job instance.
@@ -35,10 +40,9 @@ class ProcessUsersMail implements ShouldQueue
      */
     public function handle()
     {
-        dd($this->users);
         foreach ($this->users as  $user) {
          DB::table('tb_correos')->insert([
-            'user_id' => $user->id  ,'email' => $user->email , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),'promocion' => $user->promocion,
+            'user_id' => $user['id']  ,'email' => $user['email'] , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),'promocion' => $user['promocion'],
          ]);
       }
     }

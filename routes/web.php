@@ -19,23 +19,12 @@ require_once __DIR__. '/modulos/encuesta.php';
 /* require __DIR__ . '/modulos/proveedores.php';
  */
 Auth::routes();
-
 Route::redirect('/register', '/home', 301);
 Route::redirect('/', '/login', 301);
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/{estado?}', 'HomeController@index')->name('home');
 Route::get('/notificaciones','EncuestaController@notifify');
 Route::get('/leer-notificaciones', 'EncuestaController@read');
-Route::get('/prueba', function () {
 
-   $user = Correos::whereYear('fecha_creacion',2019)->get();
-    dd($user);
-   
-         
-     
-/*  Flight::where('foo', 'bar')->cursor()   */
-  
-});
 
 
 

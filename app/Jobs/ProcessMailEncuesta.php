@@ -7,11 +7,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\User;
 use App\Core\Modelos\Correos;
 use App\Mail\EncuestaMail;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\DB;
+
 
 class ProcessMailEncuesta implements ShouldQueue
 {
@@ -35,12 +34,11 @@ class ProcessMailEncuesta implements ShouldQueue
      */
     public function handle()
     {            
-        $users = Correos::whereYear('fecha_creacion',2019)->get();
+        $users = Correos::whereYear('fecha_creacion',date('Y'))->get();
         # envia los correos a todos los usuarios que deben responder la encuesta
         foreach ( $users as $user) {
             # code...
             Mail::to($user)->send(new EncuestaMail($user));
         }
-                             
     }
 }

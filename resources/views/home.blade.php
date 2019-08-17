@@ -21,25 +21,21 @@
                        {{ csrf_field() }}
                         <label class="label-primary">Enviar encuesta a:</label>
                         <select name="promociones"  class="form-control" id="promociones">
-                            <option  value="todos" selected>Todas las promóciones</option>
-                            <option  value="grupo">Grupo de prómociones</option>
+                            <option  value="todos" selected>Todas las promociones</option>
+                            <option  value="grupo">Grupo de promociones</option>
                         </select>
                         <hr>
                         <div class="form-group" id="grupo_promociones" style="display:none;">
-
                         </div>
                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-{{--
-                    <button type="button" class="btn btn-primary">Enviar</button>
---}}
                     <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
                         document.getElementById('enviar-encuesta').submit();">
                         Enviar
                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
                     </a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
@@ -49,34 +45,26 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="tile">
-              <h4>Estado de la encuesta </h4> 
-              <hr>
-               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                    Enviar encuesta
-                </button>
-               {{-- <a class="btn btn-primary" href="{{ route('enviar.correos') }}" onclick="event.preventDefault();
-                        document.getElementById('enviar-encuesta').submit();">
-                        Enviar Encuesta 
-                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                </a>--}}
-              {{--  <form id="enviar-encuesta" action="{{ route('enviar.correos') }}" method="GET" style="display: none;">
+                  <h4>Estado de la encuesta </h4>
+                  <hr>
+                    <div id="respuesta">
 
-                </form>--}}
-                
-                <div id="enviarEncuesta" style="display:none">
-                        <div class="alert alert-warning">
-                            <p> La encuesta aun <strong>no</strong>  ha sido enviada</p>
-                        </div>
-                        <button class="btn btn-primary">
-                            Enviar Encuesta 
-                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        </button>
-                </div>
+                    </div>
+                    <div id="enviarEncuesta" style="display:none">
+                            <div class="alert alert-success">
+                                <p>Todas las encuesta de este año ya han sido enviadas.</p>
+                            </div>
+                    </div>
 
                     <div id="grafico" style="display:none">
                         <h5 class="text">Estado de correos enviados</h5>
                         <canvas id="estado" width="400" height="400"></canvas>
-                    </div>  
+                    </div>
+
+                <button id="btnEncuestas" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    Enviar encuesta
+                </button>
+
             </div>
               
         </div>
@@ -91,10 +79,30 @@
     <script>
 
 var grafico = document.getElementById("grafico");
-var enviarEncuesta = document.getElementById("enviarEncuesta");
+let enviarEncuesta = document.getElementById("enviarEncuesta");
 let promociones = document.querySelector('#promociones');
 let grupoPromociones = document.querySelector('#grupo_promociones');
+let btnEncuestas = document.querySelector('#btnEncuestas');
+let respuesta = document.querySelector('#respuesta');
 
+this.consultarEncuestados()
+this.consultarEstadoEncuestas()
+this.consultarRespuesta();
+
+
+function consultarRespuesta() {
+    if(@json($estado !== null)){
+        console.log(@json($estado))
+        let elemento = document.createElement('div')
+        elemento.classList = 'alert alert-success'
+        elemento.innerText = 'Las encuestas han sido enviadas con exito'
+        respuesta.appendChild(elemento)
+
+        setTimeout(function() {
+            respuesta.removeChild(elemento);
+        },5000)
+    }
+}
 
 promociones.addEventListener('change',function() {
    if( promociones.value == 'todos' ){
@@ -109,10 +117,22 @@ promociones.addEventListener('change',function() {
 /* grafico.style.display = 'none'; */
 /* enviarEncuesta.style.display = 'none'; */
 
-this.consultarEncuestados()
 
+
+    function  consultarEstadoEncuestas() {
+        var url = '/promociones';
+
+        $.get(url, { crossDomain : true} , (data) =>  {
+            if(data.length == 0){
+                this.enviarEncuesta.style.display = 'block'
+                this.btnEncuestas.style.display = 'none'
+            }
+        }).fail( function() {
+            console.log("fallo la peticion");
+        });
+    }
     function consultarPromociones(){
-        var url = 'promociones';
+        var url = '/promociones';
             $.get(url, { crossDomain : true} , (data) =>  {
                 this.crear(data)
                 }).fail( function() {
@@ -151,7 +171,7 @@ this.consultarEncuestados()
   function consultarEncuestados(){
 
        var year = this.obtenerYear();
-        var url = 'porcentaje/encuesta/'+year;
+        var url = '/porcentaje/encuesta/'+year;
          $.get(url, { crossDomain : true} , (data) =>  {
                this.graficar(data)
             }).fail( function() {
@@ -159,7 +179,6 @@ this.consultarEncuestados()
         });
 
     }
-
 
     function graficar(data) {
         
@@ -196,8 +215,6 @@ this.consultarEncuestados()
         }
        
     }
-
-
 
 </script>
 @endsection

@@ -330,44 +330,6 @@ class EncuestaController extends Controller
 
     }
 
-    /**
-     * Se encarga de enviar las notificaciones a todas las promociones de estudiantes
-     * para responder las encuestas del año
-     * @return void
-     */
-    public function emailSend(Request $request) {
-
-        /*Validar a quienes se les va a enviar el correo electronico */
-
-            // se crea un array con los resultados pasados desde la vista
-            $array = array_map(null,$request->input());
-
-            //se valida a quien va dirigida la encuesta
-            if($request->input('promociones') == 'todos'){
-                //obtener los usuarios
-                $user = $this->getUser(1);
-            }else {
-                // se obtiene las promociones
-                $promociones = array_filter($array, function($var){
-                    if(is_numeric($var)){
-                        return $var;
-                    }
-                });
-                $user = $this->getUser(2,$promociones);
-            }
-            /* -------------------------------------------------------------------------- */
-
-     /* Envio de correos */
-       // guardar en la base los registros
-            ProcessUsersMail::dispatch($user,$this->setFecha());
-       // enviar los correos a los usuarios     
-            //ProcessMailEncuesta::dispatch();
-            
-            //$estado = "enviada";
-            //$this->promocionesEnviadas($promociones);
-            //return redirect()->route('home',compact('estado'));
-     
-    }
 
     /**
      * Se encarga de validar si el usuario puede realizar la encuesta
@@ -421,12 +383,12 @@ class EncuestaController extends Controller
         return $fecha['year'];
     }
 
-    /**
+    /*/**
      * Retorna los los usuarios que tienen el rol de estudiante, puede retornar todos los estudiantes o solo los de determinada promoción
      *
      * @return collecion
      */
-    public function getUser($tipo,$elementos = null){
+    /*public function getUser($tipo,$elementos = null){
 
         $estudiantes_id = array();
         // retorna todos los usuarios con rol estudiante
@@ -444,7 +406,7 @@ class EncuestaController extends Controller
             return $estudiantes;
         }
 
-    }
+    }*/
 
     public function setFecha(){
         $month = date('m');

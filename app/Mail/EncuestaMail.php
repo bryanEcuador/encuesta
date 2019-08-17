@@ -22,13 +22,11 @@ class EncuestaMail extends Mailable
      */
 
 
-    public function __construct($user = null)
+    public function __construct(Correos $user)
     {
-        if($user != null){
-            $this->user = $user->toArray();
-            $this->promocion = $this->user[0]['promocion'];
-            $this->url = 'http://encuesta.test:8090/encuesta/'.$this->user[0]['token'].'/'.$this->user[0]['promocion'];
-        }
+            $this->user = $user;
+            $this->promocion = $this->user['promocion'];
+            $this->url = 'http://encuesta.test:8090/encuesta/'.$this->user['token'].'/'.$this->promocion;
     }
 
     /**
@@ -39,6 +37,5 @@ class EncuestaMail extends Mailable
     public function build()
     {
        return $this->subject('Seguimiento a graduados')->markdown('emails.encuesta',['promocion' => $this->promocion, 'url' => $this->url]);
-        //return $this->subject('Seguimiento a graduados')->markdown('emails.encuesta');
     }
 }
