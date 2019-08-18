@@ -306,7 +306,7 @@ class EncuestaController extends Controller
                 $encuesta->recursos_carreras_id = $recursos_carrera;
                 $encuesta->area_dificultad_id = $areas_dificultad;
                 $encuesta->realacion_desempeno_graduado_id = $relacion_desempeño;
-                $encuesta->preferencia_estudio_id = preferencia_estudio_id;
+                $encuesta->preferencia_estudio_id = $preferencia_estudio_id;
                 $encuesta->temas_interes_id = $temas_interes;
                 $encuesta->temas_incluir_id = $contenido_incluir;
                 $encuesta->asignatura_incluir_id = $asignatura_incluir;
