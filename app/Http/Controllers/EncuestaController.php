@@ -351,6 +351,7 @@ class EncuestaController extends Controller
                  ['promocion',$promocion]
              ])->get()->toArray();
 
+
             // Validar la acción que se debe realizar según el estado de la encuesta
             if($estado[0]['estado'] == '0'){
                  return view('modulos.encuesta.encuesta');
@@ -383,31 +384,6 @@ class EncuestaController extends Controller
         return $fecha['year'];
     }
 
-    /*/**
-     * Retorna los los usuarios que tienen el rol de estudiante, puede retornar todos los estudiantes o solo los de determinada promoción
-     *
-     * @return collecion
-     */
-    /*public function getUser($tipo,$elementos = null){
-
-        $estudiantes_id = array();
-        // retorna todos los usuarios con rol estudiante
-        $users = DB::table('role_user')->select('user_id')->where('role_id',5)->get();
-        foreach($users as $user){
-            array_push($estudiantes_id,$user->user_id) ;
-        }
-
-        if($tipo == 1){
-            $estudiantes = User::whereIn('id',$estudiantes_id)->get()->toArray();
-            return $estudiantes;
-        }else if($tipo == 2){
-            // retorna los estudiantes de las promociones seleccionadas
-            $estudiantes = User::whereIn('id',$estudiantes_id)->WhereIn('promocion',$elementos)->get()->toArray();
-            return $estudiantes;
-        }
-
-    }*/
-
     public function setFecha(){
         $month = date('m');
         $year = date('Y');
@@ -427,7 +403,7 @@ class EncuestaController extends Controller
     {
         return $this->EncuestaProcedure->porcentajeEncuestados($year);
     }
-
+/*
     public function promociones(){
         $array = array();
         //consulto las promociones encuestas
@@ -458,15 +434,30 @@ class EncuestaController extends Controller
             $promocion->estado = 'enviada';
         }
     }
+  */
+    /*
+     * Por medio del id de las encuesta enviadas se obtiene la promoción para cancelar las encuestas enviadas
+     * Luego de eso se desactiva las encuestas enviadas para que no sean tomadas en cuenta durane la creación de
+     * los graficos.
+     * return void
+     */
 
     public function cancelarEncuesta($id)
     {
-        // cancelar encuesta en la tabla
-        EncuestasEnviadas::where('id',$id)->update(['estado' => 'cancelado']);
+        $usuariosDesactivar = array();
+        try{
+            $promocion = EncuestasEnviadas::findOrFail($id);
+            EncuestasEnviadas::where('id',$id)->update(['estado' => 'cancelado']);
+            Correos::where('promocion',$promocion->promocion)->update(['estado' => '2']);
+            $usuarios = Correos::where('promocion',$promocion->promocion)->get();
 
-        // desactivar registris de esta promocion
-
-
+            foreach ($usuarios as $user){
+                array_push($usuariosDesactivar,$user->user_id);
+            }
+            $encuestados = Encuesta::WhereIn('usuario_creacion',$usuariosDesactivar)->update('estado',0);
+        }catch (\Exception $e){
+            echo  $e->getMessage();
+        }
     }
 
     public function  promocionesEnviadas(){

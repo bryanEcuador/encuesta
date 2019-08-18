@@ -20,14 +20,14 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="enviar()" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Cancelar encuesta</button>
+                    <button type="button"  class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                    <button type="button" onclick="enviar()" class="btn btn-danger">Cancelar encuesta</button>
                 </div>
             </div>
         </div>
     </div>
 
-   <div class="tile col-md-12" >
+   <div class="tile col-md-6 col-md-offset-4" >
        <h3 class="tile-title">Encuestas enviadas este año</h3>
        <div class="table-responsive">
            <table class="table">
@@ -35,7 +35,6 @@
                <tr>
                    <th>Promoción</th>
                    <th>Fecha</th>
-                   <th>Usuario</th>
                    <th>Acciones</th>
                </tr>
                </thead>
@@ -44,9 +43,10 @@
                <tr>
                    <td>{{$enviada->promocion}}</td>
                    <td>{{$enviada->created_at}}</td>
-                   <td>{{$enviada->create_user_id}}</td>
                    @if($enviada->estado == 'enviada')
                    <td><button class="btn btn-danger" onclick="cancelar({{$enviada->id}})">Cancelar</button></td>
+                   @else
+                       <td class="alert-info" >La encuesta ya ha sido cancelada</td>
                    @endif
                    @if($enviada->estado == 'cancelada')
                        <td>Cancelada</td>

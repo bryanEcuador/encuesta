@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use App\Jobs\ProcessUsersMail;
 use App\Jobs\ProcessMailEncuesta;
+use App\Http\Controllers\PromocionesController;
 
 
 
@@ -26,12 +27,14 @@ class CorreosController extends Controller
     use Notifiable;
     protected $EncuestaNotification;
     protected $EncuestaMail;
+    protected  $promocion;
 
 
     public function __construct(EncuestaNotification $encuestaNotification,EncuestaMail $encuestaMail)
     {
         $this->EncuestaNotification = $encuestaNotification;
         $this->EncuestaMail = $encuestaMail;
+        $this->promocion = new PromocionesController();
     }
 
 
@@ -50,7 +53,7 @@ class CorreosController extends Controller
             //ProcessUsersMail::dispatch($user,$this->setFecha());
             //ProcessMailEncuesta::dispatch();
             $estado = true;
-            //$this->promocionesEnviadas($promociones);
+
             return redirect()->route('home',['estado' => $estado]);
         }catch (Exception $e){
             echo $e->getMessage();
@@ -115,12 +118,14 @@ class CorreosController extends Controller
             $array = array_map(null,$request->input());
             if($request->input('promociones') == 'todos'){
                 $user = $this->getUser(1);
+                $this->promocion->storePromocionesEnviadas();
             }else {
                 $promociones = array_filter($array, function($var){
                     if(is_numeric($var)){
                         return $var;
                     }
                 });
+                $this->promocion->storePromocionesEnviadas($promociones);
                 $user = $this->getUser(2,$promociones);
             }
         }catch (Exception $e){
@@ -129,4 +134,7 @@ class CorreosController extends Controller
 
         return $user;
     }
+
+
+
 }

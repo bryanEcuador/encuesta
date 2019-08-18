@@ -117,7 +117,7 @@
                 <li><a class="app-menu__item"  href="{{route('administracion.logs.sistema')}}"><i class="app-menu__icon fa fa-code" aria-hidden="true"></i><span class="app-menu__label">Logs de sistema</span> </a></li>               
             </ul>
         </li>
-        <li><a class="app-menu__item"  href="{{route('encuesta.promocionesenviadas')}}"><i class="app-menu__icon fa fa-pie-chart" aria-hidden="true"></i><span class="app-menu__label">Envio de encuesta</span> </a></li>
+        <li><a class="app-menu__item"  href="{{route('encuesta.promocionesenviadas')}}"><i class="app-menu__icon fa fa-envelope-open" aria-hidden="true"></i><span class="app-menu__label">Envio de encuesta</span> </a></li>
 
     </ul>
 </aside>

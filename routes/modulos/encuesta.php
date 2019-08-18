@@ -17,15 +17,15 @@ route::post('enviar-encuesta', 'CorreosController@enviarEncuesta')->name('enviar
 
 route::get('porcentaje/encuesta/{year}', 'EncuestaController@porcentajeEncuestados');
 
-route::get('encuesta/{token?}/{promocion?}', 'EncuestaController@ValidarEncuesta');
+route::get('encuesta/{token?}/{promocion?}', 'EncuestaController@validarEncuesta');
 
 route::post('encuesta/store','EncuestaController@store');
 
 route::get('error-encuesta', function(){
    return view('modulos.encuesta.errorEncuesta');
 });
-route::get('admin-encuesta','EncuestaController@promocionesEnviadas')->name('encuesta.promocionesenviadas');
 route::get('cancelar-encuesta/{id}','EncuestaController@cancelarEncuesta');
 
-route::get('promociones','EncuestaController@promociones');
+route::get('administracion-encuesta','PromocionesController@promocionesEnviadas')->name('encuesta.promocionesenviadas');
+route::get('promociones','PromocionesController@promociones');
 
