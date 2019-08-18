@@ -22,9 +22,9 @@ use App\Core\Modelos\ContenidoaIncluir;
 use App\Core\Modelos\DatosPersonales;
 use App\Core\Modelos\Encuesta;
 use App\Core\Modelos\InformacionProfesional;
-use App\Core\Modelos\NivelCargoTrabajo;
 use App\Core\Modelos\preferenciaEstudio;
 use App\Core\Modelos\RecursosCarrera;
+use App\Core\Modelos\NivelCargoTrabajo;
 use App\Core\Modelos\RelacionCarrera;
 use App\Core\Modelos\RelacionDesempeño;
 use App\Core\Modelos\TemasInteres;
@@ -67,8 +67,8 @@ class EncuestaController extends Controller
         $asignatura = new Asignatura();
         
         $encuesta = new Encuesta();
-        /* $nivelCargoTrabajo = new NivelCargoTrabajo();
-        $tipoInstitucion = new TipoInstitucion(); */
+        $nivelCargoTrabajo = new NivelCargoTrabajo(); //TODO
+        //$tipoInstitucion = new TipoInstitucion();
     }
 
    
