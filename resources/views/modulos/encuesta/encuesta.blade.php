@@ -1395,6 +1395,7 @@ $.ajax({
         'temas_interes_r1': $('#txt_temas').val(),
         'txt_recomen_temas': $('#temas_incluir1').val(),
         'txt_recomen_asignatura': $('#asignatura1').val()
+        'token' : @json($token)
     },
     success: function(returnData){
         console.log(returnData);
