@@ -21,8 +21,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($estado = null)
     {
-        return view('home');
+        return view('home',compact('estado'));
     }
+
+    public function porcentajeEncuestados(){
+
+    }
+
 }

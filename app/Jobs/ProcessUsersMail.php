@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class ProcessUsersMail implements ShouldQueue
 {
@@ -15,13 +16,18 @@ class ProcessUsersMail implements ShouldQueue
 
     protected $users;
     protected $fecha;
+    /**
+     * The number of times the job may be attempted.
+     * @var int
+     */
+    public $tries = 5;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(User $users,$fecha_id)
+    public function __construct($users,$fecha_id)
     {
         $this->users = $users;
         $this->fecha = $fecha_id;
@@ -35,9 +41,8 @@ class ProcessUsersMail implements ShouldQueue
     public function handle()
     {
         foreach ($this->users as  $user) {
-        
          DB::table('tb_correos')->insert([
-            'user_id' => $user->id  , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),
+            'user_id' => $user['id']  ,'email' => $user['email'] , 'estado' => 0 , 'fecha_id' => $this->fecha , 'token' =>  str_random(16),'promocion' => $user['promocion'],
          ]);
       }
     }

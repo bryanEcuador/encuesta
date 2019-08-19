@@ -32,4 +32,8 @@ class User extends Authenticatable
     public function logUser(){
         return $this->hasMany('App\Core\Modelos\UserLogs');
     }
+
+    public function correo(){
+        return $this->hasOne('App\Core\Modelos\Correos');
+    }
 }

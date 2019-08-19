@@ -5,11 +5,11 @@ Route::group(['prefix' => 'seguridad' , 'as' => 'seguridad.' ], function() {
     Route::middleware(['auth'])->group(function () {
             /* ->middleware ('permission:user.index'); */
         // permisos
-            Route::get('permisos','PermisosController@index')->name('permisos.index')/* ->middleware('permission:permisos.index') */;
-            Route::get('permisos/datos/{paginacion}/{page?}/{nombre?}','PermisosController@loadData')/* ->middleware('permission:permisos.index') */;
-            Route::post('permisos/store','PermisosController@store')->name('permisos.guardar')/* ->middleware('permission:permisos.create') */;
-            Route::put('permisos/update','PermisosController@update')->name('permisos.update')/* ->middleware('permission:permisos.update') */;        
-            Route::get('show/permisos/{id}','PermisosController@show')->name('permisos.show')/* ->where('id' , '[0-9]+')->middleware('permission:permisos.view') */;
+            Route::get('permisos','PermisosController@index')->name('permisos.index')->middleware('permission:permisos.index');
+            Route::get('permisos/datos/{paginacion}/{page?}/{nombre?}','PermisosController@loadData')->middleware('permission:permisos.index');
+            Route::post('permisos/store','PermisosController@store')->name('permisos.guardar')->middleware('permission:permisos.create') ;
+            Route::put('permisos/update','PermisosController@update')->name('permisos.update')->middleware('permission:permisos.update');
+            Route::get('show/permisos/{id}','PermisosController@show')->name('permisos.show')->where('id' , '[0-9]+')->middleware('permission:permisos.view');
                     
         // Roles
         Route::get('roles','RolesController@index')->name('roles.index')->middleware('permission:roles.index');
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'seguridad' , 'as' => 'seguridad.' ], function() {
             Route::get('usuarios','UserController@index')->name('user.index')->middleware('permission:usuarios.index');
             Route::get('usuarios/datos/{paginacion}/{page?}/{rol?}/{name?}','UserController@loadData')->middleware('permission:usuarios.index');
             Route::post('usuarios/store','UserController@store')->name('user.guardar')->middleware('permission:usuarios.create');
-            Route::put('usuarios/update','UserController@update')->name('user.update')->middleware('permission:usuarios.update');     
+            Route::put('usuarios/update','UserController@update')->name('user.update')->middleware('permission:usuarios.update');
             route::get('usuarios/delete/{id}','UserController@destroy')->name('user.delete');   
             Route::get('usuarios/show/{id}','UserController@show')->name('user.show')->where('id' , '[0-9]+')->middleware('permission:usuarios.view');
             route::get('usuarios/roles','UserController@cmbRoles')->name('user.roles');

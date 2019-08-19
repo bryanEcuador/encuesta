@@ -1,8 +1,6 @@
 <?php
+use App\Core\Modelos\Correos;
 
-route::get('encuesta', function(){
-    return view('modulos.encuesta.encuesta');
-});
 // selecet 
 route::get('get-nacionalidad', 'EncuestaController@getNacionalidadAll');
 route::get('get-genero', 'EncuestaController@getGeneroAll');
@@ -14,6 +12,20 @@ route::get('get-institucion', 'EncuestaController@getInstitucionAll');
 route::get('get-cargo', 'EncuestaController@getCargoAll');
 route::get('get-rango', 'EncuestaController@getRangoSueldoAll');
 //
-route::get('enviar-encuesta', 'EncuestaController@emailSend');
-route::get('encuesta-prueba/{token}', 'EncuestaController@ValidarEncuesta');
-// TODO: 
+route::post('enviar-encuesta', 'CorreosController@enviarEncuesta')->name('enviar.correos');
+
+
+route::get('porcentaje/encuesta/{year}', 'EncuestaController@porcentajeEncuestados');
+
+route::get('encuesta/{token?}/{promocion?}', 'EncuestaController@validarEncuesta');
+
+route::post('encuesta/store','EncuestaController@store');
+
+route::get('error-encuesta', function(){
+   return view('modulos.encuesta.errorEncuesta');
+});
+route::get('cancelar-encuesta/{id}','EncuestaController@cancelarEncuesta')->middleware('permission:encuestas');
+
+route::get('administracion-encuesta','PromocionesController@promocionesEnviadas')->name('encuesta.promocionesenviadas')->middleware('permission:encuestas');
+route::get('promociones','PromocionesController@promociones');
+

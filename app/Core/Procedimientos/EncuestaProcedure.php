@@ -61,4 +61,9 @@ class EncuestaProcedure extends Model
         return  DB::table('tb_rango_sueldo')->get();
     }
 
+    public function porcentajeEncuestados($year)
+    {
+        return DB::select('call encuesta.sp_porc_correos_enviados(?)', array($year));
+    }
+
 }

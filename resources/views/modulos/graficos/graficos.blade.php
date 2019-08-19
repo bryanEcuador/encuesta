@@ -268,7 +268,7 @@ this.cargarGraficos();
         }
 
 
-        (typeof(infraestructuraInsufuciente) == "number") ? infraestructuraInsufuciente = infraestructuraInsufuciente : infraestructuraInsufuciente = 0 ;
+        (typeof(infraestructuraInsufuciente) == "number") ? infraestructuraInsufuciente : infraestructuraInsufuciente = 0 ;
         (typeof(infraestructuraRegular) == "number") ?  infraestructuraRegular = infraestructuraRegular: infraestructuraRegular = 0;
         (typeof(infraestructuraBuena) == "number") ? infraestructuraBuena = infraestructuraBuena : infraestructuraBuena = 0;
         (typeof(infraestructuraMuyBuena) == "number") ? infraestructuraMuyBuena = infraestructuraMuyBuena  : infraestructuraMuyBuena = 0 ;

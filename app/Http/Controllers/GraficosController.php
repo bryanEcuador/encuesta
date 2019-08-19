@@ -63,7 +63,8 @@ class GraficosController extends Controller
         if($tipo == "tipo_institucion" ){
              $datos = $this->GraficosProcedure->tipoInstitucion($year);
              $total = $this->GraficosProcedure->totalTipoInstitucion($year);
-             $porcentaje = $this->porcentaje($datos,$total);
+            $porcentaje = $this->porcentajeTipoInstitucion($datos,$total);
+            //json
            return $porcentaje;
         }else if($tipo == "recursos_carrera"){
 

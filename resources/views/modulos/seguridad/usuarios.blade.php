@@ -153,6 +153,10 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div>
+                                            <label class="control-label col-md-2">Promoción</label>
+                                            <input class="form-control" v-model="promocion" type="number" min="2010" max="{{date('Y') + 1}}">
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-primary" type="button" v-on:click="validar">Guardar</button>
@@ -236,6 +240,11 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control" v-model="e_pass2" id="e_pass2"  placeholder="Confirmacion de Contraseña" autocomplete="off">
                                         </div>
+                                        <label class="label-text"> Promoción:</label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" v-model="e_promocion"   placeholder="Promoción" autocomplete="off">
+                                        </div>
+
                                         <div class="col-md-12">
                                             <label class="label-text col-md-6"> Rol:</label>
                                         </div>
@@ -276,6 +285,7 @@
                 usuario : '',
                 pass : '',
                 pass2 : '',
+                promocion : '',
                 
                 /* Carga de información */
                 usuarios_s : [],
@@ -299,7 +309,7 @@
                 e_pass2 : '',
                 e_roles : '',
                 e_email : '',
-
+                e_promocion:'',
                 /* Validaciones */
                 errores : [],
                 respuesta1 : [],
@@ -463,7 +473,8 @@
                                 email : this.email.toLowerCase(),
                                 password : this.pass,
                                 password_confirmation : this.pass2,
-                                rol : this.rol
+                                rol : this.rol,
+                                promocion : this.promocion
                         
                             }).then(response => {
                                 if(response.data[0] == "Error") {
@@ -522,6 +533,7 @@
                     this.e_email = this.usuarios_e[0].email;
                     this.e_usuario = this.usuarios_e[0].name;
                     this.e_roles = this.usuarios_e[0].rol;
+                    this.e_promocion = this.usuarios_e[0].promocion;
                     })
 
                     $("#editarUsuarios").modal('show');
@@ -635,7 +647,7 @@
                         this.errores.push("ingrese el nombre del usuario (Debe de ser unico)");
                     } else {
                         this.usuario= this.usuario.trim();
-                        if(patt2.test(this.usuario) == false)
+                        if(patt3.test(this.usuario) == false)
                         {
                             this.errores.push("El nombre de usuario no puede contener espaciones, numeros  o caracteres especiales distintots a: '_' ");
                         }else{
@@ -778,6 +790,7 @@
                             id :   this.e_id  ,
                             name :   this.e_usuario.toLowerCase() , 
                             email : this.e_email ,
+                             promocion : this.e_promocion,
                             rol : this.e_roles, 
                                 }).then(response => {
                                     if(response.data[0] == "Error") {
