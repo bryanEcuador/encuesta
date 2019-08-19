@@ -128,145 +128,442 @@
         <div id="cuerpoForm">
             <form>
                 <section v-if="personal" id="datos personales">
-                    <div class="form-group col-md-3" > 
-                    <label class="control-label" for="">Identificacion</label>
-                    <input class="form-control"type="text" v-model="identificacion" name="Identificacion">
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Tipo de Identificación</label>
+                    <select class="form-control col-md-2" v-model="tipo_identificacion">                    
+                    </select>
+                    <label class="control-label col-md-3" >Identificación</label >
+                    <input class="form-control mx-1 col-md-3"type="text" v-model="identificacion" name="identificacion ">
                     </div>
 
-                    <div class="form-group col-md-8" > 
-                    <label class="control-label" for="">Nombres y Apellidos</label>
-                    <input class="form-control"type="text" v-model="nombres" name="Nombres">
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Nombres</label>
+                    <input class="form-control mx-1 col-md-8"type="text" v-model="nombre" name=" nombre ">
                     </div>
 
-                    <div class="form-group col-md-8" > 
-                    <label class="control-label" for="">Fecha Nacimiento</label>
-                    <input type="date" v-model="fecha_nacimiento" name="Fecha Nacimiento">
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Apellidos</label>
+                    <input class="form-control mx-1 col-md-8"type="text" v-model="apellido" name="apellido">
                     </div>
 
-                    <div class="form-group row col-md-10" > 
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-4">Fecha de Nacimiento</label>
+                    <input class="form-control mx-1 col-md-5" type="date" v-model="fecha_nacimiento" name=" Nacionalidad ">
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
                     <label class="control-label col-md-3" >Nacionalidad</label >
-                    <input class="form-control mx-1 col-md-4"type="text" v-model="nacionalidad" name=" Nacionalidad ">
+                    <input class="form-control mx-1 col-md-3"type="text" v-model="nacionalidad" name=" Nacionalidad ">
                     <label class="control-label col-md-2">Genero</label>
-                    <select class="form-control col-md-2" v-model="genero">
+                    <select class="form-control col-md-3" v-model="genero">
                     <option value="FEMENINO">FEMENINO</option>
                     <option value="MASCULINO">MASCULINO</option>
                     </select>
                     </div>
 
-                    <div class="form-group row col-md-10" > 
+                    <div class="form-group row col-md-12" > 
                     <label class="control-label col-md-3" >Carrera</label >
                     <input class="form-control mx-1 col-md-5"type="text" v-model="carrera" name=" Carrera ">
                     </div>
 
-                    <div class="form-group row col-md-10" > 
+                    <div class="form-group row col-md-12" > 
                     <label class="control-label col-md-3">Discapacidad</label>
-                    <select class="form-control col-md-2" v-model="discapacidad">
-                    <option value="SI">Si</option>
-                    <option value="NO">No</option>
+                    <select class="form-control col-md-3" v-model="discapacidad">
+                    
                     </select>
-                    <label class="control-label col-md-3" >Carnet Conadis</label >
-                    <input class="form-control mx-1 col-md-3"type="text" v-model="carnet_conadis" name="Carnet Conadis ">
+                    <label class="control-label col-md-2" >Carnet Conadis</label >
+                    <input class="form-control mx-1 col-md-3 "type="text" v-model="carnet_conadis" name="Carnet Conadis ">
                     </div>
 
-                    </form>
-
-                </section>
-                <section id="informacion personales" v-if="profesional">
-                <div>
-                    <label class="titulo"> INFORMACIÓN PERSONAL</label>
-                </div>
-                    <div class="form-group row col-md-10" > 
-                    <label class="control-label col-md-2">Estado Civil</label>
-                    <select class="form-control col-md-2" v-model="estado_civil">
-                    <option value="CASADO">CASADO</option>
-                    <option value="SOLTERO">SOLTERO</option>
-                    <option value="DIVORCIADO">DIVORCIADO</option>
-                    <option value="VIUDO">VIUDO</option>
-                    <option value="UNION LIBRE">UNION LIBRE</option>
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Estado Civil</label>
+                    <select class="form-control col-md-3" v-model="estado_civil">
                     </select>
+                    <label class="control-label col-md-2" >Número de Hijos</label >
+                    <input class="form-control mx-1 col-md-3"type="text" v-model="numero_hijos" name=" numero_hijos ">
+                    
                     </div>     
 
-                    <div class="form-group row col-md-10" > 
-                    <label class="control-label col-md-3" >Número de Hijos</label >
-                    <input class="form-control mx-1 col-md-4"type="text" v-model="numero_hijos" name=" numero_hijos ">
-                    <label class="control-label col-md-2">País</label>
-                    <select class="form-control col-md-2" v-model="pais">
-                              
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">País</label>
+                    <select class="form-control col-md-3" v-model="pais">
+                                               
                     </select>
-                    </div>       
-                
-                
-                
-                
-              
-                <input type="text" v-model="ciudad" name="Ciudad">
-                <input type="number" v-model="celular" name="Celular">
-                <input type="text" v-model="direccion" name="Direccion">
-                <input type="text" v-model="correo" name="Correo">
-                <select v-model="etnia">
-                    <option>INDIGENA</option>
-                    <option>AFROAMERICANO</option>
-                    <option>NEGRO</option>
-                    <option>MULATO</option>
-                    <option>MONTUBIO</option>
-                    <option>MESTIZO</option>
-                    <option>BLANCO</option>
+                    <label class="control-label col-md-2" >Ciudad</label >
+                    <select class="form-control col-md-3" v-model="ciudad">
+                                               
                     </select>
-                    <span>Etnia: @{{ etnia }}</span>
-                    
-                </section>
-                <section id="institucion" v-if="institucion">
-                <input type="text" v-model="empresa" name="Empresa">
-                <select v-model="cargo">
-                    <option>DIRECTOR EJECUTIVO</option>
-                    <option>GERENTE GENERAL</option>
-                    <option>SUPERVISOR</option>
-                    <option>VENDEDOR</option>
-                    <option>PROMOTOR</option>
-                    <option>ANALISTA</option>
-                    <option>DESARROLLADOR</option>
-                    <option>ADMINISTRATIVO</option>
-                    <option>AUDITOR</option>
-                    <option>SALUD</option>
-                    <option>TECNICO</option>
-                    <option>JEFE</option>
-                    </select>
-                    <span>Cargo:@{{ cargo }}</span>
-                    <input type="number" v-model="tiempo_laborando" name="Tiempo Laborando">
-                    <select v-model="tipo_contrato">
-                    <option>CONTRATO INDEFINIDO</option>
-                    <option>CONTRATO EVENTUAL</option>
-                    <option>CONTRATO POR OBRA</option>
-                    <option>CONTRATO DE PRUEBA</option>
-                    <option>CONTRATO POR TAREA</option>
-                    <option>CONTRATO TACITO</option>
-                    </select>
-                    <span>Tipo Contrato: @{{ tipo_contrato }}</span>
-                    <input type="text" v-model="trabajo_exterior" name="Trabajo en el Exterior">
-                    <input type="text" v-model="relacion_carrera_profesional" name="Su Trabajo es acorde a su profesion">
-                    <input type="text" v-model="nivel_estudio_acorde" name="Su nivel se Estudio es acorde al Cargo que desempeña">
-                    <select v-model="dificultad_para_trabajar">
-                    <option>SI</option>
-                    <option>NO</option>
-                    </select>
-                    <span>Dificultad: @{{ dificultad_para_trabajar }}</span>
-                </section>
-                <section id="preferencias" v-if="preferencias">
-                <input type="text" v-model="formacion_profesional" name="Trabajo en el Exterior">
-                <input type="text" v-model="calificacion_docente" name="Trabajo en el Exterior">
-                <input type="text" v-model="conocimientos_menos_utiles" name="Trabajo en el Exterior">
-                <input type="text" v-model="recursos_de_la_carrera" name="Trabajo en el Exterior">
-                <input type="text" v-model="dificultad_general" name="Trabajo en el Exterior">
-                <input type="text" v-model="relacion_desempeño" name="Trabajo en el Exterior">
-                <input type="text" v-model="estudios_pregrado" name="Trabajo en el Exterior">
-                <input type="text" v-model="otra_carrera" name="Trabajo en el Exterior">
-                <input type="text" v-model="recomendar_institucion" name="Trabajo en el Exterior">
-                </section>
-                <section id="Recomendaciones" v-if="recomendaciones">
-                <input type="text" v-model="temas" name="Trabajo en el Exterior">
-                <input type="text" v-model="asignatura" name="Trabajo en el Exterior">
+                    </div>
 
-                </section>          
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Celular</label>
+                    <input class="form-control mx-1 col-md-3"type="text" v-model="celular" name=" celular ">
+                    <label class="control-label col-md-3">Convencional</label>
+                    <input class="form-control mx-1 col-md-2"type="text" v-model="convencional" name="convencional">
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Dirección</label>
+                    <input class="form-control mx-1 col-md-8"type="text" v-model="direccion" name="Direccion">
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Correo Electronico</label>
+                    <input class="form-control mx-1 col-md-8"type="text" v-model="correo" name="Correo">
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Etnia</label>
+                    <select class="form-control col-md-4" v-model="etnia">
+                                               
+                    </select>
+                    </div>
+                    </section>
+
+                    <section id="informacion profesional" v-if="profesional">
+                    
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-8">Trabaja Acualmente, si su respuesta es NO de clic en continuar</label>
+                    <select class="form-control col-md-3" v-model="trabajo_actual">
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Tipo de Institución</label>
+                    <select class="form-control col-md-4" v-model="tipo_institucion">
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Nombre de la Empresa</label>
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="empresa" name=" celular ">
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Actividad de la Empresa</label>
+                    <select class="form-control col-md-3" v-model="actividad_empresa">
+                    </select>
+                    <label class="control-label col-md-3">Cargo que Ocupa</label>
+                    <select class="form-control col-md-3" v-model="cargo">
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-5">Tiempo que se encuentra laborando</label>
+                    <input class="form-control mx-1 col-md-2"type="number" v-model="tiempo_laborando" name=" celular ">
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">Tipo de Contrato</label>
+                    <select class="form-control col-md-3" v-model="tipo_contrato">
+                    </select>
+                    <label class="control-label col-md-3">Rango de Sueldo</label>
+                    <select class="form-control col-md-3" v-model="rango_sueldo">
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-3">A trabajado fuera de Ecuador </label>
+                    <select class="form-control col-md-3" v-model="trabajo_exterior">
+                    </select>
+                    </div>
+
+                    <div class="form-group col-md-12" > 
+                    <label class="control-label col-md-12">Su carrera profesional se encuentra relacionado con el ambito laboral </label>
+                    <select class="form-control col-md-3" v-model="relacion_carrera_profesional">
+                    </select>
+                    </div>
+
+                    <div class="form-group col-md-12" > 
+                    <label class="control-label col-md-12">Considera que su nivel de estudio se encuentra relacionado con el ambito laboral</label>
+                    <select class="form-control col-md-3" v-model="nivel_estudio_acorde">
+                    </select>
+                    </div>
+
+                    <div class="form-group col-md-12" > 
+                    <label class="control-label col-md-12">¿Ha tenido dificultades al momento de conseguir empleo?</label>
+                    <select class="form-control col-md-3" v-model="dificultad_para_trabajar">
+                    </select>
+                    </div>
+                    </section>
+
+                    <section id="institucion" v-if="institucion">
+                    <div class="form-group col-md-12" > 
+                    <label class="control-label col-md-10">¿Cómo calificaría la formación profesional recibida en el ITSVR?</label>
+                    <select class="form-control col-md-3" v-model="formacion_profesional">
+                    </select>
+                    </div>
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-2">¿Por qué? </label>
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="formación_profesional_porque">
+                    </div>
+                    
+
+                    <div class="form-check col-md-12" > 
+                    <label class="form-chek-label">
+                    Califique de manera general a los docentes en los siguientes aspectos (considerando Excelente=5, Muy buena=4,Buena = 3, Regular=2, Insuficiente=1) 
+                    </label>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>#</th>
+                            <th>5</th>
+                            <th>4</th>
+                            <th>3</th>
+                            <th>2</th>
+                            <th>1</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Dominio de la asignatura</td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="excelente" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="muy buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_dominio" value="insuficiente" ></td>
+                            </tr>
+                            <tr>
+                            <td>Actualización en los conocimientos </td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="excelente"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="regular" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_actualizacion" value="insuficiente" ></td>
+                            </tr>
+                            <tr>
+                            <td>Metodologia de la enseñanza</td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="excelente"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_metodologia" value="insuficiente" ></td>
+                            </tr>
+                            <tr>
+                            <td>Fomento de las habilidades de análisis e Investigación </td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="excelente"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_habilidades" value="insuficiente" ></td>
+                            </tr>
+                            <tr>
+                            <td>Forma de evaluación </td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="excelente" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="muy buena"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="buena" ></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="regular"></td>
+                            <td><input class="form-check-input" type="radio" name="calificacion_docente_evaluacion" value="insuficiente"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+                    
+                    
+                            </div>
+                            <div class="form-group col-md-12" > 
+                            <label class="form-chek-label">
+                            ¿Cuáles de los conocimientos adquiridos en la carrera, considera UD que son menos útiles para su ejercicio profesional?(Puede elegir varias opciones)</label>
+                            </label>
+                            </div>
+
+                            <br>                   
+                                <input class="form-check-input" type="checkbox" name="conocimientos_materias_profesionales">Materias de profesionalización
+                                <br>
+                                                
+                                <input class="form-check-input" type="checkbox" name="conocimientos_comunicacion">Comunicación y Lingüística 
+                                <br>
+
+                                <input class="form-check-input" type="checkbox" name="conocimientos_materias_basicas">Materias básicas (Matemáticas, Computación, Sociales,etc)
+                                <br>
+
+                                <input class="form-check-input" type="checkbox" name="conocimientos_idiomas">Idiomas 
+                                <br>
+
+                                <input class="form-check-input" type="checkbox" name="conocimientos_otros">Otros 
+                            <br>
+                            <label class="control-label col-md-2">¿Por qué? </label>
+                            <input class="form-control mx-1 col-md-5"type="text" v-model="conocimientos_menos_utiles_explique">
+                            
+
+                    
+                        <div class="form-check col-md-12" > 
+                        <label class="form-chek-label">
+                        ¿Cómo calificaría usted los recursos con que cuenta la carrera ? (considerando Excelente=5, Muy buena=4,Buena = 3, Regular=2, Insuficiente=1) 
+                        </label>
+                            
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>5</th>
+                                <th>4</th>
+                                <th>3</th>
+                                <th>2</th>
+                                <th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>Talento humano</td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_talento" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Infraestructura</td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_infraestructura" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Servicios</td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_servicio" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Ambiente Tecnológico</td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="muy buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="buena"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="recursos_de_la_carrera_ambiente" value="insuficiente"></td>
+                                </tr>
+                            </tbody>
+                            </table>
+
+                            <div class="form-check col-md-12" > 
+                            <label class="form-chek-label">
+                            Indique en qué áreas ha sentido mayores dificultades en el desempeño de su trabajo en general(considerando Excelente=5, Muy buena=4,Buena = 3, Regular=2, Insuficiente=1) 
+                            </label>
+                                
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>5</th>
+                                <th>4</th>
+                                <th>3</th>
+                                <th>2</th>
+                                <th>1</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>Trabajo en equipo</td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Comunicación escrita</td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_escrita" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Comunicación oral</td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral"value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_comunicacion_oral" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Informática</td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_informatica" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Gestíon</td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_gestion" value="insuficiente"></td>
+                                </tr>
+                                <tr>
+                                <td>Investigación</td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="excelente"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_trabajo_equipo" value="muy bueno"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="bueno" ></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="regular"></td>
+                                <td><input class="form-check-input" type="radio" name="dificultad_general_investigacion" value="insuficiente" ></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                            <div class="form-group col-md-12" > 
+                            <label class="control-label col-md-12"> En relación con su desempeño como graduado del ITSVR usted se encuentra</label>
+                            <select class="form-control col-md-3" v-model="relacion_desempeño_descripcion ">
+                            </select>
+                            </div>
+
+                    </section>  
+
+                    <section v-if="preferencias" id="preferencias">
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-9">¿Está cursando actualmente estudios de pregrado? </label>
+                    <select class="form-control col-md-3" v-model="estudios_pregrado">                    
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-9">¿Elegiría usted al ITSVR para realizar otra carrera? </label>
+                    <select class="form-control col-md-3" v-model="otra_carrera">                    
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-9">¿Recomendaría usted al ITSVR, como Institución de Educación Superior?</label>
+                    <select class="form-control col-md-3" v-model="recomendar_institucion">                    
+                    </select>
+                    </div>
+
+                    <div class="form-group row col-md-12" > 
+                    <label class="control-label col-md-9"> Temas de interés para cursos de  certificación de áreas</label>
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="temas_interes_r1">
+                    <td>
+                    <input class="form-control mx-1 col-md-5"type="text" v-model="temas_interes_r2">
+                    </td>
+                    </div>
+
+
+                    </section>  
+
+                    <section v-if="recomendaciones" id="recomendaciones">
+                    <div class="form-group col-md-12" > 
+                    <label class="control-label col-md-9"> ¿Qué contenidos cree usted que se deban incluir?</label>
+                    <label class="control-label col-md-4"> Temas</label>
+                    <input class="form-control mx-1 col-md-8"type="text" v-model="temas_incluir1">
+                    <label class="control-label col-md-4"> Asignaturas</label>
+                    <input class="form-control mx-1 col-md-8 "type="text" v-model="asignatura">
+                    
+                    </div>
+
+                   
+                   
+                   
+                   
+            </form>
+
+                
+                
+            
+                      
         </form> 
         </div>
 
@@ -364,13 +661,13 @@
 
              validarInstitucion : function(boton){
                  if(boton == "next"){
-                     if(this.campo3 == ''){
-                        console.log("error3")
-                    }else {
+                     //if(this.campo3 == ''){
+                       // console.log("error3")
+                    //}else {
                         this.institucion = false;
                         this.preferencias = true;
                         this.seccionActual = 4;
-                    }
+                    //}
                  }else if(boton == "previous"){
                         this.profesional = true;
                         this.institucion = false;
@@ -384,15 +681,15 @@
 
              validarPreferencias : function (boton) {
                  if(boton == "next"){
-                     if(this.campo4 == ''){
-                        console.log("error4")
-                    }else {
+                     //if(this.campo4 == ''){
+                      //  console.log("error4")
+                   // }else {
                         this.preferencias = false;
                         this.recomendaciones = true;
                         this.seccionActual = 5;
                         this.btnEnviar =true;
                         this.btnSiguiente = false;
-                    }
+                    //}
                  }else if(boton == "previous"){
                         this.institucion = true;
                         this.preferencias = false;

@@ -126,6 +126,15 @@ this.cargarGraficos();
         });
     }
 
+    function consultarGraficoC(year) {
+         var url = 'grafico/cargo/'+year;
+         $.get(url, { crossDomain : true} , (data) =>  {
+                console.log(data);
+              // this.graficoC(data)
+            }).fail( function() {
+                console.log("fallo la peticion");
+        });
+    }
 
 // funciones para cargar graficos    
         function graficoA(datos) {
@@ -351,7 +360,10 @@ this.cargarGraficos();
     }
     function graficoC(){
 
-    }
+            }
+
+
+    
     function graficoD(){
 
     }

@@ -63,7 +63,7 @@ class GraficosController extends Controller
         if($tipo == "tipo_institucion" ){
              $datos = $this->GraficosProcedure->tipoInstitucion($year);
              $total = $this->GraficosProcedure->totalTipoInstitucion($year);
-            $porcentaje = $this->porcentajeTipoInstitucion($datos,$total);
+             $porcentaje = $this->porcentaje($datos,$total);
            return $porcentaje;
         }else if($tipo == "recursos_carrera"){
 
@@ -73,23 +73,38 @@ class GraficosController extends Controller
             $talento = $this->GraficosProcedure->recursosCarreraTalento($year);
             $total = $this->GraficosProcedure->totalRecursosCarrera($year);
 
-            $porcentajeServicios = $this->porcentajeServicios($servicios,$total);
-            $porcentajeInfraestrucutura = $this->porcentajeServicios($infraestructura,$total);
-            $porcentajeAmbiente = $this->porcentajeServicios($ambiente,$total);
-            $porcentajeTalento = $this->porcentajeServicios($talento,$total);
+            $porcentajeServicios = $this->porcentaje($servicios,$total);
+            $porcentajeInfraestrucutura = $this->porcentaje($infraestructura,$total);
+            $porcentajeAmbiente = $this->porcentaje($ambiente,$total);
+            $porcentajeTalento = $this->porcentaje($talento,$total);
 
-             $porcentajes = array('servicios' => $porcentajeServicios , 'ambiente' => $porcentajeAmbiente , 'infraestructura' => $porcentajeInfraestrucutura , 'talento' => $porcentajeTalento );
+            $porcentajes = array('servicios' => $porcentajeServicios , 'ambiente' => $porcentajeAmbiente , 'infraestructura' => $porcentajeInfraestrucutura , 'talento' => $porcentajeTalento );
             
             return $porcentajes;
 
-        }
+        }else if($tipo == "cargo"){
+            $datos = $this->GraficosProcedure->tipoCargo($year);
+            $total = $this->GraficosProcedure->totalCargo($year);
+        $porcentaje = $this->porcentaje($datos,$total);
+            return $porcentaje;  
         
-    }
+        }else if($tipo == "relacion_carrera_profesional"){
+            $datos = $this->GraficosProcedure->relacion_carrera_profesional($year);
+        $porcentaje = $this->porcentaje($datos,$total);
+            return $porcentaje;
+        }
+
+    }   
+
+
+        
+    
 
 
     // metodos para procesar información de los graficos
 
-    public function porcentajeTipoInstitucion($datos , $total) {
+    public function porcentaje($datos ,$total) {
+        dd($datos);
         foreach ($datos as $value) {
             $value->total = ($value->total * 100) / $total[0]->cantidad;
         }
@@ -99,7 +114,7 @@ class GraficosController extends Controller
 
     public function porcentajeServicios($datos, $total)
     {
-        //dd($datos);
+        dd($datos);
         foreach ($datos as $value) {
             $value->cantidad = ($value->cantidad * 100) / $total[0]->cantidad;
         }
@@ -107,4 +122,13 @@ class GraficosController extends Controller
         return $datos;
     }
 
+    public function porcentajeRecursosCarrera($datos, $total)
+    {
+        dd($datos);
+        foreach ($datos as $value) {
+            $value->cantidad = ($value->cantidad * 100) / $total[0]->cantidad;
+        }
+
+        return $datos;
+    }
 }
