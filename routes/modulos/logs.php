@@ -1,7 +1,7 @@
 <?php
 Route::group(['prefix' => 'administracion', 'as' => 'administracion.'], function () {
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth','permission:logs'])->group(function () {
 
         route::get('logs','LogController@index')->name('logs.usuarios');
         route::get('obtener-usuarios', 'LogController@getUser')->name('obtener.usuarios');

@@ -150,6 +150,7 @@ class EncuestaController extends Controller
 
     public function store(EncuestaRequest $request){
 
+        dd($request);
        $user_id = $this->user_id($request->input('token'));
         $error = null;
 

@@ -132,10 +132,14 @@ class UserController extends Controller
         $password = $request->input('password') ;
         $email = $request->input('email') ;
         $fecha_modficacion = $this->fechaActual();
-        $id = $request->input('id');      
+        $id = $request->input('id');
+        if($request->input('promocion')){
+
+            $promocion = $request->input('promocion');
+        }
 
         try{
-            $this->SeguridadProcedure->usuarioUpdate($name,$rol,$password,$email,$fecha_modficacion,$id);
+            $this->SeguridadProcedure->usuarioUpdate($name,$rol,$password,$email,$fecha_modficacion,$id,$promocion);
         }catch (QueryException $e){
             //$array = array("Error" , $e->errorInfo[1]);
             return $e; //array;

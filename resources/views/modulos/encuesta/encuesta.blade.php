@@ -45,6 +45,7 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="#">
+                                        @csrf
                                         <div class="form-body">
                                             <div id="datos_personales">
                                                 <div class="card-header">
@@ -1330,8 +1331,10 @@ if($('#finputExplique').prop('checked')){
 
 $.ajax({
     type: 'POST',
-    url: 'editarUser',
+    url: '/encuesta/store',
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
     data: {
+        "_token": $("meta[name='csrf-token']").attr("content"),
         'nombres' : $('#fcedula').val(),
         'apellidos': $('#fnombre').val(),
         'fecha_nacimiento': $('#fnacimiento').val(),
@@ -1394,8 +1397,9 @@ $.ajax({
         'recomendar_institucion': $('input[name=fsi_no_recomendacion]:checked').val(),
         'temas_interes_r1': $('#txt_temas').val(),
         'txt_recomen_temas': $('#temas_incluir1').val(),
-        'txt_recomen_asignatura': $('#asignatura1').val()
+        'txt_recomen_asignatura': $('#asignatura1').val(),
         'token' : @json($token)
+
     },
     success: function(returnData){
         console.log(returnData);

@@ -1,6 +1,6 @@
 <?php
 
-route::middleware(['auth'])->group(function () {
+route::middleware(['auth','permission:graficos'])->group(function () {
 
     Route::group(['prefix' => 'administracion', 'as' => 'administracion.'], function () {
 

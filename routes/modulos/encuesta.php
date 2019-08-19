@@ -24,8 +24,8 @@ route::post('encuesta/store','EncuestaController@store');
 route::get('error-encuesta', function(){
    return view('modulos.encuesta.errorEncuesta');
 });
-route::get('cancelar-encuesta/{id}','EncuestaController@cancelarEncuesta');
+route::get('cancelar-encuesta/{id}','EncuestaController@cancelarEncuesta')->middleware('permission:encuestas');
 
-route::get('administracion-encuesta','PromocionesController@promocionesEnviadas')->name('encuesta.promocionesenviadas');
+route::get('administracion-encuesta','PromocionesController@promocionesEnviadas')->name('encuesta.promocionesenviadas')->middleware('permission:encuestas');
 route::get('promociones','PromocionesController@promociones');
 

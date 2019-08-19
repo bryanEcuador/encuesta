@@ -110,13 +110,14 @@ class SeguridadProcedure extends Model
         return DB::select('call spUsuariosShow(?)',array($id));
     }
 
-    public function usuarioUpdate($name,$rol,$password,$email,$fecha_modficacion,$id) {
+    public function usuarioUpdate($name,$rol,$password,$email,$fecha_modficacion,$id,$promocion) {
          if($password===null || $password === ''){
                 $user = DB::table('users')->where('id',$id)
                     ->update([
                         'name'  => $name,
                         'email' => $email,
-                        'updated_at' => $fecha_modficacion
+                        'updated_at' => $fecha_modficacion,
+                        'promocion' => $promocion
                     ]);
 
                 DB::table('role_user')->where('user_id',$id)
