@@ -137,6 +137,7 @@ promociones.addEventListener('change',function() {
                 this.crear(data)
                 }).fail( function() {
                 console.log("fallo la peticion");
+                this.consultarPromociones()
             });
     }
 

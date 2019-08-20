@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Core\Modelos\EncuestasEnviadas;
+use Illuminate\Support\Facades\DB;
+
 
 class PromocionesController extends Controller
 {
@@ -12,9 +14,10 @@ class PromocionesController extends Controller
     /**
      * Inserta las promociones que han sido enviadas en la base
      * @return void
+     * @return void
      */
-    public function store($promociones = null) {
-        $promocion = new EncuestasEnviadas();
+    public function storePromocionesEnviadas($promociones = null) {
+    /*    $promocion = new EncuestasEnviadas();
         if($promociones != null) {
             foreach ($promociones as $value) {
                 $promocion->promocion = $value;
@@ -25,14 +28,15 @@ class PromocionesController extends Controller
             }
         }else{
             $promociones = $this->todasPromociones();
-            foreach ($promociones as $value) {
+
+           foreach ($promociones as $value) {
                 $promocion->promocion = $value;
                 $promocion->create_user_id = auth()->id();
                 $promocion->update_user_id = auth()->id();
                 $promocion->estado = 'enviada';
                 $promocion->save();
             }
-        }
+        }*/
     }
 
 

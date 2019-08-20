@@ -17,7 +17,8 @@
     </section>
     <section class="login-content">
       <div class="logo">
-        <h1>Vali</h1>
+        <h1>ITSVR</h1>
+        <h4>SEGUIMIENTO DE GRADUADOS</h4>
       </div>
       @yield('contenido')
  {{--      <div class="login-box">

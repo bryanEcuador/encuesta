@@ -48,10 +48,11 @@ class CorreosController extends Controller
      */
     public function enviarEncuesta(Request $request) {
 
+
         try {
             $user = $this->getDatos($request);
-            //ProcessUsersMail::dispatch($user,$this->setFecha());
-            //ProcessMailEncuesta::dispatch();
+            ProcessUsersMail::dispatch($user,$this->setFecha());
+            ProcessMailEncuesta::dispatch();
             $estado = true;
 
             return redirect()->route('home',['estado' => $estado]);
