@@ -140,8 +140,9 @@ class EncuestaController extends Controller
     }
 
     public function user_id($token){
-       $correos = Correos::where('token',$token)->get();
-       return $correos->user_id;
+       $correos = Correos::where('token',$token)->get()->toArray();
+       return $correos[0]['user_id'];
+
     }
 
     //funcion para enviar correos para realizar la encuesta 
@@ -150,16 +151,31 @@ class EncuestaController extends Controller
 
     public function store(Request $request){
 
-        dd($request);
+        $datosPersonales = new DatosPersonales();
+        $informacionProfesional = new InformacionProfesional();
+        $calificacionProfesion = new CalificacionProfesion();
+        $calificacionDocente = new CalificacionDocente();
+        $conocimientosAdquiridos = new ConocimientosAdquiridos();
+        $recursosCarrera = new RecursosCarrera();
+        $areasDificultad = new AreasDificultad();
+        $relacionDesempeño = new RelacionDesempeño();
+        $preferenciasEstudio = new preferenciaEstudio();
+        $temasInteres = new TemasInteres();
+        $contenidoaIncluir = new ContenidoaIncluir();
+        $asignatura = new Asignatura();
+        $encuesta = new Encuesta();
+
        $user_id = $this->user_id($request->input('token'));
         $error = null;
+
+        //dd($request);
 
         DB::beginTransaction();
         try {
 
             //guardando los datos de personales
+                $datosPersonales->numero_identificacion = $request->input("identificacion") ;
                 $datosPersonales->nombre = $request->input("nombres") ;
-                $datosPersonales->apellidos = $request->input("nombres"); //TODO
                 $datosPersonales->fecha_nacimiento = $request->input("fecha_nacimiento") ;
                 $datosPersonales->genero_id = $request->input("genero") ;
                 $datosPersonales->fecha_graduacion = $request->input("fecha_graduacion") ;
@@ -170,38 +186,34 @@ class EncuestaController extends Controller
                 $datosPersonales->hijos = $request->input("numero_hijos") ;
                 $datosPersonales->pais_id = $request->input("pais") ;
                 $datosPersonales->ciudad_id = $request->input("ciudad") ;
+                $datosPersonales->nacionalidad = $request->input("nacionalidad");
                 $datosPersonales->num_celular = $request->input("celular") ;
                 $datosPersonales->num_convencional = $request->input("convencional") ;
-                $datosPersonales->direccion = $request->input("dirección") ;
+                $datosPersonales->direccion = $request->input("direccion") ;
                 $datosPersonales->correo_personal = $request->input("correo") ;
                 $datosPersonales->etnia_id = $request->input("etnia") ;
                 $datosPersonales->identificacion_id = 1; //$request->input("tipo_identificacion") ;
-                $datosPersonales->numero_identificacion = $request->input("identificacion") ;
                 $datosPersonales->usuario_creacion = $user_id;
                 $datosPersonales->usuario_modificacion = $user_id;
-
                 $datosPersonales->save() ;
-
                 $datos_personales = $datosPersonales->id;
 
             // informacion profesional
-                $informacionProfesional->trabajo_actual = $request->input("trabajo_actual");
+                $informacionProfesional->trabaja_actualmente = $request->input("trabajo_actual");
                 $informacionProfesional->tipo_institucion_id = $request->input("tipo_institucion");
                 $informacionProfesional->nombre_empresa = $request->input("empresa");
-                $informacionProfesional->actividad_empresa_id =  1;//$request->input("actividad_empresa");
-                $informacionProfesional->cargo_id =  1;//$request->input("cargo");
+                $informacionProfesional->actividad_empresa_id =  1;//$request->input("actividad_empresa"); TODO select en la vista
+                $informacionProfesional->cargo_id =  1;//$request->input("cargo"); TODO select en la vista
                 $informacionProfesional->tiempo_trabajo = $request->input("tiempo_laborando");
                 $informacionProfesional->tipo_contrato_id =  1; //$request->input("tipo_contrato");
                 $informacionProfesional->rango_sueldo = $request->input("rango_sueldo");
-                $informacionProfesional->trabajo_exterior = 0; //$request->input("trabajo_exterior");
+                $informacionProfesional->trabajo_exterior = 0; //$request->input("trabajo_exterior"); TODO
                 $informacionProfesional->relacion_profesional_id = $request->input("relacion_carrera_profesional");
                 $informacionProfesional->nivel_estudio = $request->input("nivel_estudio_acorde");
-                $informacionProfesional->dificil_empleo = $request->input("dificultad_para_trabajar") == 'on' ? 'SI' : 'NO';
+                $informacionProfesional->dificil_empleo = $request->input("dificultad_para_trabajar") == 'on' ? 1 : 0;
                 $informacionProfesional->usuario_creacion = $user_id;
                 $informacionProfesional->usuario_modificacion = $user_id;
-
                 $informacionProfesional->save();
-
                 $datos_profesionales = $informacionProfesional->id;
 
             // calificacion profesional
@@ -210,9 +222,7 @@ class EncuestaController extends Controller
                 $calificacionProfesion->porque = $request->input("formación_profesional_porque");
                 $calificacionProfesion->usuario_creacion = $user_id;
                 $calificacionProfesion->usuario_modificacion = $user_id;
-
                 $calificacionProfesion->save();
-
                 $calificacion_profesion = $calificacionProfesion->id;
 
             //calificacion docente 
@@ -223,7 +233,7 @@ class EncuestaController extends Controller
                 $calificacionDocente->evaluacion = $request->input("calificacion_docente_evaluacion");
                 $calificacionDocente->usuario_creacion = $user_id;
                 $calificacionDocente->usuario_modificacion = $user_id;
-
+                $calificacionDocente->save();
                 $calificacion_docente = $calificacionDocente->id;
                 
 
@@ -234,14 +244,14 @@ class EncuestaController extends Controller
                 $conocimientosAdquiridos->materias_profesionales =$request->input("conocimientos_materias_profesionales");
                 $conocimientosAdquiridos->materias_basicas =$request->input("conocimientos_materias_basicas");
                 $conocimientosAdquiridos->comunicacion =$request->input("conocimientos_comunicacion");
-                $conocimientosAdquiridos->otros =$request->input("conocimientos_otros"); //TODO
+                $conocimientosAdquiridos->otros = $request->input("conocimientos_otros") !== null ? 1 : 0 ;
                 $conocimientosAdquiridos->idiomas =$request->input("conocimientos_idiomas");
-                //
-                $conocimientosAdquiridos->descripcion_otros =$request->input("conocimientos_menos_utiles_explique");
+                $conocimientosAdquiridos->descripcion_otros =$request->input("conocimientos_otros");
                 $conocimientosAdquiridos->usuario_creacion =$user_id;
                 $conocimientosAdquiridos->usuario_modificacion =$user_id;
-
+                $conocimientosAdquiridos->save();
                 $conocimientos_adquiridos = $conocimientosAdquiridos->id;
+
             //recursos carrera
                 $recursosCarrera->talento = $request->input("recursos_de_la_carrera_talento");
                 $recursosCarrera->infraestructura = $request->input("recursos_de_la_carrera_infraestructura");
@@ -249,7 +259,7 @@ class EncuestaController extends Controller
                 $recursosCarrera->ambiente = $request->input("recursos_de_la_carrera_ambiente");
                 $recursosCarrera->usuario_creacion = $user_id;
                 $recursosCarrera->usuario_modificacion = $user_id;
-
+                $recursosCarrera->save();
                 $recursos_carrera = $recursosCarrera->id;
 
             //areas de difucultad
@@ -261,23 +271,17 @@ class EncuestaController extends Controller
                 $areasDificultad->investigacion = $request->input("dificultad_general_investigacion");
                 $areasDificultad->usuario_creacion = $user_id;
                 $areasDificultad->usuario_modificacion = $user_id;
-
+                $areasDificultad->save();
                 $areas_dificultad = $areasDificultad->id;
             
-            // relacion carrera 
-                $relacionDesempeño->relacion = $request->input("relacion_desempeño_descripcion");
-                $relacionDesempeño->usuario_creacion = $user_id;
-                $relacionDesempeño->usuario_modificacion = $user_id;
-
-                $relacion_desempeño = $relacionDesempeño->id;
 
             // preferencias estudio 
-                $preferenciasEstudio->estudio_pregrado = $request->input("estudios_pregrado") == 'on' ? 1 : 0;
-                $preferenciasEstudio->nueva_carrera = $request->input("otra_carrera") == 'on' ? 1 : 0;
-                $preferenciasEstudio->recomendaria_institucion = $request->input("recomendar_institucion") == 'on' ? 1 : 0;
+                $preferenciasEstudio->estudio_pregrado = $request->input("estudios_pregrado");
+                $preferenciasEstudio->nueva_carrera = $request->input("otra_carrera") ;
+                $preferenciasEstudio->recomendaria_institucion = $request->input("recomendar_institucion") ;
                 $preferenciasEstudio->usuario_creacion = $user_id;
                 $preferenciasEstudio->usuario_modificacion = $user_id;
-
+                $preferenciasEstudio->save();
                 $preferencias_estudio = $preferenciasEstudio->id;
 
             // temas interes
@@ -285,7 +289,7 @@ class EncuestaController extends Controller
                 $temasInteres->recomendacion2 = $request->input("temas_interes_r2");
                 $temasInteres->usuario_creacion = $user_id;
                 $temasInteres->usuario_modificacion = $user_id;
-
+                $temasInteres->save();
                 $temas_interes = $temasInteres->id;
         
             // temas incluir
@@ -294,7 +298,7 @@ class EncuestaController extends Controller
                 $contenidoaIncluir->tema3 = $request->input("temas_incluir3");
                 $contenidoaIncluir->usuario_creacion = $user_id;
                 $contenidoaIncluir->usuario_modificacion = $user_id;
-
+                $contenidoaIncluir->save();
                 $contenido_incluir = $contenidoaIncluir->id;
 
             // asignatura 
@@ -303,16 +307,16 @@ class EncuestaController extends Controller
                 $asignatura->asignatura3 = $request->input("asignatura3");
                 $asignatura->usuario_creacion = $user_id;
                 $asignatura->usuario_modificacion = $user_id;
-
+                $asignatura->save();
                 $asignatura_incluir = $asignatura->id;
 
              // nivel cargo trabajo
                 //TODO tomar datos desde la visa
-                $nivelCargoTrabajo->descripcion = 'Desacuerdo';
-                $nivelCargoTrabajo->usuario_creacion = $user_id;
-                $nivelCargoTrabajo->usuario_modificacion = $user_id;
-
-                $nivelCargoTrabajoId = $nivelCargoTrabajo->id;
+               // $nivelCargoTrabajo->descripcion = 'Desacuerdo';
+               // $nivelCargoTrabajo->usuario_creacion = $user_id;
+               // $nivelCargoTrabajo->usuario_modificacion = $user_id;
+               // $nivelCargoTrabajo->save();
+               // $nivelCargoTrabajoId = $nivelCargoTrabajo->id;
 
             // encuesta
                 $encuesta->datos_personales_id = $datos_personales;
@@ -322,14 +326,15 @@ class EncuestaController extends Controller
                 $encuesta->conocimiento_adquirido_id = $conocimientos_adquiridos;
                 $encuesta->recursos_carreras_id = $recursos_carrera;
                 $encuesta->area_dificultad_id = $areas_dificultad;
-                $encuesta->realacion_desempeno_graduado_id = $relacion_desempeño;
-                $encuesta->preferencia_estudio_id = 1;//$preferencia_estudio_id;
+                $encuesta->relacion_desempeno_graduado_id = $request->input("relacion_desempeño_descripcion");
+                $encuesta->preferencia_estudio_id = 1;//$preferencia_estudio_id; //TODO
                 $encuesta->temas_interes_id = $temas_interes;
-                $encuesta->temas_incluir_id = $contenido_incluir;
-                $encuesta->asignatura_incluir_id = $asignatura_incluir;
-                $encuesta->relacion_carrera_profesion_id = 1; //TODO corregir por valor de entrada del formulario
-                $encuesta->relacion_estudios_cargo_id = $nivelCargoTrabajoId;
+                $encuesta->contenidos_incluir_id = $contenido_incluir;
+                $encuesta->asignatura_incluir_id =  $asignatura_incluir;//$asignatura_incluir;
+                $encuesta->relacion_carrera_profesion_id = 1; //TODO corregir por valor de entrada del formulario, esta como de eliminar
+                $encuesta->relacion_estudios_cargo_id = 1; //TODO
                 $encuesta->estado = 1;
+                $encuesta->usuario_id = $user_id;
                 $encuesta->usuario_creacion = $user_id;
                 $encuesta->usuario_modificacion = $user_id;
                 $encuesta->save();
@@ -347,6 +352,7 @@ class EncuestaController extends Controller
             $success = false;
             $error = $e->getMessage();
             DB::rollback();
+            dd($e);
         }
 
     }

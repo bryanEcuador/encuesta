@@ -4,7 +4,7 @@ namespace App\Core\Modelos;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RelacionDesempeño extends Model
+class  RelacionDesempeño extends Model
 {
     //
     protected $table = "tb_relacion_desempeno_graduado";

@@ -359,11 +359,11 @@
                                                             <div class="form-group">
                                                                 <label>¿A trabajado fuera de Ecuador?</label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fsi_ecuador" name="fsi_no_ecuador" type="radio" class="custom-control-input">
+                                                                    <input id="fsi_ecuador" name="fsi_no_ecuador" value="1" type="radio" class="custom-control-input">
                                                                     <span class="custom-control-label">SI</span>
                                                                 </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fno_ecuador" name="fsi_no_ecuador" type="radio" class="custom-control-input" checked>
+                                                                    <input id="fno_ecuador" name="fsi_no_ecuador" value="0" type="radio" class="custom-control-input" checked>
                                                                     <span class="custom-control-label">NO</span>
                                                                 </label>
                                                             </div>
@@ -399,11 +399,11 @@
                                                             <div class="form-group">
                                                                 <label>¿Ha tenido dificultades al momento de conseguir empleo? </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fsi_empleo" name="fsi_noempleo" type="radio" class="custom-control-input">
+                                                                    <input id="fsi_empleo" name="fsi_noempleo" value="1" type="radio" class="custom-control-input">
                                                                     <span class="custom-control-label">SI</span>
                                                                 </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fno_empleo" name="fsi_noempleo" type="radio" class="custom-control-input" checked>
+                                                                    <input id="fno_empleo" name="fsi_noempleo" type="radio" value="0" class="custom-control-input" checked>
                                                                     <span class="custom-control-label">NO</span>
                                                                 </label>
                                                             </div>
@@ -590,11 +590,11 @@
                                                             <label class="control-label"> Indique en qué áreas ha sentido mayores dificultades en el desempeño de su trabajo en general, Califique los siguientes elementos con un orden de prioridad (considerando la m&aacute;xima calificaci&oacute;n 5 y la m&iacute;nima):</label>
                                                             <div class="container">
                                                                 <ol class="card-subtitle">
-                                                                    <li>Insuficiente</li>
-                                                                    <li>Regular</li>
-                                                                    <li>Buena</li>
-                                                                    <li>Muy buena</li>
-                                                                    <li>Excelente</li>
+                                                                    <li>Ninguna dificultad</li>
+                                                                    <li>Dificultad baja</li>
+                                                                    <li>Dificultad media</li>
+                                                                    <li>Dificultad normal</li>
+                                                                    <li>Alta dificultad</li>
                                                                 </ol>
                                                             </div>
                                                         </div>
@@ -679,11 +679,11 @@
                                                         <label class="control-label">¿Est&aacute; cursando actualmente estudios de pregrado?</label>
                                                         <div class="mb-2">
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fsi_pregrado" name="fsi_no_pregrado" type="radio" class="custom-control-input">
+                                                                <input id="fsi_pregrado" name="fsi_no_pregrado" type="radio" value="1" class="custom-control-input">
                                                                 <span class="custom-control-label">SI</span>
                                                             </label>
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fno_pregrado" name="fsi_no_pregrado" type="radio" class="custom-control-input" checked>
+                                                                <input id="fno_pregrado" name="fsi_no_pregrado" type="radio" value="0" class="custom-control-input" checked>
                                                                 <span class="custom-control-label">NO</span>
                                                             </label>
                                                         </div>
@@ -693,11 +693,11 @@
                                                         <label class="control-label">¿Elegir&iacute;a usted al ITSVR para realizar otra carrera?</label>
                                                         <div class="mb-2">
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fsi_ITSVR" name="fsi_no_ITSVR" type="radio" class="custom-control-input">
+                                                                <input id="fsi_ITSVR" name="fsi_no_ITSVR" type="radio" value="1" class="custom-control-input">
                                                                 <span class="custom-control-label">SI</span>
                                                             </label>
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fno_ITSVR" name="fsi_no_ITSVR" type="radio" class="custom-control-input" checked>
+                                                                <input id="fno_ITSVR" name="fsi_no_ITSVR" type="radio" value="0" class="custom-control-input" checked>
                                                                 <span class="custom-control-label">NO</span>
                                                             </label>
                                                         </div>
@@ -708,11 +708,11 @@
                                                         <label class="control-label">¿Recomendar&iacute;a usted al ITSVR, como Instituci&oacute;n de Educaci&oacute;n Superior?</label>
                                                         <div class="mb-2">
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fsi_recomendacion" name="fsi_no_recomendacion" type="radio" class="custom-control-input">
+                                                                <input id="fsi_recomendacion" name="fsi_no_recomendacion" type="radio" value="1" class="custom-control-input">
                                                                 <span class="custom-control-label">SI</span>
                                                             </label>
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fno_recomendacion" name="fsi_no_recomendacion" type="radio" class="custom-control-input" checked>
+                                                                <input id="fno_recomendacion" name="fsi_no_recomendacion" type="radio" value="0" class="custom-control-input" checked>
                                                                 <span class="custom-control-label">NO</span>
                                                             </label>
                                                         </div>
@@ -1424,11 +1424,11 @@ $.ajax({
         'calificacion_docente_habilidades': $('#fhabilidades').val(),
         'calificacion_docente_evaluacion': $('#fevaluaciones').val(),
 
-        'conocimientos_materias_profesionales': finputPerso,
-        'conocimientos_materias_basicas': finputmateria,
-        'conocimientos_comunicacion': finputcomuni,
+        'conocimientos_materias_profesionales': $('#finputPerso').val(),
+        'conocimientos_materias_basicas': $('#finputmateria').val(),
+        'conocimientos_comunicacion': $('#finputcomuni').val(),
         'conocimientos_otros': $('#finputExplique_').val(),
-        'conocimientos_idiomas': finputExplique,
+        'conocimientos_idiomas': $('#finputExplique').val(),
         
         'recursos_de_la_carrera_talento': $('#ftalento').val(),
         'recursos_de_la_carrera_infraestructura': $('#finfra').val(),
