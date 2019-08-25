@@ -317,7 +317,17 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Actividad Empresarial</label>
-                                                                <input type="text" id="factividad" class="form-control" placeholder="Ingrese la actividad empresarial">
+                                                                <select class="form-control custom-select" id="factividad">
+                                                                    {{--<option value="--">--</option>--}}
+                                                                    <option value="1" selected>Marketing</option>
+                                                                    <option value="2">Financiera</option>
+                                                                    <option value="3">Produccion</option>
+                                                                    <option value="4">Educacion</option>
+                                                                    <option value="5">Telecomunicaciones</option>
+                                                                    <option value="6">Desarrollo de Software</option>
+                                                                    <option value="7">Turismo</option>
+                                                                    <option value="8">Hardware</option>
+                                                                </select>
                                                                 <div class="invalid-feedback">Por favor ingrese la actividad que realiza la empresa.</div>
                                                             </div>
                                                         </div>
@@ -325,7 +335,21 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Cargo que ocupa</label>
-                                                                <input type="text" id="fcargo" class="form-control" placeholder="Ingrese el cargo">
+                                                                <select class="form-control custom-select" id="fcargo">
+                                                                    {{--<option value="--">--</option>--}}
+                                                                    <option value="1" selected>Director Ejecutivo</option>
+                                                                    <option value="2">Gerencia General</option>
+                                                                    <option value="3">Supervisor</option>
+                                                                    <option value="4">Vendedor</option>
+                                                                    <option value="5">Promotor</option>
+                                                                    <option value="6">Analista</option>
+                                                                    <option value="7">Desarrollador</option>
+                                                                    <option value="8">Administrativo</option>
+                                                                    <option value="9">Auditor</option>
+                                                                    <option value="10">Consultor</option>
+                                                                    <option value=11>Tecnico</option>
+                                                                    <option value=12>Jefe departamental</option>
+                                                                </select>
                                                                 <div class="invalid-feedback">Por favor ingrese el cargo.</div>
                                                             </div>
                                                         </div>
@@ -351,6 +375,26 @@
                                                                     <option value="5">Mayor a $2501</option>
                                                                 </select>
                                                                 <div class="invalid-feedback">Rango de sueldos invalido.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Tipo de contrato</label>
+                                                                <select class="form-control custom-select" id="fcontrato">
+                                                                    {{--<option value="--">--</option>--}}
+                                                                    <option value="1" selected>Contrato tácito</option>
+                                                                    <option value="2">Contrato a plazo fijo</option>
+                                                                    <option value="3">Contrato de prueba</option>
+                                                                    <option value="4">Contrato por obra cierta</option>
+                                                                    <option value="5">Contrato por tarea</option>
+                                                                    <option value="6">Contrato por destajo</option>
+                                                                    <option value="7">Contrato eventual</option>
+                                                                    <option value="8">Contrato por temporada</option>
+                                                                    <option value="">Contratos ocasionales</option>
+                                                                    <option value="9">Parcial permanente</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1409,6 +1453,7 @@ $.ajax({
         'empresa': $('#fnameEmpresa').val(),
         'actividad_empresa': $('#factividad').val(),
         'cargo': $('#fcargo').val(),
+        'tipo_contrato' : $('#fcontrato').val(),
         'tiempo_laborando': $('#ftime').val(),
         'rango_sueldo': $('#frango').val(),
         'trabajo_exterior': $('input[name=fsi_no_ecuador]:checked').val(),
@@ -1458,10 +1503,12 @@ $.ajax({
 
     },
     success: function(returnData){
-        console.log(returnData);
-    
-        console.log(returnData);
-        const toast = swal.mixin({
+
+        setTimeout(function() {
+            $(location).attr('href','/redireccion');
+        },1000);
+
+ /*       const toast = swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -1470,11 +1517,9 @@ $.ajax({
         toast({
             type: 'success',
             title: 'Se realizo correctamente'
-        })
+        })*/
 
-        setTimeout(function() {
-            $(location).attr('href','/');  
-        },1000);
+
 
     },
     error: function(respuesta){

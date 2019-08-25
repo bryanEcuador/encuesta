@@ -17,9 +17,11 @@ class PromocionesController extends Controller
      * @return void
      */
     public function storePromocionesEnviadas($promociones = null) {
-    /*    $promocion = new EncuestasEnviadas();
+
         if($promociones != null) {
+
             foreach ($promociones as $value) {
+                $promocion = new EncuestasEnviadas();
                 $promocion->promocion = $value;
                 $promocion->create_user_id = auth()->id();
                 $promocion->update_user_id = auth()->id();
@@ -27,16 +29,17 @@ class PromocionesController extends Controller
                 $promocion->save();
             }
         }else{
-            $promociones = $this->todasPromociones();
+            $promocionesNoEnviadas = $this->todasPromocionesNoEnviadas();
 
-           foreach ($promociones as $value) {
-                $promocion->promocion = $value;
+            foreach ($promocionesNoEnviadas as $value) {
+                $promocion = new EncuestasEnviadas();
+                $promocion->promocion = $value->promocion;
                 $promocion->create_user_id = auth()->id();
                 $promocion->update_user_id = auth()->id();
                 $promocion->estado = 'enviada';
                 $promocion->save();
             }
-        }*/
+        }
     }
 
 
@@ -44,9 +47,22 @@ class PromocionesController extends Controller
      * Devuelve todas las promociones menores a la fecha actual
      * @return array
      */
-    public function todasPromociones(){
+    public function todasPromocionesNoEnviadas(){
+        //TODO CODIGO REPETIDO EN LA SECCIÓN DE ABAJO REFACTORIZAR EN UN NUEVO METODO
+        $promocionesEnviadas = array();
+
+        $encuestasEnviadas = DB::table('tb_encuestas_enviadas')->select('promocion')->whereYear('created_at','=',$this->getFecha())
+            ->get()->toArray();
+
+        foreach ($encuestasEnviadas as $value){
+            array_push($promocionesEnviadas ,$value->promocion);
+        }
+
         return DB::table('tb_promociones')->select('promocion')
-            ->where('promocion','<=', $this->getFecha())->get()->toArray();
+            ->where('promocion','<=', $this->getFecha())
+            ->whereNotIn('promocion',$promocionesEnviadas )
+            ->get()->toArray();
+
     }
 
     /**
@@ -54,15 +70,25 @@ class PromocionesController extends Controller
      * @return array
      */
     public function promociones(){
-        $array = array();
-        $promocionesEncuestadas = $this->promocionesEncuestadas();
+        //$array = array();
+        //$promocionesEncuestadas = $this->promocionesEncuestadas();
 
-        foreach ($promocionesEncuestadas as $promocion ){
-            array_push($array,$promocion->promocion);
+        //foreach ($promocionesEncuestadas as $promocion ){
+         //   array_push($array,$promocion->promocion);
+        //}
+
+        $promocionesEnviadas = array();
+
+        $encuestasEnviadas = DB::table('tb_encuestas_enviadas')->select('promocion')->whereYear('created_at','=',$this->getFecha())
+            ->get()->toArray();
+
+        foreach ($encuestasEnviadas as $value){
+            array_push($promocionesEnviadas ,$value->promocion);
         }
+
         return DB::table('tb_promociones')->select('promocion')
             ->where('promocion','<=', $this->getFecha())
-            ->whereNotIn('promocion',$array)->get();
+            ->whereNotIn('promocion',$promocionesEnviadas)->get();
     }
 
     /**
@@ -70,8 +96,8 @@ class PromocionesController extends Controller
      * @return array
      */
     public function promocionesEncuestadas(){
-        return DB::table('tb_correos')->join('tb_fecha','tb_correos.fecha_id','=','tb_fecha.id')
-            ->select('tb_correos.promocion')->distinct()->where('tb_fecha.año','=',$this->getFecha())->get();
+        //return DB::table('tb_correos')->join('tb_fecha','tb_correos.fecha_id','=','tb_fecha.id')
+          //  ->select('tb_correos.promocion')->distinct()->where('tb_fecha.año','=',$this->getFecha())->get();
     }
 
     public function  promocionesEnviadas(){

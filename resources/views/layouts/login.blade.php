@@ -9,6 +9,12 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+       .titulo-principal {
+         text-align: center;
+         font-family: "Inconsolata", "Fira Mono", "Source Code Pro", Monaco, Consolas, "Lucida Console", monospace
+       }
+    </style>
     <title>@yield('titulo')</title>
   </head>
   <body>
@@ -17,8 +23,8 @@
     </section>
     <section class="login-content">
       <div class="logo">
-        <h1>ITSVR</h1>
-        <h4>SEGUIMIENTO DE GRADUADOS</h4>
+        <h1 class="titulo-principal">ITSVR</h1>
+        <h4 class="titulo-principal">SEGUIMIENTO DE GRADUADOS</h4>
       </div>
       @yield('contenido')
  {{--      <div class="login-box">

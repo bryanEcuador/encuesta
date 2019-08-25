@@ -47,8 +47,8 @@
         {{--  --}}
         <div class=" col-lg-6" id="content">
         <div class="tile">
-            <h3>Tipo de institución que labora</h3>
-            <div id="grafico1">
+            <h3>Recursos con los que cuenta la carrera</h3>
+            <div id="grafico2">
                 <canvas id="myChart2" class="embed-responsive-item" width="40vw" height="30vh"></canvas>
             </div>
             <div id="render"></div>

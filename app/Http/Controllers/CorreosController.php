@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Dompdf\Exception;
+
 use function GuzzleHttp\Psr7\get_message_body_summary;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -53,11 +53,13 @@ class CorreosController extends Controller
             $user = $this->getDatos($request);
             ProcessUsersMail::dispatch($user,$this->setFecha());
             ProcessMailEncuesta::dispatch();
-            $estado = true;
+            $estado = 1;
 
             return redirect()->route('home',['estado' => $estado]);
-        }catch (Exception $e){
+        }catch (\Exception $e){
             echo $e->getMessage();
+            $estado = 2;
+            return redirect()->route('home',['estado' => $estado]);
         }
     }
 
@@ -66,26 +68,31 @@ class CorreosController extends Controller
      * @return collecion
      */
     public function getUser($tipo,$elementos = null){
-
+        $estudiantes_id = array();
         try{
-            $estudiantes_id = array();
             $users = DB::table('role_user')->select('user_id')->where('role_id','=',5)->get();
             foreach($users as $user){
                 array_push($estudiantes_id,$user->user_id) ;
             }
 
             if($tipo == 1){
-                $estudiantes = User::whereIn('id',$estudiantes_id)->get()->toArray();
-
+                //TODO se puede refactorizar
+                $array = array();
+                $promocionesEncuestadas = $this->promocion->promocionesEncuestadas();
+                if($promocionesEncuestadas !== null){
+                    foreach ($promocionesEncuestadas as $promocionValue ){
+                        array_push($array,$promocionValue->promocion);
+                    }
+                }
+                $estudiantes = User::whereIn('id',$estudiantes_id)->whereNotIn('promocion',$array)->get()->toArray();
             }else if($tipo == 2){
                 $estudiantes = User::whereIn('id',$estudiantes_id)->WhereIn('promocion',$elementos)->get()->toArray();
-
             }else{
                 $estudiantes = null;
             }
 
             return $estudiantes;
-        }catch(Exception $e){
+        }catch(\Exception $e){
             echo 'Excepción capturada: ',  $e->getMessage(), "\n"; //TODO
         }
 
@@ -117,6 +124,7 @@ class CorreosController extends Controller
     public function getDatos(Request $request){
         try {
             $array = array_map(null,$request->input());
+
             if($request->input('promociones') == 'todos'){
                 $user = $this->getUser(1);
                 $this->promocion->storePromocionesEnviadas();
@@ -129,7 +137,7 @@ class CorreosController extends Controller
                 $this->promocion->storePromocionesEnviadas($promociones);
                 $user = $this->getUser(2,$promociones);
             }
-        }catch (Exception $e){
+        }catch (\Exception $e){
             echo $e->getMessage();
         }
 
