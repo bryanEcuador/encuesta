@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
@@ -45,7 +46,6 @@
                                 </div>
                                 <div class="card-body">
                                     <form action="#">
-                                        @csrf
                                         <div class="form-body">
                                             <div id="datos_personales">
                                                 <div class="card-header">
@@ -93,8 +93,6 @@
                                                             <label class="control-label">G&eacute;nero</label>
                                                             <select class="form-control custom-select" id="fgenero">
                                                                 <option value="-">--</option>
-                                                                <option value="M">Masculino</option>
-                                                                <option value="F">Femenino</option>
                                                             </select>
                                                             <div class="invalid-feedback">Por escoja un genero v&aacute;lido.</div>
                                                         </div>
@@ -113,15 +111,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Carrera</label>
                                                             <select class="form-control custom-select" id="fcarrera">
-                                                                <option value="--">--</option>
-                                                                <option value="HT">Hoteler&iacute;a y Turismo</option>
-                                                                <option value="CE">Comercio Exterior</option>
-                                                                <option value="BF">Banca y Finanzas</option>
-                                                                <option value="PS">Promoci&oacute;n de la Salud</option>
-                                                                <option value="MR">Mantenimiento e Insatalaci&oacute;n de Redes</option>
-                                                                <option value="EE">Ensamblaje de Equipos de C&oacute;mputo</option>
-                                                                <option value="DI">Desarrollo Infantil Integral</option>
-                                                                <option value="TA">TAPS</option>
+                                                                
                                                             </select>
                                                             <div class="invalid-feedback">Por favor elija una carrera v&aacute;lida.</div>
                                                         </div>
@@ -131,11 +121,11 @@
                                                             <label class="control-label">Tiene Alguna Discapacidad</label>
                                                             <div class="mb-2">
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fsi_disc" name="fsi_no_disc" type="radio" value="S" class="custom-control-input">
+                                                                    <input id="fsi_disc" name="fsi_no_disc" type="radio" value="SI" class="custom-control-input">
                                                                     <span class="custom-control-label">SI</span>
                                                                 </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fno_disc" name="fsi_no_disc" type="radio" value="N" class="custom-control-input" checked>
+                                                                    <input id="fno_disc" name="fsi_no_disc" type="radio" value="NO" class="custom-control-input" checked>
                                                                     <span class="custom-control-label">NO</span>
                                                                 </label>
                                                             </div>
@@ -170,11 +160,6 @@
                                                             <label class="control-label">Estado Civil</label>
                                                             <select class="form-control custom-select" id="fcivil">
                                                                 <option value="-">--</option>
-                                                                <option value="S">Soltero</option>
-                                                                <option value="C">Casado</option>
-                                                                <option value="U">Union Libre</option>
-                                                                <option value="C">Viudo</option>
-                                                                <option value="D">Divorciado</option>
                                                             </select>
                                                             <div class="invalid-feedback">Por favor seleccione un estado civil v&aacute;lido.</div>
                                                         </div>
@@ -192,9 +177,6 @@
                                                             <label>Pa&iacute;s de residencia</label>
                                                             <select class="form-control custom-select" id="fpais">
                                                                 <option value="--">--</option>
-                                                                <option value="EC">Ecuador</option>
-                                                                <option value="MX">Mexico</option>
-                                                                <option value="FR">Francia</option>
                                                             </select>
                                                             <div class="invalid-feedback">Seleccione un Pa&iacute;s v&aacute;lido.</div>
                                                         </div>`
@@ -204,9 +186,6 @@
                                                             <label>Ciudad</label>
                                                             <select class="form-control custom-select" id="fciudad">
                                                                 <option value="--">--</option>
-                                                                <option value="GU">Guayaquil</option>
-                                                                <option value="NA">Naranjal</option>
-                                                                <option value="OT">Otro</option>
                                                             </select>
                                                             <div class="invalid-feedback">Seleccione una ciudad v&aacute;lida.</div>
                                                         </div>
@@ -254,11 +233,7 @@
                                                             <label>Etnia</label>
                                                             <select class="form-control custom-select" id="fetnia">
                                                                 <option value="--">--</option>
-                                                                <option value="IN">Indigena</option>
-                                                                <option value="AF">AfrorEcuatoriano</option>
-                                                                <option value="NE">Negro</option>
-                                                                <option value="MU">Mulato</option>
-                                                                <option value="MO">Montubio</option>
+                                                                
                                                             </select>
                                                             <div class="invalid-feedback">Por favor seleccione una etnia v&aacute;lida.</div>
                                                         </div>
@@ -279,11 +254,11 @@
                                                             <label class="control-label"> ¿Trabaja actualmente ? Si su respuesta es NO, de clic en contininar</label>
                                                             <div class="mb-2">
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fsi_work" name="fsi_no_work" value="S" type="radio" class="custom-control-input">
+                                                                    <input id="fsi_work" name="fsi_no_work" value="SI" type="radio" class="custom-control-input">
                                                                     <span class="custom-control-label">SI</span>
                                                                 </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fno_work" name="fsi_no_work" value="N" type="radio" class="custom-control-input" checked>
+                                                                    <input id="fno_work" name="fsi_no_work" value="NO" type="radio" class="custom-control-input" checked>
                                                                     <span class="custom-control-label">NO</span>
                                                                 </label>
                                                             </div>
@@ -298,11 +273,7 @@
                                                                 <label>Tipo de institucion donde labora</label>
                                                                 <select id="fLabora" class="form-control custom-select">
                                                                     <option value="--">--</option>
-                                                                    <option value="PU">Publica</option>
-                                                                    <option value="FA">Familiar</option>
-                                                                    <option value="NE">Negocio/Emprendimiento</option>
-                                                                    <option value="PR">Propio</option>
-                                                                    <option value="IN">Independiente</option>
+                                                                   
                                                                 </select>
                                                                 <div class="invalid-feedback">Seleccione un tipo de instituci&oacute;n v&aacute;lida.</div>
                                                             </div>
@@ -320,7 +291,17 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Actividad Empresarial</label>
-                                                                <input type="text" id="factividad" class="form-control" placeholder="Ingrese la actividad empresarial">
+                                                                <select class="form-control custom-select" id="factividad">
+                                                                    {{--<option value="--">--</option>--}}
+                                                                    <option value="1" selected>Marketing</option>
+                                                                    <option value="2">Financiera</option>
+                                                                    <option value="3">Produccion</option>
+                                                                    <option value="4">Educacion</option>
+                                                                    <option value="5">Telecomunicaciones</option>
+                                                                    <option value="6">Desarrollo de Software</option>
+                                                                    <option value="7">Turismo</option>
+                                                                    <option value="8">Hardware</option>
+                                                                </select>
                                                                 <div class="invalid-feedback">Por favor ingrese la actividad que realiza la empresa.</div>
                                                             </div>
                                                         </div>
@@ -328,7 +309,10 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Cargo que ocupa</label>
-                                                                <input type="text" id="fcargo" class="form-control" placeholder="Ingrese el cargo">
+                                                                <select class="form-control custom-select" id="fcargo">
+                                                                    {{--<option value="--">--</option>--}}
+                                                                    
+                                                                </select>
                                                                 <div class="invalid-feedback">Por favor ingrese el cargo.</div>
                                                             </div>
                                                         </div>
@@ -338,7 +322,7 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label>Tiempo que se encuentra laborando</label>
-                                                                <input type="text" id="ftime" class="form-control" placeholder="Ingrese el tiempo laboral">
+                                                                <input type="text" id="ftime" class="form-control" placeholder="Ingrese el tiempo laboral: 6 años ">
                                                                 <div class="invalid-feedback">Por favor ingrese el tiempo laboral.</div>
                                                             </div>
                                                         </div>
@@ -347,11 +331,7 @@
                                                                 <label>Rango de Sueldos</label>
                                                                 <select class="form-control custom-select" id="frango">
                                                                     <option value="--">--</option>
-                                                                    <option value="1">$354 a $500</option>
-                                                                    <option value="2">$501 a $1000</option>
-                                                                    <option value="3">$1501 y $2000</option>
-                                                                    <option value="4">$2001 y $2500</option>
-                                                                    <option value="5">Mayor a $2501</option>
+                                                                    
                                                                 </select>
                                                                 <div class="invalid-feedback">Rango de sueldos invalido.</div>
                                                             </div>
@@ -360,13 +340,24 @@
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
+                                                                <label>Tipo de contrato</label>
+                                                                <select class="form-control custom-select" id="fcontrato">
+                                                                    {{--<option value="--">--</option>--}}
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
                                                                 <label>¿A trabajado fuera de Ecuador?</label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fsi_ecuador" name="fsi_no_ecuador" type="radio" class="custom-control-input">
+                                                                    <input id="fsi_ecuador" name="fsi_no_ecuador" value="1" type="radio" class="custom-control-input">
                                                                     <span class="custom-control-label">SI</span>
                                                                 </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fno_ecuador" name="fsi_no_ecuador" type="radio" class="custom-control-input" checked>
+                                                                    <input id="fno_ecuador" name="fsi_no_ecuador" value="0" type="radio" class="custom-control-input" checked>
                                                                     <span class="custom-control-label">NO</span>
                                                                 </label>
                                                             </div>
@@ -376,9 +367,9 @@
                                                                 <label>Cuan relacionada  se encuentra su carrera profesional con las funciones que usted desempeña en el ambito laboral actualmente?</label>
                                                                 <select class="form-control custom-select" id="frelacion_cargo">
                                                                     <option value="--">--</option>
-                                                                    <option value="DI">Directamente Relacionado</option>
-                                                                    <option value="IN">Indirectamente Relacionado</option>
-                                                                    <option value="NR">Nada Relacionado</option>
+                                                                    <option value="1">Directamente Relacionado</option>
+                                                                    <option value="2">Indirectamente Relacionado</option>
+                                                                    <option value="3">Nada Relacionado</option>
                                                                 </select>
                                                                 <div class="invalid-feedback">Por favor seleccione una opci&oacute;n valida.</div>
                                                             </div>
@@ -390,10 +381,10 @@
                                                                 <label>Considera Usted que su nivel de estudio se encuentra adecuadamente acorde al cargo que desempeña en su trabajo</label>
                                                                 <select class="form-control custom-select" id="fcargo_correcto">
                                                                     <option value="--">--</option>
-                                                                    <option value="DI">Muy de acuerdo</option>
-                                                                    <option value="IN">Parcialmente de acuerdo</option>
-                                                                    <option value="NR">Medianamente en Desacuerdo</option>
-                                                                    <option value="NR">Desacuerdo</option>
+                                                                    <option value="1">Muy de acuerdo</option>
+                                                                    <option value="2">Parcialmente de acuerdo</option>
+                                                                    <option value="3">Medianamente en Desacuerdo</option>
+                                                                    <option value="4">Desacuerdo</option>
                                                                 </select>
                                                                 <div class="invalid-feedback">Por favor seleccione una opci&oacute;n valida.</div>
                                                             </div>
@@ -402,11 +393,11 @@
                                                             <div class="form-group">
                                                                 <label>¿Ha tenido dificultades al momento de conseguir empleo? </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fsi_empleo" name="fsi_noempleo" type="radio" class="custom-control-input">
+                                                                    <input id="fsi_empleo" name="fsi_noempleo" value="1" type="radio" class="custom-control-input">
                                                                     <span class="custom-control-label">SI</span>
                                                                 </label>
                                                                 <label class="custom-control custom-radio">
-                                                                    <input id="fno_empleo" name="fsi_noempleo" type="radio" class="custom-control-input" checked>
+                                                                    <input id="fno_empleo" name="fsi_noempleo" type="radio" value="0" class="custom-control-input" checked>
                                                                     <span class="custom-control-label">NO</span>
                                                                 </label>
                                                             </div>
@@ -429,11 +420,11 @@
                                                             <label class="control-label">¿C&oacute;mo calificar&iacute;a la formaci&oacute;n profesional recibida en el ITSVR?</label>
                                                             <select class="form-control custom-select" id="fcalifica">
                                                                 <option value="--">--</option>
-                                                                <option value="EX">Excelente</option>
-                                                                <option value="MB">Muy Buena</option>
-                                                                <option value="BU">Buena</option>
-                                                                <option value="RE">Regular</option>
-                                                                <option value="IN">Insuficiente</option>
+                                                                <option value="Excelente">Excelente</option>
+                                                                <option value="Muy buena">Muy Buena</option>
+                                                                <option value="Buena">Buena</option>
+                                                                <option value="Regular">Regular</option>
+                                                                <option value="Insuficiente">Insuficiente</option>
                                                             </select>
                                                             <div class="invalid-feedback">Por favor seleccione una opci&oacute;n v&aacute;lida.</div>
                                                         </div>
@@ -593,11 +584,11 @@
                                                             <label class="control-label"> Indique en qué áreas ha sentido mayores dificultades en el desempeño de su trabajo en general, Califique los siguientes elementos con un orden de prioridad (considerando la m&aacute;xima calificaci&oacute;n 5 y la m&iacute;nima):</label>
                                                             <div class="container">
                                                                 <ol class="card-subtitle">
-                                                                    <li>Insuficiente</li>
-                                                                    <li>Regular</li>
-                                                                    <li>Buena</li>
-                                                                    <li>Muy buena</li>
-                                                                    <li>Excelente</li>
+                                                                    <li>Ninguna dificultad</li>
+                                                                    <li>Dificultad baja</li>
+                                                                    <li>Dificultad media</li>
+                                                                    <li>Dificultad normal</li>
+                                                                    <li>Alta dificultad</li>
                                                                 </ol>
                                                             </div>
                                                         </div>
@@ -659,10 +650,10 @@
                                                             <label class="control-label">En relaci&oacute;n con su desempe&ntilde;o como graduado del ITSVR usted se encuentra:</label>
                                                             <select class="form-control custom-select" id="fITSVR">
                                                                 <option value="--">--</option>
-                                                                <option value="MUS">Muy satisfecho</option>
-                                                                <option value="SAS">Satisfecho</option>
-                                                                <option value="MES">Medio satisfecho</option>
-                                                                <option value="INS">Insatisfecho</option>
+                                                                <option value="1">Muy satisfecho</option>
+                                                                <option value="2">Satisfecho</option>
+                                                                <option value="3">Medio satisfecho</option>
+                                                                <option value="4">Insatisfecho</option>
                                                             </select>
                                                             <div class="invalid-feedback">Selecci&oacute;n Invalida.</div>
                                                         </div>
@@ -682,11 +673,11 @@
                                                         <label class="control-label">¿Est&aacute; cursando actualmente estudios de pregrado?</label>
                                                         <div class="mb-2">
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fsi_pregrado" name="fsi_no_pregrado" type="radio" class="custom-control-input">
+                                                                <input id="fsi_pregrado" name="fsi_no_pregrado" type="radio" value="1" class="custom-control-input">
                                                                 <span class="custom-control-label">SI</span>
                                                             </label>
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fno_pregrado" name="fsi_no_pregrado" type="radio" class="custom-control-input" checked>
+                                                                <input id="fno_pregrado" name="fsi_no_pregrado" type="radio" value="0" class="custom-control-input" checked>
                                                                 <span class="custom-control-label">NO</span>
                                                             </label>
                                                         </div>
@@ -696,11 +687,11 @@
                                                         <label class="control-label">¿Elegir&iacute;a usted al ITSVR para realizar otra carrera?</label>
                                                         <div class="mb-2">
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fsi_ITSVR" name="fsi_no_ITSVR" type="radio" class="custom-control-input">
+                                                                <input id="fsi_ITSVR" name="fsi_no_ITSVR" type="radio" value="1" class="custom-control-input">
                                                                 <span class="custom-control-label">SI</span>
                                                             </label>
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fno_ITSVR" name="fsi_no_ITSVR" type="radio" class="custom-control-input" checked>
+                                                                <input id="fno_ITSVR" name="fsi_no_ITSVR" type="radio" value="0" class="custom-control-input" checked>
                                                                 <span class="custom-control-label">NO</span>
                                                             </label>
                                                         </div>
@@ -711,11 +702,11 @@
                                                         <label class="control-label">¿Recomendar&iacute;a usted al ITSVR, como Instituci&oacute;n de Educaci&oacute;n Superior?</label>
                                                         <div class="mb-2">
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fsi_recomendacion" name="fsi_no_recomendacion" type="radio" class="custom-control-input">
+                                                                <input id="fsi_recomendacion" name="fsi_no_recomendacion" type="radio" value="1" class="custom-control-input">
                                                                 <span class="custom-control-label">SI</span>
                                                             </label>
                                                             <label class="custom-control custom-radio">
-                                                                <input id="fno_recomendacion" name="fsi_no_recomendacion" type="radio" class="custom-control-input" checked>
+                                                                <input id="fno_recomendacion" name="fsi_no_recomendacion" type="radio" value="0" class="custom-control-input" checked>
                                                                 <span class="custom-control-label">NO</span>
                                                             </label>
                                                         </div>
@@ -724,7 +715,14 @@
                                                     <div class="col-md-6">
                                                         <label class="control-label">Temas de inter&eacute;s para cursos de  certificaci&oacute;n de &aacute;reas</label>
                                                         <div class="mb-2">
-                                                            <textarea id="txt_temas" class="form-control" style="width: 100%;" rows="4"></textarea>
+                                                            <textarea id="txt_temas" class="form-control" style="width: 100%;" rows="2"></textarea>
+                                                            <div class="invalid-feedback">Escriba un tema de interes.</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label">Temas de inter&eacute;s para cursos de  certificaci&oacute;n de &aacute;reas</label>
+                                                        <div class="mb-2">
+                                                            <textarea id="txt_temas2" class="form-control" style="width: 100%;" rows="2"></textarea>
                                                             <div class="invalid-feedback">Escriba un tema de interes.</div>
                                                         </div>
                                                     </div>
@@ -742,11 +740,28 @@
                                                     <div class="col-md-12">
                                                         <label class="control-label">¿Qu&eacute; contenidos cree usted que se deban incluir?</label>
                                                         <div class="mb-2">
-                                                            <textarea id="txt_recomen_temas" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese contenido a incluir"></textarea>
-                                                            <div class="invalid-feedback">Ingrese contenido a incluir.</div>
+                                                            <textarea id="temas_incluir1" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese contenido a incluir"></textarea>
+                                                            <div class="invalid-feedback">Ingrese temas a incluir.</div>
                                                         </div>
                                                         <div class="mb-2">
-                                                            <textarea id="txt_recomen_asignatura" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese las asignaturas a incluir"></textarea>
+                                                            <textarea id="temas_incluir2" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese contenido a incluir"></textarea>
+                                                            <div class="invalid-feedback">Ingrese temas a incluir.</div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <textarea id="temas_incluir3" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese contenido a incluir"></textarea>
+                                                            <div class="invalid-feedback">Ingrese temas a incluir.</div>
+                                                        </div>
+                                                        <label class="control-label">¿Qu&eacute; asignaturas cree usted que se deban incluir?</label>
+                                                        <div class="mb-2">
+                                                            <textarea id="txt_recomen_asignatura1" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese las asignaturas a incluir"></textarea>
+                                                            <div class="invalid-feedback">Ingrese las asignaturas a incluir.</div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <textarea id="txt_recomen_asignatura2" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese las asignaturas a incluir"></textarea>
+                                                            <div class="invalid-feedback">Ingrese las asignaturas a incluir.</div>
+                                                        </div>
+                                                        <div class="mb-2">
+                                                            <textarea id="txt_recomen_asignatura3" class="form-control" style="width: 100%;" rows="3" placeholder="Ingrese las asignaturas a incluir"></textarea>
                                                             <div class="invalid-feedback">Ingrese las asignaturas a incluir.</div>
                                                         </div>
                                                     </div>
@@ -769,6 +784,74 @@
         <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
         <script type="text/javascript">
+
+                $(document).ready(function() {
+                   
+
+                    $.get("get-genero", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fgenero").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                    $.get("get-carrera", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fcarrera").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                    $.get("get-estado-civil", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fcivil").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                    $.get("get-pais", function(data){
+                        $.each(data, function(id,descpcion){
+                            console.log(1)
+                            $("#fpais").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                     $.get("get-etnia", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fetnia").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                    $.get("get-institucion", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fLabora").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                     $.get("get-cargo", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fcargo").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+
+                     $.get("get-ciudad", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#fciudad").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+
+                     $.get("get-contrato", function(data){
+                        $.each(data, function(id,tipo){
+                            $("#fcontrato").append('<option value="'+descpcion.id+'">'+tipo.tipo+'</option>');
+                                });
+                    })
+
+                    $.get("get-rango", function(data){
+                        $.each(data, function(id,descpcion){
+                            $("#frango").append('<option value="'+descpcion.id+'">'+descpcion.descpcion+'</option>');
+                                });
+                    })
+                });
+
+
         $(function(){
 
             $("#fsi_work").on('click', function(){
@@ -877,7 +960,32 @@
               var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
               return regex.test(email);
             }
+         //
+            $('#prueba').on('click', function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
+                $.ajax({
+                    type: 'POST',
+                    url: '/encuesta/store',
+                    data: {
+                        'token' : @json($token)
+            },
+                success: function(returnData){
+                    console.log(returnData);
+                    console.log(returnData);
+                },
+                error: function(respuesta){
+                    console.log(respuesta);
+                }
+            });
+            });
+
+
+        //
             $('#fcelular').on('input', function(){
                this.value = this.value.replace(/[^0-9]/g,''); 
             });
@@ -1280,7 +1388,7 @@
                 var txt_recomen_temas = $('#txt_recomen_temas').val();
                 var txt_recomen_asignatura = $('#txt_recomen_asignatura').val();
                 var isError = false;
-
+/*
                 if(txt_recomen_temas.length <=0){
                     $('#txt_recomen_temas').addClass('is-invalid');
                     isError = true;
@@ -1293,7 +1401,7 @@
                     isError = true;
                 }else{
                     $('#txt_recomen_asignatura').removeClass('is-invalid');
-                }
+                }*/
 
                 if(!isError){
                     //Logica JSON AJAX
@@ -1329,14 +1437,19 @@ if($('#finputExplique').prop('checked')){
     finputExplique = 1;
 }
 
+$.ajaxSetup({
+    headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+    });
+
 $.ajax({
     type: 'POST',
     url: '/encuesta/store',
-    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
     data: {
         "_token": $("meta[name='csrf-token']").attr("content"),
-        'nombres' : $('#fcedula').val(),
-        'apellidos': $('#fnombre').val(),
+        'identificacion' : $('#fcedula').val(),
+        'nombres': $('#fnombre').val(),
         'fecha_nacimiento': $('#fnacimiento').val(),
         'nacionalidad':  $('#fnacionalidad').val(),
         'genero': $('#fgenero').val(),
@@ -1358,6 +1471,7 @@ $.ajax({
         'empresa': $('#fnameEmpresa').val(),
         'actividad_empresa': $('#factividad').val(),
         'cargo': $('#fcargo').val(),
+        'tipo_contrato' : $('#fcontrato').val(),
         'tiempo_laborando': $('#ftime').val(),
         'rango_sueldo': $('#frango').val(),
         'trabajo_exterior': $('input[name=fsi_no_ecuador]:checked').val(),
@@ -1373,11 +1487,11 @@ $.ajax({
         'calificacion_docente_habilidades': $('#fhabilidades').val(),
         'calificacion_docente_evaluacion': $('#fevaluaciones').val(),
 
-        'conocimientos_materias_profesionales': finputPerso,
-        'conocimientos_materias_basicas': finputmateria,
-        'conocimientos_comunicacion': finputcomuni,
+        'conocimientos_materias_profesionales': $('#finputPerso').val(),
+        'conocimientos_materias_basicas': $('#finputmateria').val(),
+        'conocimientos_comunicacion': $('#finputcomuni').val(),
         'conocimientos_otros': $('#finputExplique_').val(),
-        'conocimientos_idiomas': finputExplique,
+        'conocimientos_idiomas': $('#finputExplique').val(),
         
         'recursos_de_la_carrera_talento': $('#ftalento').val(),
         'recursos_de_la_carrera_infraestructura': $('#finfra').val(),
@@ -1396,16 +1510,23 @@ $.ajax({
         'otra_carrera' : $('input[name=fsi_no_ITSVR]:checked').val(),
         'recomendar_institucion': $('input[name=fsi_no_recomendacion]:checked').val(),
         'temas_interes_r1': $('#txt_temas').val(),
-        'txt_recomen_temas': $('#temas_incluir1').val(),
-        'txt_recomen_asignatura': $('#asignatura1').val(),
+        'temas_interes_r2': $('#txt_temas2').val(),
+        'temas_incluir1': $('#temas_incluir1').val(),
+        'temas_incluir2': $('#temas_incluir2').val(),
+        'temas_incluir3': $('#temas_incluir3').val(),
+        'asignatura1': $('#txt_recomen_asignatura1').val(),
+        'asignatura2': $('#txt_recomen_asignatura2').val(),
+        'asignatura3': $('#txt_recomen_asignatura3').val(),
         'token' : @json($token)
 
     },
     success: function(returnData){
-        console.log(returnData);
-    
-        console.log(returnData);
-        const toast = swal.mixin({
+
+        setTimeout(function() {
+            $(location).attr('href','/redireccion');
+        },1000);
+
+ /*       const toast = swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -1414,11 +1535,9 @@ $.ajax({
         toast({
             type: 'success',
             title: 'Se realizo correctamente'
-        })
+        })*/
 
-        setTimeout(function() {
-            $(location).attr('href','/');  
-        },1000);
+
 
     },
     error: function(respuesta){

@@ -27,7 +27,7 @@
         </div>
     </div>
 
-   <div class="tile col-md-6 offset-md-6" >
+   <div class="tile col-md-6 offset-md-3" >
        <h3 class="tile-title">Encuestas enviadas este año</h3>
        <div class="table-responsive">
            <table class="table">

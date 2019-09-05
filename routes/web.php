@@ -25,7 +25,16 @@ Route::get('/home/{estado?}', 'HomeController@index')->name('home');
 Route::get('/notificaciones','EncuestaController@notifify');
 Route::get('/leer-notificaciones', 'EncuestaController@read');
 
+route::get('/redireccion',function (){
+    $titulo = 'Gracias por responder la encuesta del presente año.';
+    $mensaje = '';
+    return view('modulos.encuesta.errorEncuesta',compact('titulo','mensaje'));
+});
 
+route::get('/prueba-prueba',function(){
+    $token = 10;
+   return view('modulos.encuesta.encuesta',compact('token'));
+});
 
 
 

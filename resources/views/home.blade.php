@@ -45,7 +45,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="tile">
-                  <h4>Estado de la encuesta </h4>
+                  <h4>Encuestas </h4>
                   <hr>
                     <div id="respuesta">
 
@@ -55,9 +55,14 @@
                                 <p>Todas las encuesta de este año ya han sido enviadas.</p>
                             </div>
                     </div>
+                    <div id="ningunaEncuestaEnviada" style="display:none">
+                        <div class="alert alert-danger">
+                            <p>Aun no se ha enviado ninguna encuesta.</p>
+                        </div>
+                    </div>
 
                     <div id="grafico" style="display:none">
-                        <h5 class="text">Estado de correos enviados</h5>
+                        <h5 class="text"></h5>
                         <canvas id="estado" width="400" height="400"></canvas>
                     </div>
 
@@ -80,6 +85,7 @@
 
 var grafico = document.getElementById("grafico");
 let enviarEncuesta = document.getElementById("enviarEncuesta");
+let ningunaEncuestaEnviada = document.getElementById("ningunaEncuestaEnviada");
 let promociones = document.querySelector('#promociones');
 let grupoPromociones = document.querySelector('#grupo_promociones');
 let btnEncuestas = document.querySelector('#btnEncuestas');
@@ -91,11 +97,20 @@ this.consultarRespuesta();
 
 
 function consultarRespuesta() {
-    if(@json($estado !== null)){
+    if(@json($estado == 1)){
         console.log(@json($estado))
         let elemento = document.createElement('div')
         elemento.classList = 'alert alert-success'
-        elemento.innerText = 'Las encuestas han sido enviadas con exito'
+        elemento.innerText = 'Las encuestas han sido enviadas con exito.'
+        respuesta.appendChild(elemento)
+
+        setTimeout(function() {
+            respuesta.removeChild(elemento);
+        },5000)
+    }else if(@json($estado == 2)){
+        let elemento = document.createElement('div')
+        elemento.classList = 'alert alert-danger'
+        elemento.innerText = 'Lo sentimos hubo un error al momento de enviar las encuestas.'
         respuesta.appendChild(elemento)
 
         setTimeout(function() {
@@ -114,18 +129,19 @@ promociones.addEventListener('change',function() {
 });
 
 
-/* grafico.style.display = 'none'; */
-/* enviarEncuesta.style.display = 'none'; */
-
 
 
     function  consultarEstadoEncuestas() {
         var url = '/promociones';
 
         $.get(url, { crossDomain : true} , (data) =>  {
+            console.log(data.length)
             if(data.length == 0){
                 this.enviarEncuesta.style.display = 'block'
                 this.btnEncuestas.style.display = 'none'
+            }else if(data.length > 0){
+                this.enviarEncuesta.style.display = 'none'
+                this.btnEncuestas.style.display = 'block'
             }
         }).fail( function() {
             console.log("fallo la peticion");
@@ -137,6 +153,7 @@ promociones.addEventListener('change',function() {
                 this.crear(data)
                 }).fail( function() {
                 console.log("fallo la peticion");
+                this.consultarPromociones()
             });
     }
 
@@ -181,19 +198,16 @@ promociones.addEventListener('change',function() {
     }
 
     function graficar(data) {
-        
-        if(data[0].porcentaje == 0){
-            
-             enviarEncuesta.style.display = 'block'; 
+        if(data[0].porcentaje == 'x'){
+            ningunaEncuestaEnviada.style.display = 'block'
         } else {
-             grafico.style.display = 'block'; 
-
+             grafico.style.display = 'block';
              var diferencia = 100 - data[0].porcentaje;
             var ctx = document.getElementById("estado").getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'polarArea',
                 data: {
-                    labels: ["Respondidas", "Faltantes"],
+                    labels: [+data[0].porcentaje+"% Respondidas", diferencia+"% No respondidas"],
                     datasets: [{
                         data: [data[0].porcentaje, diferencia],
                         backgroundColor: [
